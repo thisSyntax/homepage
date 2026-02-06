@@ -68,3 +68,22 @@
           view: monthly # optional - possible values monthly, agenda
           maxEvents: 10 # optional - defaults to 10
           showTime: true # optional - show time for event happening today - defaults to false
+          integrations: # optional
+            - type: ical
+              url: https://ics.calendarlabs.com/76/3bbe7524/US_Holidays.ics
+              name: Holiday
+              color: purple
+              params: # optional - additional params for the service
+                showName: true # optional - show name before event title in event line - defaults to false
+            - type: ical
+              url: https://raw.githubusercontent.com/callaars/film-calendar/refs/heads/main/calendars/tmdb_release_calendar_US_theatrical.ics
+              name: Movie
+              color: emerald
+              params: # optional - additional params for the service
+                showName: true # optional - show name before event title in event line - defaults to false
+            - type: ical
+              url: https://ics.calendarlabs.com/1969/74c9ce15/Atlanta_Falcons_Schedule.ics
+              name: Falcons
+              color: red
+              params: # optional - additional params for the service
+                showName: true # optional - show name before event title in event line - defaults to false
