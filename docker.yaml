@@ -12,3 +12,7 @@
 f-si-servarr:
   host: f-si-servarr
   port: 2375
+
+f-si-komodo:
+  host: f-si-komodo
+  port: 2375
