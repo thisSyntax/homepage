@@ -21,7 +21,7 @@
           url: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
           key: {{HOMEPAGE_VAR_KOMODO_API_KEY}}
           secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
-          showSummary: true # optional, default: false. Takes precedence over showStacks
+          showSummary: false # optional, default: false. Takes precedence over showStacks
           showStacks: true # optional, default: false
     - Synology:
         id: col-9-21
