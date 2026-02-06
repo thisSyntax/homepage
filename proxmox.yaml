@@ -1,0 +1,5 @@
+---
+pve:
+   url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+   token: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
+   secret: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}

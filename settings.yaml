@@ -1,0 +1,42 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+title: Fey Server Infrastructure
+
+background: 
+  image: /images/cyberpunk.jpg
+  blur: sm # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+  saturate: 70 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  brightness: 70 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 100 # 0-100
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: bing # google, duckduckgo, bing, baidu, brave or custom
+
+theme: dark
+color: yellow
+
+layout:
+  System:
+    icon: mdi-desktop-classic-#ffffff
+  Main:
+    icon: mdi-shield-crown-outline-#ffffff
+  Admin:
+    icon: mdi-account-box-outline-#ffffff
+  Weather:
+    icon: mdi-weather-hazy-#ffffff
+  Media Management:
+    icon: si-vlcmediaplayer-#ffffff
+  Monitoring & Networking:
+    icon: mdi-home-analytics-#ffffff
+  Tools:
+    icon: mdi-application-brackets-outline-#ffffff
+  Calendar:
+    icon: mdi-calendar-month-outline-#ffffff
+  Bookmarks:
+    icon: mdi-bookmark-multiple-outline-#ffffff

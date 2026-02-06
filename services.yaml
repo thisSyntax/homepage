@@ -1,0 +1,44 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- System:
+    - Proxmox:
+        icon: proxmox.png
+        href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+        widget:
+          type: proxmox
+          url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+          username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
+          password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
+    - Komodo:
+        id: col-12-21__komodo
+        icon: komodo
+        href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
+        showStats: false
+        widget:
+          type: komodo
+          url: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
+          key: {{HOMEPAGE_VAR_KOMODO_API_KEY}}
+          secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
+          showSummary: true # optional, default: false. Takes precedence over showStacks
+          showStacks: true # optional, default: false
+    - Synology:
+        id: col-9-21
+        icon: synology
+        href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
+        widget:
+          type: diskstation
+          url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
+          username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
+          password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+
+- Main:
+    - Plex:
+        id: __plex
+        icon: plex
+        href: {{HOMEPAGE_VAR_PLEX_URL}}
+        widget:
+          type: plex
+          url: {{HOMEPAGE_VAR_PLEX_URL}} 
+          key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
