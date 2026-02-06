@@ -60,3 +60,11 @@
             maximumFractionDigits: 1
 
 - Calendar:
+    - Upcoming Media Releases:
+        icon: mdi-popcorn
+        widget:
+          type: calendar
+          firstDayInWeek: monday # optional - defaults to monday
+          view: monthly # optional - possible values monthly, agenda
+          maxEvents: 10 # optional - defaults to 10
+          showTime: true # optional - show time for event happening today - defaults to false
