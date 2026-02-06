@@ -48,18 +48,15 @@
           key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
 
 - Weather:
-    - "":
-        widget:
-          type: weather
-          provider: open-meteo # or weatherapi
-          label: Duluth # optional
-          latitude: {{HOMEPAGE_VAR_WEATHER_LATITUDE}} # e.g., 50.4501
-          longitude: {{HOMEPAGE_VAR_WEATHER_LONGITUDE}} # e.g., 30.5234
-          timezone: Americas/Duluth # optional
-          units: imperial # or metric
-          cache: 5 # Time in minutes to cache API responses, to stay within limits
-          format: # optional, Intl.NumberFormat options
-            maximumFractionDigits: 1
+    - openmeteo:
+        label: Duluth # optional
+        latitude: {{HOMEPAGE_VAR_WEATHER_LATITUDE}} # e.g., 50.4501
+        longitude: {{HOMEPAGE_VAR_WEATHER_LONGITUDE}} # e.g., 30.5234
+        timezone: Americas/Duluth # optional
+        units: imperial # or metric
+        cache: 5 # Time in minutes to cache API responses, to stay within limits
+        format: # optional, Intl.NumberFormat options
+          maximumFractionDigits: 1
 
 - Calendar:
     - Upcoming Media Releases:
