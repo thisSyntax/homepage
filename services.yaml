@@ -25,7 +25,7 @@
           showSummary: false # optional, default: false. Takes precedence over showStacks
           showStacks: true # optional, default: false
     - Synology:
-        id: col-medium__synology
+        id: col-small__synology
         icon: synology
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
