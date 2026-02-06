@@ -12,9 +12,9 @@
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
     - Komodo:
-        id: col-max__komodo
+        id: col-large__komodo
         icon: komodo
-        container: f-si-komodo
+        container: komodo-core-1
         href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
         showStats: false
         widget:
