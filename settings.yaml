@@ -10,16 +10,22 @@ background:
   saturate: 70 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
   brightness: 70 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
   opacity: 100 # 0-100
-
+cardBlur: md # or sm, lg
+headerStyle: clean #underlined # or boxed, boxedWidgets, clean
 quicklaunch:
   searchDescriptions: true
   hideInternetSearch: true
   showSearchSuggestions: true
   hideVisitURL: true
   provider: bing # google, duckduckgo, bing, baidu, brave or custom
-
 theme: dark
 color: yellow
+hideVersion: true
+useEqualHeights: true
+showStats: false
+statusStyle: 'dot'
+hideErrors: true
+
 
 layout:
   System:
