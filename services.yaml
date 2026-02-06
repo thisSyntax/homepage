@@ -25,6 +25,7 @@
           secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
           showSummary: false # optional, default: false. Takes precedence over showStacks
           showStacks: true # optional, default: false
+          fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
     - Synology:
         id: col-small__synology
         icon: synology
@@ -34,6 +35,7 @@
           url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
           username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
           password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+          fields: ["volumeAvailable", "resources.cpu"]
 
 - Main:
     - Plex:
