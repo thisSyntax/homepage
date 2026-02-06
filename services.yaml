@@ -14,6 +14,7 @@
     - Komodo:
         id: col-max__komodo
         icon: komodo
+        container: f-si-komodo
         href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
         showStats: false
         widget:
