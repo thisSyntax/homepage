@@ -12,7 +12,7 @@
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
     - Komodo:
-        id: col-12-21__komodo
+        id: col-max__komodo
         icon: komodo
         href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
         showStats: false
@@ -24,7 +24,7 @@
           showSummary: false # optional, default: false. Takes precedence over showStacks
           showStacks: true # optional, default: false
     - Synology:
-        id: col-9-21
+        id: col-medium__synology
         icon: synology
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
