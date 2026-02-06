@@ -9,10 +9,10 @@
 # my-docker:
 #   socket: /var/run/docker.sock
 
-f-si-servarr:
-  host: f-si-servarr
+f-si-komodo:
+  host: 192.168.5.102
   port: 2375
 
-f-si-komodo:
-  host: f-si-komodo
+f-si-servarr:
+  host: 192.168.5.103
   port: 2375
