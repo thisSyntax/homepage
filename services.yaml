@@ -7,6 +7,7 @@
         id: col-3x__proxmox
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+        weight: "0"
         widget:
           type: proxmox
           url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
@@ -43,6 +44,7 @@
         id: col-3x__plex
         icon: plex
         href: {{HOMEPAGE_VAR_PLEX_URL}}
+        weight: "0"
         widget:
           type: plex
           url: {{HOMEPAGE_VAR_PLEX_URL}} 
