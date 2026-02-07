@@ -1,31 +1,3 @@
-.services-list.flex.flex-col {
-    display: grid !important;
-    grid-template-columns: repeat(42, 1fr);
-    gap: 0.5rem;
-}
-.services-list.flex.flex-col .service {
-    grid-column: span 42;
-}
-.services-list.flex.flex-col .service > div {
-    height: 100%;
-}
-.services-list.flex.flex-col .service > .mb-2 {
-    margin-bottom: 0 !important;
-}
-.services-list.flex.flex-col [id^="col-small"].service {  
-    grid-column: span 18;
-}
-.services-list.flex.flex-col [id^="col-medium"].service { 
-    grid-column: span 21;
-}
-.services-list.flex.flex-col [id^="col-large"].service {  
-    grid-column: span 24;
-}
-.services-list.flex.flex-col [id^="col-max"].service {  
-    grid-column: span 42;
-}
-
-
 /* For custom classes used in iFrame */
 .iframe-home-assistant-weather {
   background: transparent;
@@ -43,4 +15,112 @@
     zoom: 0.92;
     height: 260px;
   }
+}
+
+/*  For custom column layout  */
+.services-list.flex.flex-col {
+    display: grid !important;
+    grid-template-columns: repeat(42, 1fr);
+    gap: 0.5rem;
+}
+.services-list.flex.flex-col .service {
+    grid-column: span 42;
+}
+.services-list.flex.flex-col .service > div {
+    height: 100%;
+}
+.services-list.flex.flex-col .service > .mb-2 {
+    margin-bottom: 0 !important;
+}
+.services-list.flex.flex-col [id^="col-1-8"].service {  /* 1/8 */
+    grid-column: span 7;
+}
+.services-list.flex.flex-col [id^="col-9-21"].service { /* 9/21 */
+    grid-column: span 18;
+}
+.services-list.flex.flex-col [id^="col-1-2"].service { /* 1/2 */
+    grid-column: span 21;
+}
+.services-list.flex.flex-col [id^="col-12-21"].service {  /* 12/21 */
+    grid-column: span 24;
+}
+.services-list.flex.flex-col [id^="col-3x"].service {
+  @media(min-width: 1100px) {
+    grid-column: span 50;
+  }
+  @media(min-width: 1536px) {
+    grid-column: span 156;
+  }
+  @media(min-width: 1800px) {
+    grid-column: span 194;
+  }
+}
+
+
+.service-icon {
+  width: 2.3rem !important;
+}
+#col-1-8 .service-icon {
+  width: auto !important; /* Reset or override for col-1-8 */
+}
+
+
+.logout-icon {
+  font-size: 18px !important;
+  color: #ffffff99 !important;
+  margin: auto;
+}
+
+
+/* Reduce padding and width for the health/status button */
+.service-container-stats > div {
+  padding: 0.75rem 0.4rem !important;  
+}
+
+
+.custom-docker-btn > div:hover,
+.custom-docker-btn:focus > div {
+  background: rgba(0,0,0,0.18) !important; /* or match the exact shade from the original */
+}
+
+
+/* Vertically center the .service-icon within .service-title */
+.service-title {
+    align-items: center !important; /* Vertically center children, including .service-icon */
+}
+
+
+/* Adjust icon size */
+.service-icon {
+    width: 24px !important;
+    height: 24px !important;
+}
+.service-icon img {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+
+/* Camera reboot button styling */
+.custom-camera-reboot-btn > div:hover,
+.custom-camera-reboot-btn:focus > div {
+  background: rgba(34, 197, 94, 0.2) !important; /* Green tint for camera actions */
+}
+
+
+.custom-camera-reboot-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5 !important;
+}
+
+
+/* Optional: Add animation for reboot button */
+.custom-camera-reboot-btn:active svg {
+  animation: spin 0.5s linear;
+}
+
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

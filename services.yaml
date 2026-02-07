@@ -4,7 +4,6 @@
 
 - System:
     - Proxmox:
-        id: col-max__proxmox
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
         widget:
@@ -28,7 +27,7 @@
           showStacks: true # optional, default: false
           fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
     - Synology:
-        id: col-small__synology
+        id: col-9-21__synology
         icon: synology
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
@@ -40,7 +39,6 @@
 
 - Main:
     - Plex:
-        id: col-max__plex
         icon: plex
         href: {{HOMEPAGE_VAR_PLEX_URL}}
         widget:
@@ -75,7 +73,7 @@
 
 - Monitoring & Networking:
     - Home Assistant:
-        id: col-medium__home-assistant
+        id: col-1-2__home-assistant
         icon: home-assistant
         href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
         server: REDACTED
@@ -87,7 +85,6 @@
 
 - Calendar:
     - Holidays, Movies, NFL:
-        id: col-max__calendar
         widget:
           type: calendar
           firstDayInWeek: monday # optional - defaults to monday
