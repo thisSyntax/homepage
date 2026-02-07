@@ -69,28 +69,29 @@
           allowScrolling: no # optional, default: yes     
 
 - Calendar:
-    widget:
-      type: calendar
-      firstDayInWeek: monday # optional - defaults to monday
-      view: monthly # optional - possible values monthly, agenda
-      maxEvents: 10 # optional - defaults to 10
-      showTime: true # optional - show time for event happening today - defaults to false
-      integrations: # optional
-        - type: ical
-          url: https://www.thunderbird.net/media/caldata/autogen/USHolidays.ics
-          name: Holiday
-          color: purple
-          params: # optional - additional params for the service
-            showName: true # optional - show name before event title in event line - defaults to false
-        - type: ical
-          url: https://raw.githubusercontent.com/callaars/film-calendar/refs/heads/main/calendars/tmdb_release_calendar_US_theatrical.ics
-          name: Movie
-          color: emerald
-          params: # optional - additional params for the service
-            showName: true # optional - show name before event title in event line - defaults to false
-        - type: ical
-          url: https://fancalendar.app/api/subscription/ec2f87a409995522.ics
-          name: NFL
-          color: red
-          params: # optional - additional params for the service
-            showName: true # optional - show name before event title in event line - defaults to false
+    - "":
+        widget:
+          type: calendar
+          firstDayInWeek: monday # optional - defaults to monday
+          view: monthly # optional - possible values monthly, agenda
+          maxEvents: 10 # optional - defaults to 10
+          showTime: true # optional - show time for event happening today - defaults to false
+          integrations: # optional
+            - type: ical
+              url: https://www.thunderbird.net/media/caldata/autogen/USHolidays.ics
+              name: Holiday
+              color: purple
+              params: # optional - additional params for the service
+                showName: true # optional - show name before event title in event line - defaults to false
+            - type: ical
+              url: https://raw.githubusercontent.com/callaars/film-calendar/refs/heads/main/calendars/tmdb_release_calendar_US_theatrical.ics
+              name: Movie
+              color: emerald
+              params: # optional - additional params for the service
+                showName: true # optional - show name before event title in event line - defaults to false
+            - type: ical
+              url: https://fancalendar.app/api/subscription/ec2f87a409995522.ics
+              name: NFL
+              color: red
+              params: # optional - additional params for the service
+                showName: true # optional - show name before event title in event line - defaults to false
