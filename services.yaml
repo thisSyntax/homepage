@@ -72,14 +72,14 @@
     - Sonarr:
         id: col-medium__sonarr
         icon: sonarr
-        href: {{HOMEPAGE_VAR_SONARR_URL}}
+        href: http://sonarr.local
         server: f-si-servarr
         container: sonarr
         widget:
           type: sonarr
-          url: {{HOMEPAGE_VAR_SONARR_IP_URL}}
+          url: http://sonarr.local
           key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
-          fields: ["seriesCount", "queueCount"] # optional, default: ["seriesCount"]
+          fields: ["series", "wanted"] # optional, Allowed fields: ["wanted", "queued", "series"]
     - Prowlarr:
         id: col-small__prowlarr
         icon: prowlarr
