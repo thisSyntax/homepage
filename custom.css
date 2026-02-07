@@ -21,15 +21,12 @@
 .services-list.flex.flex-col [id^="col-large"].service {  
     grid-column: span 24;
 }
+.services-list.flex.flex-col [id^="col-max"].service {  
+    grid-column: span 42;
+}
 
 
 /* For custom classes used in iFrame */
-.iframe-home-assistant-media {
-  width: 300px;
-  height: 500px;
-}
- 
- 
 .iframe-home-assistant-weather {
   background: transparent;
   height: 285px;
