@@ -91,16 +91,16 @@
           url: {{HOMEPAGE_VAR_SONARR_IP_URL}}
           key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
           fields: ["seriesCount", "queueCount"] # optional, default: ["seriesCount"]
-    - Powlarr:
+    - Prowlarr:
         id: col-small__prowlarr
-        icon: powlarr
-        href: {{HOMEPAGE_VAR_POWLARR_URL}}
+        icon: prowlarr
+        href: {{HOMEPAGE_VAR_prowlarr_URL}}
         server: f-si-servarr
         container: prowlarr
         widget:
           type: prowlarr
-          url: {{HOMEPAGE_VAR_POWLARR_IP_URL}}
-          key: {{HOMEPAGE_VAR_POWLARR_API_KEY}}
+          url: {{HOMEPAGE_VAR_prowlarr_IP_URL}}
+          key: {{HOMEPAGE_VAR_prowlarr_API_KEY}}
           fields: ["indexerCount", "queueCount"] # optional, default: ["indexerCount"]
     - Bazzarr:
         id: col-small__bazarr
