@@ -65,8 +65,11 @@
           name: iframe-home-assistant-weather
           src: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}/dashboard-homepage/weather?kiosk"
           classes: iframe-home-assistant-weather
-          allowPolicy: fullscreen
-          allowScrolling: no # optional, default: yes     
+          referrerPolicy: same-origin # optional, no default
+          allowPolicy: fullscreen # optional, no default
+          allowFullscreen: true # optional, default: true
+          loadingStrategy: eager # optional, default: eager
+          allowScrolling: no # optional, default: yes   
 
 - Monitoring & Networking:
     - Home Assistant:
