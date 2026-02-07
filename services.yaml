@@ -68,6 +68,64 @@
           allowPolicy: fullscreen
           allowScrolling: no # optional, default: yes     
 
+- Media Management:
+    - Radarr:
+        id: col-medium__radarr
+        icon: radarr
+        href: {{HOMEPAGE_VAR_RADARR_URL}}
+        server: f-si-servarr
+        container: radarr
+        widget:
+          type: radarr
+          url: {{HOMEPAGE_VAR_RADARR_IP_URL}}
+          key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+          fields: ["movieCount", "queueCount"] # optional, default: ["movieCount"]
+    - Sonarr:
+        id: col-medium__sonarr
+        icon: sonarr
+        href: {{HOMEPAGE_VAR_SONARR_URL}}
+        server: f-si-servarr
+        container: sonarr
+        widget:
+          type: sonarr
+          url: {{HOMEPAGE_VAR_SONARR_IP_URL}}
+          key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+          fields: ["seriesCount", "queueCount"] # optional, default: ["seriesCount"]
+    - Powlarr:
+        id: col-small__prowlarr
+        icon: powlarr
+        href: {{HOMEPAGE_VAR_POWLARR_URL}}
+        server: f-si-servarr
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: {{HOMEPAGE_VAR_POWLARR_IP_URL}}
+          key: {{HOMEPAGE_VAR_POWLARR_API_KEY}}
+          fields: ["indexerCount", "queueCount"] # optional, default: ["indexerCount"]
+    - Bazzarr:
+        id: col-small__bazarr
+        icon: bazarr
+        href: {{HOMEPAGE_VAR_BAZARR_URL}}
+        server: f-si-servarr
+        container: bazarr
+        widget:
+          type: bazarr
+          url: {{HOMEPAGE_VAR_BAZARR_IP_URL}}
+          key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+          fields: ["subtitleCount", "queueCount"] # optional, default: ["subtitleCount"]
+
+- Monitoring & Networking:
+    - Home Assistant:
+        id: col-small__home-assistant
+        icon: home-assistant
+        href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+        server: REDACTED
+        container: homeassistant
+        widget:
+          type: homeassistant
+          url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+          key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
+
 - Calendar:
     - "":
         widget:
