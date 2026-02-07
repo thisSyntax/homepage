@@ -68,30 +68,6 @@
           allowPolicy: fullscreen
           allowScrolling: no # optional, default: yes     
 
-- Media Management:
-    - Prowlarr:
-        id: col-small__prowlarr
-        icon: prowlarr
-        href: {{HOMEPAGE_VAR_prowlarr_URL}}
-        server: f-si-servarr
-        container: prowlarr
-        widget:
-          type: prowlarr
-          url: {{HOMEPAGE_VAR_prowlarr_IP_URL}}
-          key: {{HOMEPAGE_VAR_prowlarr_API_KEY}}
-          fields: ["indexerCount", "queueCount"] # optional, default: ["indexerCount"]
-    - Bazzarr:
-        id: col-small__bazarr
-        icon: bazarr
-        href: {{HOMEPAGE_VAR_BAZARR_URL}}
-        server: f-si-servarr
-        container: bazarr
-        widget:
-          type: bazarr
-          url: {{HOMEPAGE_VAR_BAZARR_IP_URL}}
-          key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-          fields: ["subtitleCount", "queueCount"] # optional, default: ["subtitleCount"]
-
 - Monitoring & Networking:
     - Home Assistant:
         id: col-small__home-assistant
