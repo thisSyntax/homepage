@@ -84,7 +84,7 @@
           key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
 
 - Calendar:
-    - "Holidays, Movies, NFL":
+    - Holidays, Movies, NFL:
         widget:
           type: calendar
           firstDayInWeek: monday # optional - defaults to monday
