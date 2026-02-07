@@ -4,7 +4,7 @@
     gap: 0.5rem;
 }
 .services-list.flex.flex-col .service {
-    grid-column: span 4;
+    grid-column: span 42;
 }
 .services-list.flex.flex-col .service > div {
     height: 100%;
@@ -13,16 +13,16 @@
     margin-bottom: 0 !important;
 }
 .services-list.flex.flex-col [id^="col-small"].service {  
-    grid-column: span 1;
+    grid-column: span 18;
 }
 .services-list.flex.flex-col [id^="col-medium"].service { 
-    grid-column: span 2;
+    grid-column: span 21;
 }
 .services-list.flex.flex-col [id^="col-large"].service {  
-    grid-column: span 3;
+    grid-column: span 24;
 }
 .services-list.flex.flex-col [id^="col-max"].service {  
-    grid-column: span 4;
+    grid-column: span 42;
 }
 
 
