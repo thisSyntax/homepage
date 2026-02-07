@@ -30,19 +30,28 @@ hideErrors: true
 layout:
   System:
     icon: mdi-desktop-classic-#ffffff
+    columns: 4
   Main:
     icon: mdi-shield-crown-outline-#ffffff
+    columns: 4
   Admin:
     icon: mdi-account-box-outline-#ffffff
+    columns: 4
   Weather:
     icon: mdi-weather-hazy-#ffffff
+    columns: 4
   Media Management:
     icon: si-vlcmediaplayer-#ffffff
+    columns: 4
   Monitoring & Networking:
     icon: mdi-home-analytics-#ffffff
+    columns: 4
   Tools:
     icon: mdi-application-brackets-outline-#ffffff
+    columns: 4
   Calendar:
     icon: mdi-calendar-month-outline-#ffffff
+    columns: 4
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff
+    columns: 4
