@@ -4,7 +4,7 @@
 
 - System:
     - Proxmox:
-        id: col-3x__proxmox
+        id: __proxmox
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
         weight: "0"
@@ -41,7 +41,7 @@
 
 - Main:
     - Plex:
-        id: col-3x__plex
+        id: __plex
         icon: plex
         href: {{HOMEPAGE_VAR_PLEX_URL}}
         weight: "0"
@@ -52,7 +52,7 @@
 
 - Admin:
     - Speedtest:
-        id: col-max__speedtest-tracker
+        id: __speedtest-tracker
         icon: speedtest-tracker
         href: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_URL}}
         server: REDACTED
@@ -63,7 +63,7 @@
 
 - Weather:
     - "":
-        id: col-max__weather
+        id: __weather
         widget:
           type: iframe
           name: iframe-home-assistant-weather
@@ -89,6 +89,7 @@
 
 - Calendar:
     - Holidays, Movies, NFL:
+        id: __calendar
         widget:
           type: calendar
           firstDayInWeek: monday # optional - defaults to monday
