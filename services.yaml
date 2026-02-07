@@ -69,17 +69,6 @@
           allowScrolling: no # optional, default: yes     
 
 - Media Management:
-    - Radarr:
-        id: col-medium__radarr
-        icon: radarr
-        href: {{HOMEPAGE_VAR_RADARR_URL}}
-        server: f-si-servarr
-        container: radarr
-        widget:
-          type: radarr
-          url: {{HOMEPAGE_VAR_RADARR_IP_URL}}
-          key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
-          fields: ["movieCount", "queueCount"] # optional, default: ["movieCount"]
     - Sonarr:
         id: col-medium__sonarr
         icon: sonarr
