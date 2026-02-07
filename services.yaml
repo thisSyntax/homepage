@@ -69,17 +69,6 @@
           allowScrolling: no # optional, default: yes     
 
 - Media Management:
-    - Sonarr:
-        id: col-medium__sonarr
-        icon: sonarr
-        href: http://sonarr.local
-        server: f-si-servarr
-        container: sonarr
-        widget:
-          type: sonarr
-          url: http://sonarr.local
-          key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
-          fields: ["series", "wanted"] # optional, Allowed fields: ["wanted", "queued", "series"]
     - Prowlarr:
         id: col-small__prowlarr
         icon: prowlarr
