@@ -4,7 +4,7 @@
 
 - System:
     - Proxmox:
-        id: __proxmox
+        id: col-3x__proxmox
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
         widget:
@@ -13,7 +13,7 @@
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
     - Komodo:
-        id: col-1-2__komodo
+        id: col-12-21__komodo
         icon: komodo
         server: f-si-komodo
         container: komodo-core-1
@@ -28,7 +28,7 @@
           showStacks: true # optional, default: false
           fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
     - Synology:
-        id: col-1-2__synology
+        id: col-9-21__synology
         icon: synology
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
@@ -36,11 +36,11 @@
           url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
           username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
           password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
-          fields: ["volumeAvailable", "resources.cpu"]
+          fields: ["volumeAvailable"]
 
 - Main:
     - Plex:
-        id: __plex
+        id: col-3x__plex
         icon: plex
         href: {{HOMEPAGE_VAR_PLEX_URL}}
         widget:
