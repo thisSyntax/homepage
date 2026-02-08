@@ -13,6 +13,7 @@
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
     - Komodo:
+        id: col-1-12__komodo
         icon: komodo
         server: f-si-komodo
         container: komodo-core-1

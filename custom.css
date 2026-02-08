@@ -1,11 +1,10 @@
 /* For custom column layout */
 .services-list.flex.flex-col {
     display: grid !important;
-    grid-template-columns: repeat(42, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: 4;
 }
 .services-list.flex.flex-col .service {
-    grid-column: span 42;
+    grid-column: span 4;
 }
 .services-list.flex.flex-col .service > div {
     height: 100%;
@@ -13,15 +12,12 @@
 .services-list.flex.flex-col .service > .mb-2 {
     margin-bottom: 0 !important;
 }
-.services-list.flex.flex-col [id^="col-1-8"].service {  /* 1/8 */
-    grid-column: span 7;
+.services-list.flex.flex-col [id^="col-1-1"].service {
+    grid-column: span 1;
 }
-.services-list.flex.flex-col [id^="col-9-21"].service { /* 9/21 */
-    grid-column: span 18;
+.services-list.flex.flex-col [id^="col-1-2"].service {
+    grid-column: span 2;
 }
-.services-list.flex.flex-col [id^="col-1-2"].service { /* 1/2 */
-    grid-column: span 21;
-}
-.services-list.flex.flex-col [id^="col-12-21"].service {  /* 12/21 */
-    grid-column: span 24;
+.services-list.flex.flex-col [id^="col-1-3"].service {
+    grid-column: span 3;
 }
