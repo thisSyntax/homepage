@@ -28,10 +28,10 @@ hideErrors: true
 
 
 layout:
-  Calendar:
-    icon: mdi-calendar-month-outline-#ffffff
   System:
     icon: mdi-desktop-classic-#ffffff
+  Calendar:
+    icon: mdi-calendar-month-outline-#ffffff
   Apps:
     icon: mdi-shield-crown-outline-#ffffff
   Admin:
