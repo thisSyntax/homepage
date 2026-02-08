@@ -13,7 +13,7 @@
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
     - Komodo:
-        id: col-1-3__komodo
+        id: col-3__komodo
         icon: komodo
         server: f-si-komodo
         container: komodo-core-1
@@ -28,7 +28,7 @@
           showStacks: true # optional, default: false
           fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
     - Synology:
-        id: col-1-1__synology
+        id: col-1__synology
         icon: synology
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
