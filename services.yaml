@@ -38,6 +38,7 @@
 
 - Calendar:
     - Calendar:
+        id: col-1-2__calendar
         widget:
           type: calendar
           firstDayInWeek: sunday # optional - defaults to monday
@@ -59,6 +60,7 @@
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
     - Agenda:
+        id: col-2-4__agenda
         widget:
           type: calendar
           view: agenda

@@ -1,14 +1,21 @@
-#layout-groups div:nth-child(1) {
-  flex: 1 !important;
-  flex-basis: 0 !important;
+/* For custom column layout */
+.services-list.flex.flex-col {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
 }
 
-#layout-groups div:nth-child(2) {
-  flex: 2 !important;
-  flex-basis: 0 !important;
+.servicess-list.flex.flex-col [id^="col-1-2"].service {
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
 
-#layout-groups div:nth-child(3) {
-  flex: 1 !important;
-  flex-basis: 0 !important;
+.servicess-list.flex.flex-col [id^="col-1-4"].service {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.servicess-list.flex.flex-col [id^="col-2-4"].service {
+    grid-column-start: 2;
+    grid-column-end: 4;
 }
