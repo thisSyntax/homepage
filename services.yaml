@@ -50,17 +50,6 @@
           url: {{HOMEPAGE_VAR_PLEX_URL}} 
           key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
 
-- Admin:
-    - Speedtest:
-        id: __speedtest-tracker
-        icon: speedtest-tracker
-        href: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_URL}}
-        server: REDACTED
-        container: speedtest-tracker
-        widget:
-          type: speedtest
-          url: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_IP_URL}}
-
 - Weather:
     - "":
         id: __weather

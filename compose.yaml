@@ -5,13 +5,14 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /etc/homepage:/app/config # Make sure your local config directory exists
-      - /etc/homepage/images:/app/public/images # mount a path to where your images are kept
-      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+      - /opt/docker/homepage/config:/app/config # Make sure your local config directory exists
+      - /opt/docker/homepage/images:/app/public/images # mount a path to where your images are kept
     env_file:
       - .env
     environment:
       HOMEPAGE_ALLOWED_HOSTS: gethomepage.dev,192.168.5.106:3000 # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+      PUID: $PUID
+      PGID: $PGID
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
     container_name: dockerproxy
