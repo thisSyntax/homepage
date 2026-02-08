@@ -11,5 +11,3 @@ services:
       - .env
     environment:
       HOMEPAGE_ALLOWED_HOSTS: gethomepage.dev,192.168.5.31:3000,192.168.5.106:3000 # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
-      PUID: $PUID
-      PGID: $PGID
