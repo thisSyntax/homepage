@@ -28,17 +28,19 @@ hideErrors: true
 
 
 layout:
-  First Row:
+  Row1:
     style: row
     columns: 3
     header: false
     System:
       icon: mdi-desktop-classic-#ffffff
     Calendar:
+      sytle: row
+      columns: 2
       icon: mdi-calendar-month-outline-#ffffff
     Apps:
       icon: mdi-shield-crown-outline-#ffffff
-  Second Row:
+  Row2:
     style: row
     columns: 4
     header: false
