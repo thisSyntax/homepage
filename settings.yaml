@@ -31,7 +31,7 @@ layout:
   Row1:
     style: row
     columns: 3
-    header: false
+    header: true
     System:
       icon: mdi-desktop-classic-#ffffff
     Calendar:
@@ -43,7 +43,7 @@ layout:
   Row2:
     style: row
     columns: 4
-    header: false
+    header: true
     Admin:
       icon: mdi-account-box-outline-#ffffff
     Media Management:
