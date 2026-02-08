@@ -32,8 +32,8 @@ layout:
     icon: mdi-desktop-classic-#ffffff
   Calendar:
     icon: mdi-calendar-month-outline-#ffffff
-  "":
-    icon: 
+  Agenda:
+    icon: mdi-view-agenda-outline-#ffffff
   Apps:
     icon: mdi-shield-crown-outline-#ffffff
   Admin:
