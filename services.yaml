@@ -36,7 +36,7 @@
           password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
           fields: ["volumeAvailable"]
 
-- Main:
+- Apps:
     - Plex:
         icon: plex
         href: {{HOMEPAGE_VAR_PLEX_URL}}
