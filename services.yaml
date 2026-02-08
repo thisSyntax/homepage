@@ -50,20 +50,6 @@
           url: {{HOMEPAGE_VAR_PLEX_URL}} 
           key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
 
-- Weather:
-    - "":
-        id: __weather
-        widget:
-          type: iframe
-          name: iframe-home-assistant-weather
-          src: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}/dashboard-homepage/weather?kiosk"
-          classes: iframe-home-assistant-weather
-          referrerPolicy: same-origin # optional, no default
-          allowPolicy: fullscreen # optional, no default
-          allowFullscreen: true # optional, default: true
-          loadingStrategy: eager # optional, default: eager
-          allowScrolling: no # optional, default: yes   
-
 - Monitoring & Networking:
     - Home Assistant:
         id: col-1-2__home-assistant
@@ -81,26 +67,21 @@
         id: __calendar
         widget:
           type: calendar
-          firstDayInWeek: monday # optional - defaults to monday
+          firstDayInWeek: sunday # optional - defaults to monday
           view: monthly # optional - possible values monthly, agenda
           maxEvents: 10 # optional - defaults to 10
           showTime: true # optional - show time for event happening today - defaults to false
+          timezone: America/Los_Angeles # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
           integrations: # optional
-            - type: ical
-              url: https://www.thunderbird.net/media/caldata/autogen/USHolidays.ics
-              name: Holiday
-              color: purple
+            - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+              service_group: Media # group name where widget exists
+              service_name: Radarr # service name for that widget
+              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}:7878 # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
-                showName: true # optional - show name before event title in event line - defaults to false
-            - type: ical
-              url: https://raw.githubusercontent.com/callaars/film-calendar/refs/heads/main/calendars/tmdb_release_calendar_US_theatrical.ics
-              name: Movie
-              color: emerald
+                unmonitored: true # optional - defaults to false, used with *arr stack
+            - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+              service_group: Media # group name where widget exists
+              service_name: Sonarr # service name for that widget
+              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}:8989  # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
-                showName: true # optional - show name before event title in event line - defaults to false
-            - type: ical
-              url: https://fancalendar.app/api/subscription/ec2f87a409995522.ics
-              name: NFL
-              color: red
-              params: # optional - additional params for the service
-                showName: true # optional - show name before event title in event line - defaults to false
+                unmonitored: true # optional - defaults to false, used with *arr stack
