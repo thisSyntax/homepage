@@ -30,13 +30,9 @@ hideErrors: true
 layout:
   Calendar:
     icon: mdi-calendar-month-outline-#ffffff
-    style: row
-    columns: 2
   System:
     icon: mdi-desktop-classic-#ffffff
-    style: row
-    columns: 2
-  Main:
+  Apps:
     icon: mdi-shield-crown-outline-#ffffff
   Admin:
     icon: mdi-account-box-outline-#ffffff
