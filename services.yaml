@@ -75,13 +75,13 @@
             - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
               service_group: Media # group name where widget exists
               service_name: Radarr # service name for that widget
-              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}:7878 # optional - adds links to sonarr/radarr pages
+              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
             - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
               service_group: Media # group name where widget exists
               service_name: Sonarr # service name for that widget
-              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}:8989  # optional - adds links to sonarr/radarr pages
+              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
     - Agenda:
@@ -95,12 +95,12 @@
             - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
               service_group: Media # group name where widget exists
               service_name: Radarr # service name for that widget
-              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}:7878 # optional - adds links to sonarr/radarr pages
+              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
             - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
               service_group: Media # group name where widget exists
               service_name: Sonarr # service name for that widget
-              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}:8989  # optional - adds links to sonarr/radarr pages
+              baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}  # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
