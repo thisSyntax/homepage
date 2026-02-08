@@ -9,7 +9,7 @@ background:
   blur: sm # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
   saturate: 70 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
   brightness: 70 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
-  opacity: 50 # 0-100
+  opacity: 100 # 0-100
 cardBlur: md # or sm, lg
 headerStyle: boxedWidgets #underlined # or boxed, boxedWidgets, clean
 quicklaunch:
