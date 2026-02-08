@@ -28,21 +28,27 @@ hideErrors: true
 
 
 layout:
-  System:
-    icon: mdi-desktop-classic-#ffffff
-  Calendar:
-    icon: mdi-calendar-month-outline-#ffffff
-  Agenda:
-    icon: mdi-view-agenda-outline-#ffffff
-  Apps:
-    icon: mdi-shield-crown-outline-#ffffff
-  Admin:
-    icon: mdi-account-box-outline-#ffffff
-  Media Management:
-    icon: si-vlcmediaplayer-#ffffff
-  Monitoring & Networking:
-    icon: mdi-home-analytics-#ffffff
-  Tools:
-    icon: mdi-application-brackets-outline-#ffffff
+  First Row:
+    style: row
+    columns: 3
+    header: false
+    System:
+      icon: mdi-desktop-classic-#ffffff
+    Calendar:
+      icon: mdi-calendar-month-outline-#ffffff
+    Apps:
+      icon: mdi-shield-crown-outline-#ffffff
+  Second Row:
+    style: row
+    columns: 4
+    header: false
+    Admin:
+      icon: mdi-account-box-outline-#ffffff
+    Media Management:
+      icon: si-vlcmediaplayer-#ffffff
+    Monitoring & Networking:
+      icon: mdi-home-analytics-#ffffff
+    Tools:
+      icon: mdi-application-brackets-outline-#ffffff
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff

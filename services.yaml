@@ -59,9 +59,7 @@
               service_name: Sonarr # service name for that widget
               baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
-                unmonitored: true # optional - defaults to false, used with *arr stack
-    
-- Agenda:    
+                unmonitored: true # optional - defaults to false, used with *arr stack   
     - Agenda:
         widget:
           type: calendar
