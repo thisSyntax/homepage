@@ -32,8 +32,7 @@ layout:
     icon: mdi-desktop-classic-#ffffff
   Calendar:
     icon: mdi-calendar-month-outline-#ffffff
-  Agenda:
-    header: false # optional - defaults to true, set to false to hide the header for this group
+  "":
   Apps:
     icon: mdi-shield-crown-outline-#ffffff
   Admin:

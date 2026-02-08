@@ -61,7 +61,7 @@
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
     
-- Agenda:
+- "":
     - Agenda:
         widget:
           type: calendar
