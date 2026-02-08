@@ -5,8 +5,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /opt/docker/homepage/config:/app/config # Make sure your local config directory exists
-      - /opt/docker/homepage/images:/app/public/images # mount a path to where your images are kept
+      - /etc/homepage:/app/config # Make sure your local config directory exists
+      - /etc/homepage/images:/app/public/images # mount a path to where your images are kept
     env_file:
       - .env
     environment:
