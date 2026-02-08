@@ -32,8 +32,8 @@ layout:
     icon: mdi-desktop-classic-#ffffff
   Calendar:
     icon: mdi-calendar-month-outline-#ffffff
-    style: row
-    columns: 2
+    style: columns
+    rows: 1
   Apps:
     icon: mdi-shield-crown-outline-#ffffff
   Admin:
