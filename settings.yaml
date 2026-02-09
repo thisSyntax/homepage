@@ -35,6 +35,7 @@ layout:
     System:
       icon: mdi-desktop-classic-#ffffff
     Calendar:
+      id: flex-1__calendar
       style: row
       columns: 2
       icon: mdi-calendar-month-outline-#ffffff
