@@ -195,7 +195,8 @@
           widget:
             type: deluge
             url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
-            password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}}
+            password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}} # webui password
+            enableLeechProgress: true # optional, defaults to false
       - qBittorrent:
           id: col-2__qbittorrent
           icon: qbittorrent
