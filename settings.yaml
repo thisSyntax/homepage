@@ -31,18 +31,19 @@ layout:
   Row1:
     style: row
     columns: 3
-    header: true
+    header: false
     System:
       icon: mdi-desktop-classic-#ffffff
     Calendar:
-      sytle: row
+      style: row
+      columns: 2
       icon: mdi-calendar-month-outline-#ffffff
     Apps:
       icon: mdi-shield-crown-outline-#ffffff
   Row2:
     style: row
     columns: 4
-    header: true
+    header: false
     Admin:
       icon: mdi-account-box-outline-#ffffff
     Media Management:
