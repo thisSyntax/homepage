@@ -125,7 +125,7 @@
       - Radarr:
           id: col-2__radarr
           icon: radarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
           server: f-si-docker-media
           container: radarr
           widget:
@@ -135,7 +135,7 @@
       - Sonarr:
           id: col-2__sonarr
           icon: sonarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
           server: f-si-docker-media
           container: sonarr
           widget:
@@ -145,7 +145,7 @@
       - Lidarr:
           id: col-2__lidarr
           icon: lidarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
           server: f-si-docker-media
           container: lidarr
           widget:
@@ -155,7 +155,7 @@
       - Bazarr:
           id: col-2__bazarr
           icon: bazarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767/
           server: f-si-docker-media
           container: bazarr
           widget:
@@ -165,13 +165,13 @@
       - Whisparr:
           id: __whisparr
           icon: whisparr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
           server: f-si-docker-media
           container: whisparr
       - Prowlarr:
           id: col-2__prowlarr
           icon: prowlarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
           server: f-si-docker-media
           container: prowlarr
           widget:
@@ -208,7 +208,7 @@
       - SABnzbd:
           id: col-2__sabnzbd
           icon: sabnzbd
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
           server: f-si-docker-media
           container: sabnzbd
           widget:
@@ -218,13 +218,13 @@
       - Huntarr:
           id: col-2__huntarr
           icon: huntarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9705
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9705
           server: f-si-docker-media
           container: huntarr
       - Notifiarr:
           id: col-2__notifiarr
           icon: notifiarr
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
           server: f-si-docker-media
           container: notifiarr
 
@@ -232,7 +232,7 @@
       - Syncthing:
           id: col-2__syncthing
           icon: syncthing
-          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
           server: f-si-docker-media
           container: syncthing
  
