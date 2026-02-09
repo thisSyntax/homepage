@@ -51,13 +51,13 @@
               - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Radarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
               - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Sonarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack   
       - Agenda:
@@ -71,13 +71,13 @@
               - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Radarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
               - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Sonarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}  # optional - adds links to sonarr/radarr pages
+                baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}  # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
 
@@ -130,7 +130,7 @@
           container: radarr
           widget:
             type: radarr
-            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+            url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
             key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
       - Sonarr:
           id: col-2__sonarr
@@ -140,7 +140,7 @@
           container: sonarr
           widget:
             type: sonarr
-            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+            url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
             key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
       - Lidarr:
           id: col-2__lidarr
@@ -150,7 +150,7 @@
           container: lidarr
           widget:
             type: lidarr
-            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+            url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
             key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
       - Bazarr:
           id: col-2__bazarr
@@ -160,7 +160,7 @@
           container: bazarr
           widget:
             type: bazarr
-            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+            url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
             key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
       - Whisparr:
           id: __whisparr
@@ -176,7 +176,7 @@
           container: prowlarr
           widget:
             type: prowlarr
-            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+            url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
             key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
       # - Tdarr:
       #     id: col-2__tdarr
@@ -213,7 +213,7 @@
           container: sabnzbd
           widget:
             type: sabnzbd
-            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+            url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
             key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
       - Huntarr:
           id: col-2__huntarr
