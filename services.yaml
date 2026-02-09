@@ -51,13 +51,13 @@
               - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Radarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
+                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
               - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Sonarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
+                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack   
       - Agenda:
@@ -71,13 +71,13 @@
               - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Radarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}} # optional - adds links to sonarr/radarr pages
+                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
               - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
                 service_group: Media # group name where widget exists
                 service_name: Sonarr # service name for that widget
-                baseUrl: {{HOMEPAGE_VAR_SERVARR_IP}}  # optional - adds links to sonarr/radarr pages
+                baseUrl: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}  # optional - adds links to sonarr/radarr pages
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
 
@@ -93,7 +93,7 @@
           id: col-2__tautulli
           icon: tautulli
           href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          server: f-si-docker-mediu
+          server: f-si-docker-media
           container: tautulli
           widget:
             type: tautulli
@@ -103,6 +103,8 @@
           id: col-2__jellyseerr
           icon: jellyseerr
           href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+          server: f-si-docker-media
+          container: jellyseerr
           widget:
             type: jellyseerr
             url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
@@ -120,14 +122,117 @@
             url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
             key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
   - Media Management:
-      - qBittorrent:
-          id: col-2__qbittorrent
-          icon: qbittorrent
-          href: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
-          weight: "7"
+      - Radarr:
+          id: col-2__radarr
+          icon: radarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+          server: f-si-docker-media
+          container: radarr
           widget:
-            type: qbittorrent
-            url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
-            username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-            password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
-            fields: ["download", "upload"]
+            type: radarr
+            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+            key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+      - Sonarr:
+          id: col-2__sonarr
+          icon: sonarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+          server: f-si-docker-media
+          container: sonarr
+          widget:
+            type: sonarr
+            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+            key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+      - Lidarr:
+          id: col-2__lidarr
+          icon: lidarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+          server: f-si-docker-media
+          container: lidarr
+          widget:
+            type: lidarr
+            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+            key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
+      - Bazarr:
+          id: col-2__bazarr
+          icon: bazarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+          server: f-si-docker-media
+          container: bazarr
+          widget:
+            type: bazarr
+            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+            key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+      - Whisparr:
+          id: __whisparr
+          icon: whisparr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
+          server: f-si-docker-media
+          container: whisparr
+      - Prowlarr:
+          id: col-2__prowlarr
+          icon: prowlarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+          server: f-si-docker-media
+          container: prowlarr
+          widget:
+            type: prowlarr
+            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+            key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
+      # - Tdarr:
+      #     id: col-2__tdarr
+      #     icon: tdarr
+      #     href: {{HOMEPAGE_VAR_TDARR_IP}}:8265
+      #     server: f-si-docker-media
+      #     container: tdarr
+      #     widget:
+      #       type: tdarr
+      #       url: {{HOMEPAGE_VAR_TDARR_IP}}:8265
+      #       key: {{HOMEPAGE_VAR_TDARR_API_KEY}}
+      - deluge:
+          id: col-2__deluge
+          icon: deluge
+          href: {{HOMEPAGE_VAR_DELUGE_URL}}
+          widget:
+            type: deluge
+            url: {{HOMEPAGE_VAR_DELUGE_URL}}:8101
+            password: {{HOMEPAGE_VAR_DELUGE_PASSWORD}}
+      # - qBittorrent:
+      #     id: col-2__qbittorrent
+      #     icon: qbittorrent
+      #     href: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+      #     widget:
+      #       type: qbittorrent
+      #       url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+      #       username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+      #       password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+      - SABnzbd:
+          id: col-2__sabnzbd
+          icon: sabnzbd
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+          server: f-si-docker-media
+          container: sabnzbd
+          widget:
+            type: sabnzbd
+            url: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+            key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
+      - Huntarr:
+          id: col-2__huntarr
+          icon: huntarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9705
+          server: f-si-docker-media
+          container: huntarr
+      - Notifiarr:
+          id: col-2__notifiarr
+          icon: notifiarr
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
+          server: f-si-docker-media
+          container: notifiarr
+
+  - Tools:
+      - Syncthing:
+          id: col-2__syncthing
+          icon: syncthing
+          href: {{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
+          server: f-si-docker-media
+          container: syncthing
+ 
