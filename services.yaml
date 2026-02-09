@@ -84,12 +84,29 @@
   - Apps:
       - Plex:
           icon: plex
-          href: {{HOMEPAGE_VAR_PLEX_URL}}
-          weight: "0"
+          href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
           widget:
             type: plex
-            url: {{HOMEPAGE_VAR_PLEX_URL}} 
+            url: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
+      - Tautulli:
+          id: col-2__tautulli
+          icon: tautulli
+          href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+          server: f-si-docker-mediu
+          container: tautulli
+          widget:
+            type: tautulli
+            url: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            key: {{HOMEPAGE_VAR_TAUTULLI_API_KEY}} # see https://tautulli.com/api/v2
+      - Jellyseerr:
+          id: col-2__jellyseerr
+          icon: jellyseerr
+          href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+          widget:
+            type: jellyseerr
+            url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
 
 - Row2:
   - Monitoring & Networking:
