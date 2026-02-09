@@ -199,10 +199,10 @@
       - qBittorrent:
           id: col-2__qbittorrent
           icon: qbittorrent
-          href: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent/
+          href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent/
           widget:
             type: qbittorrent
-            url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent
+            url: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent
             username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
             password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
       - SABnzbd:
