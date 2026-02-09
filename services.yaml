@@ -102,3 +102,13 @@
             type: homeassistant
             url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
             key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
+  - Media Management:
+      - qBittorrent:
+          icon: qbittorrent
+          href: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+          weight: "7"
+          widget:
+            type: qbittorrent
+            url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+            username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+            password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
