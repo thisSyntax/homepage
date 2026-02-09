@@ -2,6 +2,7 @@
 .services-list.flex.flex-col {
     display: grid !important;
     grid-template-columns: 4;
+    gap: 0.5rem;
 }
 .services-list.flex.flex-col .service {
     grid-column: span 4;
