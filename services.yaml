@@ -194,7 +194,7 @@
           href: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge/
           widget:
             type: deluge
-            url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8102
+            url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
             password: {{HOMEPAGE_VAR_DELUGE_PASSWORD}}
       # - qBittorrent:
       #     id: col-2__qbittorrent
