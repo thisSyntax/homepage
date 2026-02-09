@@ -23,9 +23,9 @@ blockHighlights:
     warn: "bg-amber-300/30 text-amber-900 dark:bg-amber-900/30 dark:text-amber-200"
     danger: "bg-rose-700/45 text-rose-200 dark:bg-rose-950/70 dark:text-rose-400"
 
+iconStyle: theme # optional, defaults to gradient
+useEqualHeights: true
 layout:
-  iconStyle: theme # optional, defaults to gradient
-  useEqualHeights: true
   Row1:
     style: row
     columns: 3
@@ -64,7 +64,7 @@ quicklaunch:
 
 hideVersion: true
 
-showStats: true
+showStats: false
 
 statusStyle: 'basic'
 
