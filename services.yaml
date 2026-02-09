@@ -152,12 +152,12 @@
             type: bazarr
             url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
             key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-      - Whisparr:
-          id: __whisparr
-          icon: whisparr
-          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
-          server: f-si-docker-media
-          container: whisparr
+      # - Whisparr:
+      #     id: __whisparr
+      #     icon: whisparr
+      #     href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
+      #     server: f-si-docker-media
+      #     container: whisparr
       - Prowlarr:
           id: col-2__prowlarr
           icon: prowlarr
@@ -187,15 +187,6 @@
             url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
             password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}} # webui password
             enableLeechProgress: true # optional, defaults to false
-      - qBittorrent:
-          id: col-2__qbittorrent
-          icon: qbittorrent
-          href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent
-          widget:
-            type: qbittorrent
-            url: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent
-            username: {{HOMEPAGE_VAR_SEEDBOX_USERNAME}}
-            password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}}
       - SABnzbd:
           id: col-2__sabnzbd
           icon: sabnzbd
