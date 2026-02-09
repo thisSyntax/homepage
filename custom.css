@@ -1,7 +1,7 @@
 /* For custom column layout */
 .services-list.flex.flex-col {
     display: grid !important;
-    grid-template-columns: 4;
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
 }
 .services-list.flex.flex-col .service {
