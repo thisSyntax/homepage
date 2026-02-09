@@ -36,7 +36,6 @@ layout:
       icon: mdi-desktop-classic-#ffffff
     Calendar:
       sytle: row
-      columns: 2
       icon: mdi-calendar-month-outline-#ffffff
     Apps:
       icon: mdi-shield-crown-outline-#ffffff
