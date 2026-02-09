@@ -191,11 +191,11 @@
       - deluge:
           id: col-2__deluge
           icon: deluge
-          href: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge
+          href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge
           widget:
             type: deluge
             url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
-            password: {{HOMEPAGE_VAR_DELUGE_PASSWORD}}
+            password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}}
       - qBittorrent:
           id: col-2__qbittorrent
           icon: qbittorrent
@@ -203,8 +203,8 @@
           widget:
             type: qbittorrent
             url: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}:443/qbittorrent
-            username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-            password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+            username: {{HOMEPAGE_VAR_SEEDBOX_USERNAME}}
+            password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}}
       - SABnzbd:
           id: col-2__sabnzbd
           icon: sabnzbd
