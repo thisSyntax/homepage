@@ -65,4 +65,4 @@ showStats: false
 
 statusStyle: 'basic'
 
-hideErrors: true
+hideErrors: false
