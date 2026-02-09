@@ -10,24 +10,22 @@ background:
   saturate: 70 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
   brightness: 70 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
   opacity: 100 # 0-100
-cardBlur: md # or sm, lg
-headerStyle: boxedWidgets #underlined # or boxed, boxedWidgets, clean
-quicklaunch:
-  searchDescriptions: true
-  hideInternetSearch: true
-  showSearchSuggestions: true
-  hideVisitURL: true
-  provider: bing # google, duckduckgo, bing, baidu, brave or custom
-theme: dark
-color: yellow
-hideVersion: true
-useEqualHeights: true
-showStats: false
-statusStyle: 'dot'
-hideErrors: true
 
+cardBlur: md # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
+
+theme: dark # or light
+
+color: yellow
+
+blockHighlights:
+  levels:
+    good: "bg-emerald-500/40 text-emerald-950 dark:bg-emerald-900/60 dark:text-emerald-400"
+    warn: "bg-amber-300/30 text-amber-900 dark:bg-amber-900/30 dark:text-amber-200"
+    danger: "bg-rose-700/45 text-rose-200 dark:bg-rose-950/70 dark:text-rose-400"
 
 layout:
+  iconStyle: theme # optional, defaults to gradient
+  useEqualHeights: true
   Row1:
     style: row
     columns: 3
@@ -54,3 +52,20 @@ layout:
       icon: mdi-application-brackets-outline-#ffffff
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff
+
+headerStyle: boxedWidgets #underlined # or boxed, boxedWidgets, clean
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: bing # google, duckduckgo, bing, baidu, brave or custom
+
+hideVersion: true
+
+showStats: true
+
+statusStyle: 'basic'
+
+hideErrors: true
