@@ -111,16 +111,6 @@
             key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
 
 - Row2:
-  - Monitoring & Networking:
-      - Home Assistant:
-          icon: home-assistant
-          href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-          server: REDACTED
-          container: homeassistant
-          widget:
-            type: homeassistant
-            url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-            key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
   - Media Management:
       - Radarr:
           id: col-2__radarr
@@ -229,6 +219,17 @@
           server: f-si-docker-media
           container: notifiarr
 
+  - Monitoring & Networking:
+      - Home Assistant:
+          icon: home-assistant
+          href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+          server: REDACTED
+          container: homeassistant
+          widget:
+            type: homeassistant
+            url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+            key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
+ 
   - Tools:
       - Syncthing:
           id: col-2__syncthing
