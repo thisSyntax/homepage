@@ -104,6 +104,7 @@
             key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
   - Media Management:
       - qBittorrent:
+          id: col-2__qbittorrent
           icon: qbittorrent
           href: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
           weight: "7"
