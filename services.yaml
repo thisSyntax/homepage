@@ -155,7 +155,7 @@
       - Bazarr:
           id: col-2__bazarr
           icon: bazarr
-          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767/
+          href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
           server: f-si-docker-media
           container: bazarr
           widget:
@@ -191,18 +191,18 @@
       - deluge:
           id: col-2__deluge
           icon: deluge
-          href: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge/
+          href: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge
           widget:
             type: deluge
-            url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge/
+            url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
             password: {{HOMEPAGE_VAR_DELUGE_PASSWORD}}
       - qBittorrent:
           id: col-2__qbittorrent
           icon: qbittorrent
-          href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent/
+          href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent
           widget:
             type: qbittorrent
-            url: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/qbittorrent/
+            url: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}:443/qbittorrent
             username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
             password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
       - SABnzbd:
