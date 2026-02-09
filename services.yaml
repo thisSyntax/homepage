@@ -113,3 +113,4 @@
             url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
             username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
             password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+            fields: ["download", "upload"]
