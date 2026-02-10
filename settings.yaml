@@ -37,6 +37,8 @@ layout:
     icon: mdi-home-analytics-#ffffff
   Tools:
     icon: mdi-application-brackets-outline-#ffffff
+  Weather:
+    icon: mdi-weather-hazy-#ffffff
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff
 
