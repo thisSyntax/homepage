@@ -31,8 +31,6 @@ layout:
     icon: mdi-account-box-outline-#ffffff
   Calendar:
     icon: mdi-calendar-month-outline-#ffffff
-  Admin:
-    icon: mdi-account-box-outline-#ffffff
   Media Management:
     icon: si-vlcmediaplayer-#ffffff
   Monitoring & Networking:
