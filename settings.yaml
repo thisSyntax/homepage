@@ -29,16 +29,16 @@ layout:
     icon: mdi-shield-crown-outline-#ffffff
   Admin:
     icon: mdi-account-box-outline-#ffffff
-  Calendar:
-    icon: mdi-calendar-month-outline-#ffffff
+  Weather:
+    icon: mdi-weather-hazy-#ffffff
   Media Management:
     icon: si-vlcmediaplayer-#ffffff
   Monitoring & Networking:
     icon: mdi-home-analytics-#ffffff
   Tools:
     icon: mdi-application-brackets-outline-#ffffff
-  Weather:
-    icon: mdi-weather-hazy-#ffffff
+  Calendar:
+    icon: mdi-calendar-month-outline-#ffffff
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff
 
