@@ -17,64 +17,7 @@ function renameLabels() {
         if (mappings[text]) el.textContent = mappings[text];
     });
 }
- 
-// Add logout button
-function addLogoutButton() {
-    const logoutUrl = "REDACTED"; // Replace with your actual logout URL
-    const targetElement = document.querySelector(".flex.flex-row.w-full.flex-wrap.justify-between.gap-x-2");
- 
-    if (targetElement && !document.getElementById("logout-icon")) {
-        const logoutButton = document.createElement("a");
-        logoutButton.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                <path d="M10 9V5a1 1 0 011-1h8a1 1 0 011 1v14a1 1 0 01-1 1h-8a1 1 0 01-1-1v-4H8v4a3 3 0 003 3h8a3 3 0 003-3V5a3 3 0 00-3-3h-8a3 3 0 00-3 3v4h2zM15 12l-4-4v3H3v2h8v3l4-4z"/>
-            </svg>
-        `;
-        logoutButton.href = logoutUrl;
-        logoutButton.id = "logout-icon";
-        logoutButton.classList.add("logout-icon");
- 
-        targetElement.appendChild(logoutButton);
-    }
-}
- 
-// Custom Docker Buttons - Stop and Restart
-const stopBtnHTML = `
-  <button type="button"
-    class="shrink-0 flex items-center justify-center cursor-pointer service-tag custom-docker-stop-btn"
-    title="Stop Docker Container"
-    style="padding:0;">
-    <div class="w-auto text-center overflow-hidden"
-         style="padding:0.75rem 0.25rem; background:transparent;">
-      <div class="rounded-full h-3 w-3 flex items-center justify-center"
-           style="background:transparent;">
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" stroke="none">
-          <rect x="6" y="5" width="12" height="12" rx="1"/>
-        </svg>
-      </div>
-    </div>
-    <span class="sr-only">Stop Docker Container</span>
-  </button>
-`;
- 
-const restartBtnHTML = `
-  <button type="button"
-    class="shrink-0 flex items-center justify-center cursor-pointer service-tag custom-docker-restart-btn"
-    title="Restart Docker Container"
-    style="padding:0;">
-    <div class="w-auto text-center overflow-hidden"
-         style="padding:0.75rem 0.25rem; background:transparent;">
-      <div class="rounded-full h-3 w-3 flex items-center justify-center"
-           style="background:transparent;">
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 4v5h5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4 9A7 7 0 1 0 9 4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-    <span class="sr-only">Restart Docker Container</span>
-  </button>
-`;
+  
  
 // Portainer API details
 const PORTAINER_ENDPOINT_ID = 2;
