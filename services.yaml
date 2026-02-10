@@ -82,7 +82,7 @@
         widget:
           type: iframe
           name: iframe-home-assistant-weather
-          src: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}/dashboard-homepage/weather?kiosk"
+          src: "http://127.0.0.1/dashboard-homepage/weather?kiosk"
           classes: iframe-home-assistant-weather
           allowPolicy: fullscreen
           allowScrolling: no # optional, default: yes
