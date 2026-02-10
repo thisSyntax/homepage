@@ -68,6 +68,6 @@ hideVersion: true
 
 showStats: false
 
-statusStyle: 'dot'
+statusStyle: 'basic'
 
 hideErrors: false
