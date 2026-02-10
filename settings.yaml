@@ -23,30 +23,22 @@ blockHighlights:
 iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
-  Row1:
-    style: row
-    columns: 3
-    header: false
-    System:
-      icon: mdi-desktop-classic-#ffffff
-    Calendar:
-      style: row
-      columns: 2
-      icon: mdi-calendar-month-outline-#ffffff
-    Apps:
-      icon: mdi-shield-crown-outline-#ffffff
-  Row2:
-    style: row
-    columns: 4
-    header: false
-    Admin:
-      icon: mdi-account-box-outline-#ffffff
-    Media Management:
-      icon: si-vlcmediaplayer-#ffffff
-    Monitoring & Networking:
-      icon: mdi-home-analytics-#ffffff
-    Tools:
-      icon: mdi-application-brackets-outline-#ffffff
+  System:
+    icon: mdi-desktop-classic-#ffffff
+  Apps:
+    icon: mdi-shield-crown-outline-#ffffff
+  Admin:
+    icon: mdi-account-box-outline-#ffffff
+  Calendar:
+    icon: mdi-calendar-month-outline-#ffffff
+  Admin:
+    icon: mdi-account-box-outline-#ffffff
+  Media Management:
+    icon: si-vlcmediaplayer-#ffffff
+  Monitoring & Networking:
+    icon: mdi-home-analytics-#ffffff
+  Tools:
+    icon: mdi-application-brackets-outline-#ffffff
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff
 
