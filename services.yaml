@@ -14,7 +14,7 @@
     - Komodo:
         id: col-3__komodo
         icon: komodo
-        server: f-si-komodo
+        server: komodo
         container: komodo-core-1
         href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
         showStats: false
@@ -49,7 +49,7 @@
         id: col-2__tautulli
         icon: tautulli
         href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: f-si-docker-media
+        server: docker-media
         container: tautulli
         widget:
           type: tautulli
@@ -59,7 +59,7 @@
         id: col-2__jellyseerr
         icon: jellyseerr
         href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: f-si-docker-media
+        server: docker-media
         container: jellyseerr
         widget:
           type: jellyseerr
@@ -71,7 +71,7 @@
         id: __speedtest-tracker
         icon: speedtest-tracker
         href: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
-        server: f-si-docker-others
+        server: docker-others
         container: speedtest-tracker
         widget:
           type: speedtest
@@ -92,7 +92,7 @@
         id: col-2__radarr
         icon: radarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
-        server: f-si-docker-media
+        server: docker-media
         container: radarr
         widget:
           type: radarr
@@ -102,7 +102,7 @@
         id: col-2__sonarr
         icon: sonarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
-        server: f-si-docker-media
+        server: docker-media
         container: sonarr
         widget:
           type: sonarr
@@ -112,7 +112,7 @@
         id: col-2__lidarr
         icon: lidarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
-        server: f-si-docker-media
+        server: docker-media
         container: lidarr
         widget:
           type: lidarr
@@ -122,7 +122,7 @@
         id: col-2__bazarr
         icon: bazarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
-        server: f-si-docker-media
+        server: docker-media
         container: bazarr
         widget:
           type: bazarr
@@ -132,13 +132,13 @@
     #     id: __whisparr
     #     icon: whisparr
     #     href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
-    #     server: f-si-docker-media
+    #     server: docker-media
     #     container: whisparr
     - Prowlarr:
         id: col-2__prowlarr
         icon: prowlarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
-        server: f-si-docker-media
+        server: docker-media
         container: prowlarr
         widget:
           type: prowlarr
@@ -148,7 +148,7 @@
     #     id: col-2__tdarr
     #     icon: tdarr
     #     href: {{HOMEPAGE_VAR_TDARR_IP}}:8265
-    #     server: f-si-docker-media
+    #     server: docker-media
     #     container: tdarr
     #     widget:
     #       type: tdarr
@@ -167,7 +167,7 @@
         id: col-2__sabnzbd
         icon: sabnzbd
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
-        server: f-si-docker-media
+        server: docker-media
         container: sabnzbd
         widget:
           type: sabnzbd
@@ -177,20 +177,20 @@
         id: col-2__huntarr
         icon: huntarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9705
-        server: f-si-docker-media
+        server: docker-media
         container: huntarr
     - Notifiarr:
         id: col-2__notifiarr
         icon: notifiarr
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
-        server: f-si-docker-media
+        server: docker-media
         container: notifiarr
 
 - Monitoring & Networking:
     - Home Assistant:
         icon: home-assistant
         href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-        server: f-si-docker-essentials
+        server: docker-essentials
         container: homeassistant
         widget:
           type: homeassistant
@@ -202,7 +202,7 @@
         id: col-2__syncthing
         icon: syncthing
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
-        server: f-si-docker-media
+        server: docker-media
         container: syncthing
 
 - Calendar:
