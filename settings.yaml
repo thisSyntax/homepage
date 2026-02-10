@@ -24,23 +24,36 @@ iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
   System:
-    icon: mdi-desktop-classic-#ffffff
+    icon: mdi-desktop-classic-#\r
+    tab: Services
   Apps:
-    icon: mdi-shield-crown-outline-#ffffff
+    icon: mdi-shield-crown-outline-#\r
+    tab: Services
   Admin:
-    icon: mdi-account-box-outline-#ffffff
+    icon: mdi-account-box-outline-#\r
+    tab: Services
   Weather:
-    icon: mdi-weather-hazy-#ffffff
+    icon: mdi-weather-hazy-#\r
+    tab: Services
   Media Management:
-    icon: si-vlcmediaplayer-#ffffff
+    icon: si-vlcmediaplayer-#\r
+    tab: Services
   Monitoring & Networking:
-    icon: mdi-home-analytics-#ffffff
+    icon: mdi-home-analytics-#\r
+    tab: Services
   Tools:
-    icon: mdi-application-brackets-outline-#ffffff
+    icon: mdi-application-brackets-outline-#\r
+    tab: Services
   Calendar:
-    icon: mdi-calendar-month-outline-#ffffff
+    icon: mdi-calendar-month-outline-#\r
+    tab: Services
   Bookmarks:
-    icon: mdi-bookmark-multiple-outline-#ffffff
+    icon: mdi-bookmark-multiple-outline-#\r
+    tab: Services
+  Grafana Dashboard:
+    header: false
+    tab: Grafana
+
 
 headerStyle: boxedWidgets #underlined # or boxed, boxedWidgets, clean
 

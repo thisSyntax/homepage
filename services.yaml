@@ -227,3 +227,12 @@
               baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989 # optional - adds links to sonarr/radarr pages
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
+
+- Grafana Dashboard:
+    - "":
+        widget:
+          type: iframe
+          name: iframe-grafana
+          src: "{{HOMEPAGE_VAR_GRAFANA_URL}}"
+          classes: iframe-grafana
+          allowPolicy: fullscreen
