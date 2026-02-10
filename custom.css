@@ -63,6 +63,15 @@ html {
 }
 
 
+.iframe-cameras {
+  background: transparent;
+  zoom: 0.9;
+  height: 800px;
+  margin: -13px 0px 0px 0px;
+}
+
+
+
 /* For custom column layout */
 .services-list.flex.flex-col {
     display: grid !important;
