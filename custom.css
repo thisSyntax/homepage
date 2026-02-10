@@ -20,6 +20,15 @@ html {
 }
 
  
+/* Due to tailwind v4*/
+.container {
+  @media(min-width: 767px) {
+    max-width: 90vw !important;
+    width: 90% !important;
+  }
+}
+
+ 
 /* For custom classes used in iFrame */
 .iframe-home-assistant-media {
   width: 300px;
