@@ -74,7 +74,7 @@
         server: f-si-docker-others
         container: speedtest-tracker
         widget:
-          type: speedtest-tracker
+          type: speedtest
           url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
 
 - Calendar:
