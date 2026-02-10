@@ -190,7 +190,7 @@
     - Home Assistant:
         icon: home-assistant
         href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-        server: docker-essentials
+        server: f-si-docker-essentials
         container: homeassistant
         widget:
           type: homeassistant
