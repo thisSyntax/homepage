@@ -1,42 +1,6 @@
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
-- System:
-    - Proxmox:
-        icon: proxmox.png
-        href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
-        weight: "0"
-        widget:
-          type: proxmox
-          url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
-          username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
-          password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
-    - Komodo:
-        id: col-3__komodo
-        icon: komodo
-        server: komodo
-        container: komodo-core-1
-        href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
-        showStats: false
-        widget:
-          type: komodo
-          url: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
-          key: {{HOMEPAGE_VAR_KOMODO_API_KEY}}
-          secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
-          showSummary: false # optional, default: false. Takes precedence over showStacks
-          showStacks: true # optional, default: false
-          fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
-    - Synology:
-        id: col-1__synology
-        icon: synology
-        href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
-        widget:
-          type: diskstation
-          url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
-          username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
-          password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
-          fields: ["volumeAvailable"]
-
 - Top:
   - Weather:
       - "":
@@ -92,7 +56,44 @@
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
 
+
 - Main:
+  - System:
+      - Proxmox:
+          icon: proxmox.png
+          href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+          weight: "0"
+          widget:
+            type: proxmox
+            url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+            username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
+            password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
+      - Komodo:
+          id: col-3__komodo
+          icon: komodo
+          server: komodo
+          container: komodo-core-1
+          href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
+          showStats: false
+          widget:
+            type: komodo
+            url: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
+            key: {{HOMEPAGE_VAR_KOMODO_API_KEY}}
+            secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
+            showSummary: false # optional, default: false. Takes precedence over showStacks
+            showStacks: true # optional, default: false
+            fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
+      - Synology:
+          id: col-1__synology
+          icon: synology
+          href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
+          widget:
+            type: diskstation
+            url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
+            username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
+            password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+            fields: ["volumeAvailable"]
+
   - Apps:
       - Plex:
           icon: plex
