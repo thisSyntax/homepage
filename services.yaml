@@ -68,12 +68,12 @@
     - Immich:
         id: __immich-server
         icon: immich
-        href: http://docker-media:2283
+        href: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
         server: docker-media
         container: immich-server
         widget:
           type: immich
-          url: http://docker-media:2283
+          url: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
           key: {{HOMEPAGE_VAR_IMMICH_TOKEN}}
           version: 2
 
