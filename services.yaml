@@ -37,17 +37,17 @@
           password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
           fields: ["volumeAvailable"]
 
-- Weather:
-    - "":
-        widget:
-          type: iframe
-          name: iframe-home-assistant-weather
-          src: {{HOMEPAGE_VAR_HOMEASSISTANT_WEATHER_URL}}
-          classes: iframe-home-assistant-weather
-          allowPolicy: fullscreen
-          allowScrolling: no # optional, default: yes
-
 - Top:
+  - Weather:
+      - "":
+          widget:
+            type: iframe
+            name: iframe-home-assistant-weather
+            src: {{HOMEPAGE_VAR_HOMEASSISTANT_WEATHER_URL}}
+            classes: iframe-home-assistant-weather
+            allowPolicy: fullscreen
+            allowScrolling: no # optional, default: yes
+
   - Calendar:
       - Calendar:
           widget:
