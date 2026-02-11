@@ -23,10 +23,9 @@ blockHighlights:
 iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
-  Weather:
-    icon: mdi-weather-hazy-#ffffff
-  Calendar:
-    icon: mdi-calendar-month-outline-#ffffff
+  Info:
+    style: row
+    columns: 3
   System:
     icon: mdi-desktop-classic-#ffffff
     tab: Services

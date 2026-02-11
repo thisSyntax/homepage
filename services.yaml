@@ -1,9 +1,10 @@
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
-- Weather:
-    - "":
+- Info:
+    - Weather:
         id: __weather
+        icon: mdi-weather-hazy-#ffffff
         widget:
           type: iframe
           name: iframe-home-assistant-weather
@@ -11,10 +12,9 @@
           classes: h-60 sm:h-60 md:h-60 lg:h-60 xl:h-60 2xl:h-72
           allowPolicy: fullscreen
           allowScrolling: no # optional, default: yes
-
-- Calendar:
     - Calendar:
         id: __calendar
+        icon: mdi-calendar-month-outline-#ffffff
         widget:
           type: calendar
           firstDayInWeek: sunday # optional - defaults to monday
@@ -37,6 +37,7 @@
                 unmonitored: true # optional - defaults to false, used with *arr stack
     - Agenda:
         id: __agenda
+        icon: mdi-view-agenda-outline-#ffffff
         widget:
           type: calendar
           firstDayInWeek: sunday # optional - defaults to monday
