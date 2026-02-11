@@ -4,6 +4,7 @@
 - Top:
   - Weather:
       - "":
+          id: col-1__weather
           widget:
             type: iframe
             name: iframe-home-assistant-weather
@@ -14,6 +15,7 @@
 
   - Calendar:
       - Calendar:
+          id: col-1__calendar
           widget:
             type: calendar
             firstDayInWeek: sunday # optional - defaults to monday
@@ -35,6 +37,7 @@
                 params: # optional - additional params for the service
                   unmonitored: true # optional - defaults to false, used with *arr stack
       - Agenda:
+          id: col_1__calendar-agenda
           widget:
             type: calendar
             firstDayInWeek: sunday # optional - defaults to monday
