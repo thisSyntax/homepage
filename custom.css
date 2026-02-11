@@ -21,7 +21,7 @@ html {
 .container {
   @media(min-width: 767px) {
     max-width: 100vw !important;
-    width:75% !important;
+    width: 90% !important;
   }
 }
 
