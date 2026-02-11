@@ -2,17 +2,29 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 - Info:
-    - Weather:
+    # - Weather:
+    #     id: __weather
+    #     icon: mdi-weather-hazy-#ffffff
+    #     widget:
+    #       type: iframe
+    #       name: iframe-home-assistant-weather
+    #       src: {{HOMEPAGE_VAR_HOMEASSISTANT_WEATHER_URL}}
+    #       classes: iframe-home-assistant-weather # optional, use tailwind height classes, see https://tailwindcss.com/docs/height
+    #       referrerPolicy: same-origin # optional, no default
+    #       allowPolicy: fullscreen
+    #       allowScrolling: no # optional, default: yes
+    - Weather :
         id: __weather
         icon: mdi-weather-hazy-#ffffff
         widget:
-          type: iframe
-          name: iframe-home-assistant-weather
-          src: {{HOMEPAGE_VAR_HOMEASSISTANT_WEATHER_URL}}
-          classes: iframe-home-assistant-weather # optional, use tailwind height classes, see https://tailwindcss.com/docs/height
-          referrerPolicy: same-origin # optional, no default
-          allowPolicy: fullscreen
-          allowScrolling: no # optional, default: yes
+          type: weather
+          fields:
+            lat: {{HOMEPAGE_VAR_OPENMETEO_LATITUDE}}
+            lon: {{HOMEPAGE_VAR_OPENMETEO_LONGITUDE}}
+            units: metric        # metric / imperial
+            provider: openweathermap
+            apiKey: {{HOMEPAGE_VAR_OPENWEATHERMAP_API_KEY}}
+            cache: 5             # refresh interval (minutes)
     - Calendar:
         id: __calendar
         icon: mdi-calendar-month-outline-#ffffff
