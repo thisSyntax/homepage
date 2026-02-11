@@ -12,11 +12,8 @@ body {
  
  
 /* Apply zoom specifically for the Homepage */
-/* body {
-    zoom: 0.8;
-} */
 html {
-  font-size: 80%;
+  font-size: 90%;
 }
 
  
