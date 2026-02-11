@@ -35,19 +35,19 @@ html {
  
 .iframe-home-assistant-weather {
   background: transparent;
-  height: 285px;
+  height: 385px;
   margin: -13px 0px 0px 0px;
   @media(min-width: 767px) {
     zoom: 0.85;
-    height: 280px;
+    height: 380px;
   }
   @media(min-width: 1536px) {
     zoom: 0.83;
-    height: 290px;
+    height: 390px;
   }
   @media(min-width: 1800px) {
     zoom: 0.92;
-    height: 260px;
+    height: 360px;
   }
 }
  
