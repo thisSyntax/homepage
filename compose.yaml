@@ -7,6 +7,7 @@ services:
     volumes:
       - /opt/docker/homepage:/app/config # Make sure your local config directory exists
       - /opt/images:/app/public/images # mount a path to where your images are kept
+      - /opt/widgets:/app/src/widgets # optional, only needed if you want to add custom widgets
     env_file:
       - .env
     environment:
