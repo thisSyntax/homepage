@@ -70,7 +70,7 @@
         icon: immich
         href: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
         server: docker-media
-        container: immich-server
+        container: immich_server
         widget:
           type: immich
           url: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
