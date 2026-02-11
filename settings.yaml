@@ -24,8 +24,9 @@ iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
   Info:
+    icon: mdi-information-outline-#ffffff
     style: row
-    columns: 3
+    columns: 4
   System:
     icon: mdi-desktop-classic-#ffffff
     tab: Services
