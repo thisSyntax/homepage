@@ -12,7 +12,7 @@ cardBlur: md # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
 
 theme: dark # or light
 
-color: yellow
+color: teal
 
 blockHighlights:
   levels:
