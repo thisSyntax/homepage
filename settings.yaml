@@ -23,41 +23,34 @@ blockHighlights:
 iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
-  Top:
+  Weather:
+    icon: mdi-weather-hazy-#ffffff
+  Calendar:
+    icon: mdi-calendar-month-outline-#ffffff
+  System:
+    icon: mdi-desktop-classic-#ffffff
+    tab: Services
+  Apps:
+    icon: mdi-shield-crown-outline-#ffffff
+    tab: Services
+  Admin:
+    icon: mdi-account-box-outline-#ffffff
+    tab: Services
+  Media Management:
+    icon: si-vlcmediaplayer-#ffffff
+    tab: Services
+  Monitoring & Networking:
+    icon: mdi-home-analytics-#ffffff
+    tab: Services
+  Tools:
+    icon: mdi-application-brackets-outline-#ffffff
+    tab: Services
+  Bookmarks:
+    icon: mdi-bookmark-multiple-outline-#ffffff
+    tab: Services
+  Grafana Dashboard:
     header: false
-    style: row
-    columns: 1
-    Weather:
-      icon: mdi-weather-hazy-#ffffff
-    Calendar:
-      icon: mdi-calendar-month-outline-#ffffff
-  Main:
-    style: row
-    columns: 4
-    System:
-      icon: mdi-desktop-classic-#ffffff
-      tab: Services
-    Apps:
-      icon: mdi-shield-crown-outline-#ffffff
-      tab: Services
-    Admin:
-      icon: mdi-account-box-outline-#ffffff
-      tab: Services
-    Media Management:
-      icon: si-vlcmediaplayer-#ffffff
-      tab: Services
-    Monitoring & Networking:
-      icon: mdi-home-analytics-#ffffff
-      tab: Services
-    Tools:
-      icon: mdi-application-brackets-outline-#ffffff
-      tab: Services
-    Bookmarks:
-      icon: mdi-bookmark-multiple-outline-#ffffff
-      tab: Services
-    Grafana Dashboard:
-      header: false
-      tab: Grafana
+    tab: Grafana
 
 
 headerStyle: boxedWidgets #underlined # or boxed, boxedWidgets, clean
