@@ -95,27 +95,3 @@ html {
 .services-list.flex.flex-col [id^="col-3"].service {
     grid-column: span 3;
 }
-
-* For custom classes used in iFrame */
-.iframe-home-assistant-media {
-  width: 300px;
-  height: 500px;
-}
- 
-.iframe-home-assistant-weather {
-  background: transparent;
-  height: 285px;
-  margin: -13px 0px 0px 0px;
-  @media(min-width: 767px) {
-    zoom: 0.85;
-    height: 280px;
-  }
-  @media(min-width: 1536px) {
-    zoom: 0.83;
-    height: 290px;
-  }
-  @media(min-width: 1800px) {
-    zoom: 0.92;
-    height: 260px;
-  }
-}
