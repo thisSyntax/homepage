@@ -68,8 +68,8 @@ Current top-to-bottom structure:
   instances on a Raspberry Pi, not one of the `docker.yaml` hosts, so no `server`/`container`
   fields)
 - **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr, Prowlarr
-  — itself a 2-column row), Calendar (release calendar, agenda view), Management (Seerr,
-  Syncthing, Notifiarr)
+  — itself a 2-column row), Calendar (two stacked cards: monthly grid, then agenda list),
+  Management (Seerr, Syncthing, Notifiarr)
 
 **Known issue (by choice, not an oversight)**: per
 [Homepage's calendar widget docs](https://gethomepage.dev/widgets/services/calendar/), the
@@ -84,7 +84,12 @@ Two other Calendar bugs were fixed independently of the above and remain fixed:
 - The integration's URL-link field is `baseUrl` (camelCase) — `baseurl` is silently accepted
   by YAML but ignored by the widget, so links quietly did nothing.
 - `previousDays` only has an effect in `view: agenda`; it's inert under `view: monthly`.
-  Calendar is set to `view: agenda` for this reason.
+
+Since `previousDays` is agenda-only, the Calendar column runs two separate calendar widget
+instances stacked on top of each other rather than picking one view: **Calendar**
+(`view: monthly`, a plain grid, no `previousDays`) and **Agenda** (`view: agenda`, a list
+that does use `previousDays`). Both carry the same `integrations` block, so both would show
+Radarr/Sonarr events if the nested-group issue above gets resolved.
 
 (A two-tab Services/Grafana split was tried and dropped earlier — the Grafana iframe
 integration wasn't set up correctly.)

@@ -174,6 +174,28 @@
             widget:
               type: calendar
               firstDayInWeek: sunday # optional - defaults to monday
+              view: monthly # optional - possible values monthly, agenda
+              maxEvents: 15 # optional - defaults to 10
+              showTime: true # optional - show time for event happening today - defaults to false
+              timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+              integrations: # optional
+                - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+                  service_group: Arr Stack # group name where widget exists - nested under Media, which is confirmed NOT to resolve (see comment at top of file); kept for when this is revisited
+                  service_name: Radarr # service name for that widget
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
+                  params: # optional - additional params for the service
+                    unmonitored: true # optional - defaults to false, used with *arr stack
+                - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+                  service_group: Arr Stack # group name where widget exists - nested under Media, which is confirmed NOT to resolve (see comment at top of file); kept for when this is revisited
+                  service_name: Sonarr # service name for that widget
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
+                  params: # optional - additional params for the service
+                    unmonitored: true # optional - defaults to false, used with *arr stack
+        - Agenda:
+            icon: mdi-calendar-month-outline-#ffffff
+            widget:
+              type: calendar
+              firstDayInWeek: sunday # optional - defaults to monday
               view: agenda # optional - possible values monthly, agenda - agenda is required for previousDays to have any effect
               maxEvents: 15 # optional - defaults to 10
               showTime: true # optional - show time for event happening today - defaults to false
