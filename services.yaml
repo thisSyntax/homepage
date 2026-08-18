@@ -88,12 +88,12 @@
               password: {{HOMEPAGE_VAR_UNIFI_PASSWORD}}
         - Speedtest-Tracker:
             icon: speedtest-tracker
-            href: http://{{HOMEPAGE_VAR_DOCKER_OTHERS_IP}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
             server: docker-others
             container: speedtest-tracker
             widget:
               type: speedtest
-              url: http://{{HOMEPAGE_VAR_DOCKER_OTHERS_IP}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
               version: 2 # required if running v2 or higher, defaults to 1
               key: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}} # in v2 this is your password or an app password
 
@@ -119,52 +119,52 @@
     - Arr Stack:
         - Radarr:
             icon: radarr
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:7878
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
             server: docker-media
             container: radarr
             widget:
               type: radarr
-              url: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:7878
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
               key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
               fields: ["wanted", "missing", "movies"] # allowed fields: wanted, missing, queued, movies
         - Sonarr:
             icon: sonarr
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:8989
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
             server: docker-media
             container: sonarr
             widget:
               type: sonarr
-              url: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:8989
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
               fields: ["wanted", "series"] # allowed fields: wanted, queued, series
         - Lidarr:
             icon: lidarr
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:8686
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
             server: docker-media
             container: lidarr
             widget:
               type: lidarr
-              url: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:8686
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
               fields: ["wanted", "artists"] # allowed fields: wanted, queued, artists
         - Bazarr:
             icon: bazarr
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:6767
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
             server: docker-media
             container: bazarr
             widget:
               type: bazarr
-              url: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:6767
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
               fields: ["missingEpisodes", "missingMovies"]
         - Prowlarr:
             icon: prowlarr
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:9696
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
             server: docker-media
             container: prowlarr
             widget:
               type: prowlarr
-              url: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:9696
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
               fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed fields: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
 
@@ -203,13 +203,13 @@
                 - type: radarr
                   service_group: Arr Stack
                   service_name: Radarr
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}
                   params:
                     unmonitored: true
                 - type: sonarr
                   service_group: Arr Stack
                   service_name: Sonarr
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}
                   params:
                     unmonitored: true
 
@@ -225,15 +225,15 @@
               key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
         - Syncthing:
             icon: syncthing
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:8384
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
             server: docker-media
             container: syncthing
             widget:
               type: syncthing
-              url: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:8384
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
               key: {{HOMEPAGE_VAR_SYNCTHING_API_KEY}} # see https://docs.syncthing.net/users/api.html
         - Notifiarr:
             icon: notifiarr
-            href: http://{{HOMEPAGE_VAR_DOCKER_MEDIA_IP}}:5454
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
             server: docker-media
             container: notifiarr
