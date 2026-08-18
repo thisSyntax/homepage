@@ -78,6 +78,13 @@
               fields: ["running", "down", "total"] # allowed fields (max 4): total, running, stopped, unhealthy, unknown
 
     - Network:
+        - Unifi Controller:
+            icon: unifi
+            href: http://{{HOMEPAGE_VAR_UNIFI_IP}}
+            widget:
+              type: unifi
+              url: http://{{HOMEPAGE_VAR_UNIFI_IP}}
+              key: {{HOMEPAGE_VAR_UNIFI_API_KEY}} # required if using API key instead of username/password
         - Speedtest-Tracker:
             icon: speedtest-tracker
             href: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
