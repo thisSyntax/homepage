@@ -52,14 +52,6 @@ html {
 }
  
  
-.iframe-grafana {
-  background: transparent;
-  zoom: 0.8;
-  height: 900px;
-  margin: -13px 0px 0px 0px;
-}
-
-
 .iframe-cameras {
   background: transparent;
   zoom: 0.9;

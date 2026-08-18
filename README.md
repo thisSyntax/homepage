@@ -20,7 +20,7 @@ Config for my [Homepage](https://gethomepage.dev/) dashboard ("Fey Server Infras
 
 | File | Purpose |
 |------|---------|
-| `settings.yaml` | Global appearance: theme, background, tabs/layout groups, quick-launch |
+| `settings.yaml` | Global appearance: theme, background, layout group order, quick-launch |
 | `services.yaml` | Service cards (with widgets), grouped into the layout sections defined in `settings.yaml` |
 | `widgets.yaml` | Top-of-page info widgets: search bar, weather (Open-Meteo), date/time, Proxmox glances |
 | `docker.yaml` | Docker socket endpoints, used by `server`/`container` fields in `services.yaml` for live container status |
@@ -34,7 +34,7 @@ Config for my [Homepage](https://gethomepage.dev/) dashboard ("Fey Server Infras
 
 Every secret and host-specific value is a `{{HOMEPAGE_VAR_*}}` placeholder, resolved from `.env` at container start. Never hardcode a real IP, token, or password into a tracked file. Variables currently referenced:
 
-- **Infra**: `WEB_DOMAIN`, `GRAFANA_URL`
+- **Infra**: `WEB_DOMAIN`
 - **Proxmox**: `PROXMOX_IP_URL`, `PROXMOX_API_ID`, `PROXMOX_API_KEY`, `PROXMOX_GLANCES_URL`
 - **Komodo**: `KOMODO_IP_URL`, `KOMODO_API_KEY`, `KOMODO_SECRET`
 - **Synology**: `SYNOLOGY_IP_URL`, `SYNOLOGY_USERNAME`, `SYNOLOGY_PASSWORD`
@@ -55,11 +55,9 @@ Every secret and host-specific value is a `{{HOMEPAGE_VAR_*}}` placeholder, reso
 - `id: col-3__<name>` → 3 columns
 - no `col-N__` prefix → all 4 columns
 
-## Tabs
+## Layout
 
-Configured via `settings.yaml`'s `layout`:
-
-- **Services** — System, Apps, Admin, Media Management, Monitoring & Networking, Tools, Bookmarks
-- **Grafana** — full-width Grafana iframe
-
-The `Info` group has no tab assignment, so it renders above the tab bar on every tab.
+Single page, no tabs — `settings.yaml`'s `layout` lists the groups in display order:
+Info, System, Apps, Admin, Media Management, Monitoring & Networking, Tools, Bookmarks.
+(A two-tab Services/Grafana split was tried and dropped — the Grafana iframe integration
+wasn't set up correctly.)

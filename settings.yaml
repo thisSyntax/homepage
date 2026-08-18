@@ -28,28 +28,18 @@ layout:
     columns: 1
   System:
     icon: mdi-desktop-classic-#ffffff
-    tab: Services
   Apps:
     icon: mdi-shield-crown-outline-#ffffff
-    tab: Services
   Admin:
     icon: mdi-account-box-outline-#ffffff
-    tab: Services
   Media Management:
     icon: si-vlcmediaplayer-#ffffff
-    tab: Services
   Monitoring & Networking:
     icon: mdi-home-analytics-#ffffff
-    tab: Services
   Tools:
     icon: mdi-application-brackets-outline-#ffffff
-    tab: Services
   Bookmarks:
     icon: mdi-bookmark-multiple-outline-#ffffff
-    tab: Services
-  Grafana Dashboard:
-    header: false
-    tab: Grafana
 
 
 headerStyle: boxedWidgets #underlined # or boxed, boxedWidgets, clean

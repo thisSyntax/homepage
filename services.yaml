@@ -226,12 +226,6 @@
           type: sabnzbd
           url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
           key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
-    - Huntarr:
-        id: col-2__huntarr
-        icon: huntarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9705
-        server: docker-media
-        container: huntarr
     - Notifiarr:
         id: col-2__notifiarr
         icon: notifiarr
@@ -257,12 +251,3 @@
         href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
         server: docker-media
         container: syncthing
-
-- Grafana Dashboard:
-    - "":
-        widget:
-          type: iframe
-          name: iframe-grafana
-          src: "{{HOMEPAGE_VAR_GRAFANA_URL}}"
-          classes: iframe-grafana
-          allowPolicy: fullscreen
