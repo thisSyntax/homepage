@@ -32,20 +32,9 @@ Config for my [Homepage](https://gethomepage.dev/) dashboard ("Fey Server Infras
 
 ## Environment variables
 
-Every secret and host-specific value is a `{{HOMEPAGE_VAR_*}}` placeholder, resolved from `.env` at container start. Never hardcode a real IP, token, or password into a tracked file. Variables currently referenced:
+Every secret and host-specific value is a `{{HOMEPAGE_VAR_*}}` placeholder, resolved from `.env` at container start. Never hardcode a real IP, token, or password into a tracked file.
 
-- **Infra**: `WEB_DOMAIN`
-- **Proxmox**: `PROXMOX_IP_URL`, `PROXMOX_API_ID`, `PROXMOX_API_KEY`, `PROXMOX_GLANCES_URL`
-- **Komodo**: `KOMODO_IP_URL`, `KOMODO_API_KEY`, `KOMODO_SECRET`
-- **Synology**: `SYNOLOGY_IP_URL`, `SYNOLOGY_USERNAME`, `SYNOLOGY_PASSWORD`
-- **Docker hosts**: `DOCKER-MEDIA_IP`, `DOCKER-OTHERS_IP`
-- **Home Assistant**: `HOMEASSISTANT_URL`, `HOMEASSISTANT_TOKEN`, `HOMEASSISTANT_WEATHER_URL`
-- **Pi-hole**: `PIHOLE1_IP`, `PIHOLE1_API_KEY`, `PIHOLE2_IP`, `PIHOLE2_API_KEY`
-- **Weather**: `OPENMETEO_LATITUDE`, `OPENMETEO_LONGITUDE`
-- **Media stack**: `PLEX_API_KEY`, `TAUTULLI_API_KEY`, `JELLYSEERR_API_KEY` (used by the Seerr widget/card), `IMMICH_TOKEN`, `RADARR_API_KEY`, `SONARR_API_KEY`, `LIDARR_API_KEY`, `BAZARR_API_KEY`, `PROWLARR_API_KEY`, `SABNZBD_API_KEY`
-- **Seedbox**: `SEEDBOX_URL`, `SEEDBOX_PASSWORD`
-
-(Each is referenced as `HOMEPAGE_VAR_<NAME>` in `.env`.)
+`.env.example` in the repo root lists every `HOMEPAGE_VAR_*` variable referenced across the YAML files, grouped by section. Copy it to `.env` and fill in real values.
 
 ## Layout
 
@@ -59,7 +48,8 @@ Top-to-bottom structure:
 - **Quick Links** — bookmarks, single row (see `bookmarks.yaml`)
 - **Infrastructure** — Proxmox, Synology (row of 2)
 - **Services** — a row of 4 nested columns: Apps (Plex, Tautulli, Immich, Home Assistant),
-  Admin (Komodo), Network (Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 — on a Raspberry Pi)
+  Admin (Komodo), Network (Unifi Controller, Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 —
+  on a Raspberry Pi)
 - **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr,
   Prowlarr — itself a 2-column row), Calendar (a monthly grid card and an agenda list card),
   Management (Seerr, Syncthing, Notifiarr)
