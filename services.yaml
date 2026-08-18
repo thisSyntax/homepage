@@ -1,6 +1,10 @@
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
+#
+# Custom: a service's `id: col-N__<name>` prefix sets its column span in the
+# 4-column grid defined in custom.css (col-1/2/3 = that many columns; no
+# prefix = full width). Not a Homepage-native option.
 - Info:
     # - Weather:
     #     id: __weather
