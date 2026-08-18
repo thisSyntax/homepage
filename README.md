@@ -24,7 +24,7 @@ Config for my [Homepage](https://gethomepage.dev/) dashboard ("Fey Server Infras
 | `services.yaml` | Service cards (with widgets), grouped into the layout sections defined in `settings.yaml` |
 | `widgets.yaml` | Top-of-page info widgets: search bar, weather (Open-Meteo), date/time, Proxmox glances |
 | `docker.yaml` | Docker socket endpoints, used by `server`/`container` fields in `services.yaml` for live container status |
-| `bookmarks.yaml` | Bookmark links shown in the Bookmarks group |
+| `bookmarks.yaml` | Bookmark links shown in the Quick Links row |
 | `proxmox.yaml` | Proxmox API credentials |
 | `custom.css` | Custom styles: hidden scrollbar, page zoom, iframe sizing per widget |
 | `custom.js` | DOM tweaks: removes the refresh button, shortens a few widget labels |
@@ -56,13 +56,18 @@ old approach of forcing a CSS grid onto a flat service list.
 
 Current top-to-bottom structure:
 
-- **Bookmarks** — `header: false`, single row (see `bookmarks.yaml`)
+- **Quick Links** — `header: false`, single row (see `bookmarks.yaml`). This layout key
+  must match `bookmarks.yaml`'s category name exactly — a mismatch (it was briefly named
+  `Bookmarks` here while the file used `Quick Links`) is silently ignored and the bookmark
+  row falls back to Homepage's default bottom-of-page placement instead of respecting the
+  layout order.
 - **Infrastructure** — Proxmox, Synology (row of 2)
 - **Services** — a row of 4 nested columns: Apps (Plex, Tautulli, Immich), Admin (Komodo),
   Network (Home Assistant, Speedtest-Tracker), DNS (empty placeholder — Pi-hole on a
   Raspberry Pi is planned but not wired up yet)
 - **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr,
-  Prowlarr), Calendar (release calendar), Management (Seerr, Syncthing, Notifiarr)
+  Prowlarr — displayed as a 2-column row itself), Calendar (release calendar), Management
+  (Seerr, Syncthing, Notifiarr)
 
 **Caveat**: the Calendar widget's `radarr`/`sonarr` integrations (`service_group`/
 `service_name`) look up services by name and reportedly do **not** recurse into nested

@@ -2,9 +2,9 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/bookmarks
 #
-# Rendered as a single row (settings.yaml's `Bookmarks` layout entry sets
-# style: row, header: false) - kept in one category so no sub-header shows
-# above the row.
+# Rendered as a single row (settings.yaml's `Quick Links` layout entry -
+# must match this category name exactly - sets style: row, header: false)
+# - kept in one category so no sub-header shows above the row.
 - Quick Links:
     - Github:
         - abbr: GH

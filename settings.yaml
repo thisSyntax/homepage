@@ -24,7 +24,11 @@ iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
   # Rendering order follows this block's key order, not services.yaml's.
-  Bookmarks:
+  # Key names below must match the actual group name in services.yaml/
+  # bookmarks.yaml exactly - an unmatched key (e.g. "Bookmarks" when
+  # bookmarks.yaml's category is named "Quick Links") is silently ignored,
+  # and bookmarks then fall back to their default bottom-of-page placement.
+  Quick Links:
     header: false
     style: row
     columns: 4
@@ -52,7 +56,8 @@ layout:
     style: row
     columns: 3
     Arr Stack:
-      style: column
+      style: row
+      columns: 2
     Calendar:
       style: column
     Management:
