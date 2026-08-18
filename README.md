@@ -58,17 +58,19 @@ Current top-to-bottom structure:
 
 - **Bookmarks** — `header: false`, single row (see `bookmarks.yaml`)
 - **Infrastructure** — Proxmox, Synology (row of 2)
-- **Services** — a row of 4 nested columns: Media (Plex, Tautulli, Immich), Apps (Komodo,
-  Notifiarr), Network (Home Assistant, Speedtest-Tracker, Syncthing), Requests (Seerr)
-- **Arr Stack** — a row of 3 nested columns: Discovery (Radarr, Sonarr, Lidarr, Prowlarr),
-  Calendar (release calendar), Management (Bazarr, deluge, SABnzbd)
+- **Services** — a row of 4 nested columns: Apps (Plex, Tautulli, Immich), Admin (Komodo),
+  Network (Home Assistant, Speedtest-Tracker), DNS (empty placeholder — Pi-hole on a
+  Raspberry Pi is planned but not wired up yet)
+- **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr,
+  Prowlarr), Calendar (release calendar), Management (Seerr, Syncthing, Notifiarr)
 
 **Caveat**: the Calendar widget's `radarr`/`sonarr` integrations (`service_group`/
-`service_name`) look up services by name and do **not** recurse into nested sub-groups. Here
-Radarr/Sonarr live in `Arr Stack > Discovery`, so `service_group: Discovery` (the immediate
-nested group, not `Arr Stack`) is what the integration is pointed at. If new-release events
-stop appearing on the Calendar card after a future restructure, check this first — it likely
-means the lookup can no longer find the target service at its new nesting depth.
+`service_name`) look up services by name and reportedly do **not** recurse into nested
+sub-groups. Radarr/Sonarr live two levels deep (`Media > Arr Stack`) — deeper than what's
+been confirmed to work — so `service_group: "Arr Stack"` is the best guess at the correct
+value, unverified. If new-release events stop appearing on the Calendar card, check this
+first — it likely means the lookup can no longer find Radarr/Sonarr at their current nesting
+depth, and pulling them out to a top-level (non-nested) group is the known-working fallback.
 
 (A two-tab Services/Grafana split was tried and dropped earlier — the Grafana iframe
 integration wasn't set up correctly.)

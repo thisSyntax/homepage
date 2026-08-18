@@ -6,11 +6,12 @@
 # column) - see settings.yaml's `layout` for the row/column styling that
 # pairs with the group names used here. Calendar's radarr/sonarr
 # integrations below look up services by service_group/service_name, and
-# that lookup does NOT recurse into nested sub-groups - Radarr/Sonarr and
-# the Calendar widget are deliberately kept in the same nesting depth
-# (Arr Stack > Discovery / Arr Stack > Calendar) so service_group: Discovery
-# still resolves. If the calendar ever stops showing new releases after a
-# restructure, this is the first thing to check.
+# that lookup reportedly does NOT recurse into nested sub-groups.
+# Radarr/Sonarr now live two levels deep (Media > Arr Stack) - deeper than
+# what's been confirmed to work - so service_group: "Arr Stack" is the best
+# guess at the correct value, but this needs verifying live after a
+# /reload. If the calendar stops showing new releases, this is the first
+# thing to check.
 - Infrastructure:
     - Proxmox:
         icon: proxmox.png
@@ -28,10 +29,9 @@
           url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
           username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
           password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
-          fields: ["volumeAvailable"]
 
 - Services:
-    - Media:
+    - Apps:
         - Plex:
             icon: plex
             href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
@@ -59,7 +59,7 @@
               key: {{HOMEPAGE_VAR_IMMICH_TOKEN}}
               version: 2
 
-    - Apps:
+    - Admin:
         - Komodo:
             icon: komodo
             server: komodo
@@ -74,11 +74,6 @@
               showSummary: false # optional, default: false. Takes precedence over showStacks
               showStacks: true # optional, default: false
               fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
-        - Notifiarr:
-            icon: notifiarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
-            server: docker-media
-            container: notifiarr
 
     - Network:
         - Home Assistant:
@@ -98,25 +93,12 @@
             widget:
               type: speedtest
               url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
-        - Syncthing:
-            icon: syncthing
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
-            server: docker-media
-            container: syncthing
 
-    - Requests:
-        - Seerr:
-            icon: jellyseerr
-            href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-            server: docker-media
-            container: seerr # renamed from `jellyseerr` when migrated to Seerr
-            widget:
-              type: seerr # Jellyseerr/Overseerr merged into Seerr (Feb 2026); `jellyseerr` still works as a legacy alias but `seerr` is the maintained type
-              url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-              key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
+    - DNS:
+        
 
-- Arr Stack:
-    - Discovery:
+- Media:
+    - Arr Stack:
         - Radarr:
             icon: radarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
@@ -144,11 +126,15 @@
               type: lidarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
-        # - Whisparr:
-        #     icon: whisparr
-        #     href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
-        #     server: docker-media
-        #     container: whisparr
+        - Bazarr:
+            icon: bazarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+            server: docker-media
+            container: bazarr
+            widget:
+              type: bazarr
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
         - Prowlarr:
             icon: prowlarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
@@ -158,15 +144,7 @@
               type: prowlarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
-        # - Tdarr:
-        #     icon: tdarr
-        #     href: {{HOMEPAGE_VAR_TDARR_IP}}:8265
-        #     server: docker-media
-        #     container: tdarr
-        #     widget:
-        #       type: tdarr
-        #       url: {{HOMEPAGE_VAR_TDARR_IP}}:8265
-        #       key: {{HOMEPAGE_VAR_TDARR_API_KEY}}
+
 
     - Calendar:
         - Calendar:
@@ -181,42 +159,35 @@
               timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
               integrations: # optional
                 - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Discovery # group name where widget exists - must be the immediate (nested) group, not the top-level "Arr Stack"
+                  service_group: Arr Stack # group name where widget exists - must be the immediate (nested) group Radarr/Sonarr live in
                   service_name: Radarr # service name for that widget
                   baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                   params: # optional - additional params for the service
                     unmonitored: true # optional - defaults to false, used with *arr stack
                 - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Discovery # group name where widget exists - must be the immediate (nested) group, not the top-level "Arr Stack"
+                  service_group: Arr Stack # group name where widget exists - must be the immediate (nested) group Radarr/Sonarr live in
                   service_name: Sonarr # service name for that widget
                   baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
                   params: # optional - additional params for the service
                     unmonitored: true # optional - defaults to false, used with *arr stack
 
     - Management:
-        - Bazarr:
-            icon: bazarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+        - Seerr:
+            icon: seerr
+            href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
-            container: bazarr
+            container: seerr # renamed from `jellyseerr` when migrated to Seerr
             widget:
-              type: bazarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
-              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-        - deluge:
-            icon: deluge
-            href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge
-            widget:
-              type: deluge
-              url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
-              password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}} # webui password
-              enableLeechProgress: true # optional, defaults to false
-        - SABnzbd:
-            icon: sabnzbd
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+              type: seerr # Jellyseerr/Overseerr merged into Seerr (Feb 2026); `jellyseerr` still works as a legacy alias but `seerr` is the maintained type
+              url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
+        - Syncthing:
+            icon: syncthing
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
             server: docker-media
-            container: sabnzbd
-            widget:
-              type: sabnzbd
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
-              key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
+            container: syncthing
+        - Notifiarr:
+            icon: notifiarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
+            server: docker-media
+            container: notifiarr

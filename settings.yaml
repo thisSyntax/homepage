@@ -38,20 +38,20 @@ layout:
     icon: mdi-shield-crown-outline-#ffffff
     style: row
     columns: 4
-    Media:
-      style: column
     Apps:
+      style: column
+    Admin:
       style: column
     Network:
       style: column
-    Requests:
+    DNS:
       style: column
 
-  Arr Stack:
+  Media:
     icon: si-vlcmediaplayer-#ffffff
     style: row
     columns: 3
-    Discovery:
+    Arr Stack:
       style: column
     Calendar:
       style: column
