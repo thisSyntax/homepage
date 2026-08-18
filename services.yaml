@@ -94,6 +94,8 @@
             widget:
               type: speedtest
               url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
+              version: 2 # required if running v2 or higher, defaults to 1
+              key: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}} # in v2 this is your password or an app password
 
     - DNS:
         - Pi-hole 1:
