@@ -2,84 +2,25 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 #
-# Custom: a service's `id: col-N__<name>` prefix sets its column span in the
-# 4-column grid defined in custom.css (col-1/2/3 = that many columns; no
-# prefix = full width). Not a Homepage-native option.
-- Info:
-    # - Weather:
-    #     id: __weather
-    #     icon: mdi-weather-hazy-#ffffff
-    #     widget:
-    #       type: iframe
-    #       name: iframe-home-assistant-weather
-    #       src: {{HOMEPAGE_VAR_HOMEASSISTANT_WEATHER_URL}}
-    #       classes: iframe-home-assistant-weather # optional, use tailwind height classes, see https://tailwindcss.com/docs/height
-    #       referrerPolicy: same-origin # optional, no default
-    #       allowPolicy: fullscreen
-    #       allowScrolling: no # optional, default: yes
-    - Weather :
-        id: __weather
-        icon: mdi-weather-hazy-#ffffff
-        widget:
-          type: iframe
-          name: iframe-home-assistant-weather
-          src: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}/dashboard-homepage/weather?kiosk"
-          classes: iframe-home-assistant-weather
-          allowPolicy: fullscreen
-          allowScrolling: no # optional, default: yes     
-
-    - Calendar:
-        id: __calendar
-        icon: mdi-calendar-month-outline-#ffffff
-        widget:
-          type: calendar
-          firstDayInWeek: sunday # optional - defaults to monday
-          view: monthly # optional - possible values monthly, agenda
-          maxEvents: 15 # optional - defaults to 10
-          showTime: true # optional - show time for event happening today - defaults to false
-          previousDays: 3 # optional - shows events since three days ago - defaults to 0
-          timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
-          integrations: # optional
-            - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-              service_group: Media Management # group name where widget exists
-              service_name: Radarr # service name for that widget
-              baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
-              params: # optional - additional params for the service
-                unmonitored: true # optional - defaults to false, used with *arr stack
-            - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-              service_group: Media Management # group name where widget exists
-              service_name: Sonarr # service name for that widget
-              baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
-              params: # optional - additional params for the service
-                unmonitored: true # optional - defaults to false, used with *arr stack
-
-- System:
+# Groups can nest (a list item that is itself a list becomes a sub-group/
+# column) - see settings.yaml's `layout` for the row/column styling that
+# pairs with the group names used here. Calendar's radarr/sonarr
+# integrations below look up services by service_group/service_name, and
+# that lookup does NOT recurse into nested sub-groups - Radarr/Sonarr and
+# the Calendar widget are deliberately kept in the same nesting depth
+# (Arr Stack > Discovery / Arr Stack > Calendar) so service_group: Discovery
+# still resolves. If the calendar ever stops showing new releases after a
+# restructure, this is the first thing to check.
+- Infrastructure:
     - Proxmox:
-        id: __proxmox
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
         widget:
           type: proxmox
           url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
-          username: {{HOMEPAGE_VAR_PROXMOX_API_ID}} 
+          username: {{HOMEPAGE_VAR_PROXMOX_API_ID}}
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
-    - Komodo:
-        id: col-3__komodo
-        icon: komodo
-        server: komodo
-        container: komodo-core-1
-        href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
-        showStats: false
-        widget:
-          type: komodo
-          url: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
-          key: {{HOMEPAGE_VAR_KOMODO_API_KEY}}
-          secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
-          showSummary: false # optional, default: false. Takes precedence over showStacks
-          showStacks: true # optional, default: false
-          fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
     - Synology:
-        id: col-1__synology
         icon: synology
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
@@ -89,165 +30,193 @@
           password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
           fields: ["volumeAvailable"]
 
-- Apps:
-    - Plex:
-        icon: plex
-        href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        widget:
-          type: plex
-          url: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
-    - Tautulli:
-        id: col-2__tautulli
-        icon: tautulli
-        href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: docker-media
-        container: tautulli
-        widget:
-          type: tautulli
-          url: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_TAUTULLI_API_KEY}} # see https://tautulli.com/api/v2
-    - Jellyseerr:
-        id: col-2__jellyseerr
-        icon: jellyseerr
-        href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: docker-media
-        container: jellyseerr
-        widget:
-          type: jellyseerr
-          url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
-    - Immich:
-        id: __immich-server
-        icon: immich
-        href: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: docker-media
-        container: immich_server
-        widget:
-          type: immich
-          url: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_IMMICH_TOKEN}}
-          version: 2
+- Services:
+    - Media:
+        - Plex:
+            icon: plex
+            href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            widget:
+              type: plex
+              url: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
+        - Tautulli:
+            icon: tautulli
+            href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            server: docker-media
+            container: tautulli
+            widget:
+              type: tautulli
+              url: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              key: {{HOMEPAGE_VAR_TAUTULLI_API_KEY}} # see https://tautulli.com/api/v2
+        - Immich:
+            icon: immich
+            href: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            server: docker-media
+            container: immich_server
+            widget:
+              type: immich
+              url: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              key: {{HOMEPAGE_VAR_IMMICH_TOKEN}}
+              version: 2
 
-- Admin:
-    - Speedtest-Tracker:
-        id: __speedtest-tracker
-        icon: speedtest-tracker
-        href: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
-        server: docker-others
-        container: speedtest-tracker
-        widget:
-          type: speedtest
-          url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
+    - Apps:
+        - Komodo:
+            icon: komodo
+            server: komodo
+            container: komodo-core-1
+            href: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
+            showStats: false
+            widget:
+              type: komodo
+              url: {{HOMEPAGE_VAR_KOMODO_IP_URL}}
+              key: {{HOMEPAGE_VAR_KOMODO_API_KEY}}
+              secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
+              showSummary: false # optional, default: false. Takes precedence over showStacks
+              showStacks: true # optional, default: false
+              fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
+        - Notifiarr:
+            icon: notifiarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
+            server: docker-media
+            container: notifiarr
 
-- Media Management:
-    - Radarr:
-        id: col-2__radarr
-        icon: radarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
-        server: docker-media
-        container: radarr
-        widget:
-          type: radarr
-          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
-          key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
-    - Sonarr:
-        id: col-2__sonarr
-        icon: sonarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
-        server: docker-media
-        container: sonarr
-        widget:
-          type: sonarr
-          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
-          key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
-    - Lidarr:
-        id: col-2__lidarr
-        icon: lidarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
-        server: docker-media
-        container: lidarr
-        widget:
-          type: lidarr
-          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
-          key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
-    - Bazarr:
-        id: col-2__bazarr
-        icon: bazarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
-        server: docker-media
-        container: bazarr
-        widget:
-          type: bazarr
-          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
-          key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-    # - Whisparr:
-    #     id: __whisparr
-    #     icon: whisparr
-    #     href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
-    #     server: docker-media
-    #     container: whisparr
-    - Prowlarr:
-        id: col-2__prowlarr
-        icon: prowlarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
-        server: docker-media
-        container: prowlarr
-        widget:
-          type: prowlarr
-          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
-          key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
-    # - Tdarr:
-    #     id: col-2__tdarr
-    #     icon: tdarr
-    #     href: {{HOMEPAGE_VAR_TDARR_IP}}:8265
-    #     server: docker-media
-    #     container: tdarr
-    #     widget:
-    #       type: tdarr
-    #       url: {{HOMEPAGE_VAR_TDARR_IP}}:8265
-    #       key: {{HOMEPAGE_VAR_TDARR_API_KEY}}
-    - deluge:
-        id: col-2__deluge
-        icon: deluge
-        href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge
-        widget:
-          type: deluge
-          url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
-          password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}} # webui password
-          enableLeechProgress: true # optional, defaults to false
-    - SABnzbd:
-        id: col-2__sabnzbd
-        icon: sabnzbd
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
-        server: docker-media
-        container: sabnzbd
-        widget:
-          type: sabnzbd
-          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
-          key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
-    - Notifiarr:
-        id: col-2__notifiarr
-        icon: notifiarr
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
-        server: docker-media
-        container: notifiarr
+    - Network:
+        - Home Assistant:
+            icon: home-assistant
+            href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+            server: docker-essentials
+            container: homeassistant
+            widget:
+              type: homeassistant
+              url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+              key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
+        - Speedtest-Tracker:
+            icon: speedtest-tracker
+            href: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
+            server: docker-others
+            container: speedtest-tracker
+            widget:
+              type: speedtest
+              url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
+        - Syncthing:
+            icon: syncthing
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
+            server: docker-media
+            container: syncthing
 
-- Monitoring & Networking:
-    - Home Assistant:
-        icon: home-assistant
-        href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-        server: docker-essentials
-        container: homeassistant
-        widget:
-          type: homeassistant
-          url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-          key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
+    - Requests:
+        - Seerr:
+            icon: jellyseerr
+            href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            server: docker-media
+            container: seerr # renamed from `jellyseerr` when migrated to Seerr
+            widget:
+              type: seerr # Jellyseerr/Overseerr merged into Seerr (Feb 2026); `jellyseerr` still works as a legacy alias but `seerr` is the maintained type
+              url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
 
-- Tools:
-    - Syncthing:
-        id: col-2__syncthing
-        icon: syncthing
-        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
-        server: docker-media
-        container: syncthing
+- Arr Stack:
+    - Discovery:
+        - Radarr:
+            icon: radarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+            server: docker-media
+            container: radarr
+            widget:
+              type: radarr
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+              key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+        - Sonarr:
+            icon: sonarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+            server: docker-media
+            container: sonarr
+            widget:
+              type: sonarr
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+              key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+        - Lidarr:
+            icon: lidarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+            server: docker-media
+            container: lidarr
+            widget:
+              type: lidarr
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+              key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
+        # - Whisparr:
+        #     icon: whisparr
+        #     href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6969
+        #     server: docker-media
+        #     container: whisparr
+        - Prowlarr:
+            icon: prowlarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+            server: docker-media
+            container: prowlarr
+            widget:
+              type: prowlarr
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
+        # - Tdarr:
+        #     icon: tdarr
+        #     href: {{HOMEPAGE_VAR_TDARR_IP}}:8265
+        #     server: docker-media
+        #     container: tdarr
+        #     widget:
+        #       type: tdarr
+        #       url: {{HOMEPAGE_VAR_TDARR_IP}}:8265
+        #       key: {{HOMEPAGE_VAR_TDARR_API_KEY}}
+
+    - Calendar:
+        - Calendar:
+            icon: mdi-calendar-month-outline-#ffffff
+            widget:
+              type: calendar
+              firstDayInWeek: sunday # optional - defaults to monday
+              view: monthly # optional - possible values monthly, agenda
+              maxEvents: 15 # optional - defaults to 10
+              showTime: true # optional - show time for event happening today - defaults to false
+              previousDays: 3 # optional - shows events since three days ago - defaults to 0
+              timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+              integrations: # optional
+                - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+                  service_group: Discovery # group name where widget exists - must be the immediate (nested) group, not the top-level "Arr Stack"
+                  service_name: Radarr # service name for that widget
+                  baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                  params: # optional - additional params for the service
+                    unmonitored: true # optional - defaults to false, used with *arr stack
+                - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+                  service_group: Discovery # group name where widget exists - must be the immediate (nested) group, not the top-level "Arr Stack"
+                  service_name: Sonarr # service name for that widget
+                  baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                  params: # optional - additional params for the service
+                    unmonitored: true # optional - defaults to false, used with *arr stack
+
+    - Management:
+        - Bazarr:
+            icon: bazarr
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+            server: docker-media
+            container: bazarr
+            widget:
+              type: bazarr
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+        - deluge:
+            icon: deluge
+            href: https://{{HOMEPAGE_VAR_SEEDBOX_URL}}/deluge
+            widget:
+              type: deluge
+              url: http://{{HOMEPAGE_VAR_SEEDBOX_URL}}:8101
+              password: {{HOMEPAGE_VAR_SEEDBOX_PASSWORD}} # webui password
+              enableLeechProgress: true # optional, defaults to false
+        - SABnzbd:
+            icon: sabnzbd
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+            server: docker-media
+            container: sabnzbd
+            widget:
+              type: sabnzbd
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8080
+              key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}

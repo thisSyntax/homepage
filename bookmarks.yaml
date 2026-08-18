@@ -1,18 +1,17 @@
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/bookmarks
-
-- Developer:
+#
+# Rendered as a single row (settings.yaml's `Bookmarks` layout entry sets
+# style: row, header: false) - kept in one category so no sub-header shows
+# above the row.
+- Quick Links:
     - Github:
         - abbr: GH
           href: https://github.com/
-
-- Social:
     - Reddit:
         - abbr: RE
           href: https://reddit.com/
-
-- Entertainment:
     - YouTube:
         - abbr: YT
           href: https://youtube.com/
