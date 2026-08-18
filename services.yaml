@@ -58,6 +58,15 @@
               url: https://immich.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_IMMICH_TOKEN}}
               version: 2
+        - Home Assistant:
+            icon: home-assistant
+            href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+            server: docker-essentials
+            container: homeassistant
+            widget:
+              type: homeassistant
+              url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
+              key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
 
     - Admin:
         - Komodo:
@@ -76,15 +85,6 @@
               fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
 
     - Network:
-        - Home Assistant:
-            icon: home-assistant
-            href: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-            server: docker-essentials
-            container: homeassistant
-            widget:
-              type: homeassistant
-              url: {{HOMEPAGE_VAR_HOMEASSISTANT_URL}}
-              key: {{HOMEPAGE_VAR_HOMEASSISTANT_TOKEN}}
         - Speedtest-Tracker:
             icon: speedtest-tracker
             href: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
@@ -95,6 +95,22 @@
               url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
 
     - DNS:
+        - Pi-hole 1:
+            icon: pihole
+            href: http://{{HOMEPAGE_VAR_PIHOLE1_IP}}
+            widget:
+              type: pihole
+              url: http://{{HOMEPAGE_VAR_PIHOLE1_IP}}
+              version: 6 # required if running v6 or higher, defaults to 5
+              key: {{HOMEPAGE_VAR_PIHOLE1_API_KEY}} # optional, in v6 can be your password or app password
+        - Pi-hole 2:
+            icon: pihole
+            href: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
+            widget:
+              type: pihole
+              url: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
+              version: 6 # required if running v6 or higher, defaults to 5
+              key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # optional, in v6 can be your password or app password
         
 
 - Media:

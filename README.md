@@ -40,6 +40,7 @@ Every secret and host-specific value is a `{{HOMEPAGE_VAR_*}}` placeholder, reso
 - **Synology**: `SYNOLOGY_IP_URL`, `SYNOLOGY_USERNAME`, `SYNOLOGY_PASSWORD`
 - **Docker hosts**: `DOCKER-MEDIA_IP`, `DOCKER-OTHERS_IP`
 - **Home Assistant**: `HOMEASSISTANT_URL`, `HOMEASSISTANT_TOKEN`, `HOMEASSISTANT_WEATHER_URL`
+- **Pi-hole**: `PIHOLE1_IP`, `PIHOLE1_API_KEY`, `PIHOLE2_IP`, `PIHOLE2_API_KEY`
 - **Weather**: `OPENMETEO_LATITUDE`, `OPENMETEO_LONGITUDE`
 - **Media stack**: `PLEX_API_KEY`, `TAUTULLI_API_KEY`, `JELLYSEERR_API_KEY` (used by the Seerr widget/card), `IMMICH_TOKEN`, `RADARR_API_KEY`, `SONARR_API_KEY`, `LIDARR_API_KEY`, `BAZARR_API_KEY`, `PROWLARR_API_KEY`, `SABNZBD_API_KEY`
 - **Seedbox**: `SEEDBOX_URL`, `SEEDBOX_PASSWORD`
@@ -62,9 +63,10 @@ Current top-to-bottom structure:
   row falls back to Homepage's default bottom-of-page placement instead of respecting the
   layout order.
 - **Infrastructure** — Proxmox, Synology (row of 2)
-- **Services** — a row of 4 nested columns: Apps (Plex, Tautulli, Immich), Admin (Komodo),
-  Network (Home Assistant, Speedtest-Tracker), DNS (empty placeholder — Pi-hole on a
-  Raspberry Pi is planned but not wired up yet)
+- **Services** — a row of 4 nested columns: Apps (Plex, Tautulli, Immich, Home Assistant),
+  Admin (Komodo), Network (Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 — a pair of Pi-hole
+  instances on a Raspberry Pi, not one of the `docker.yaml` hosts, so no `server`/`container`
+  fields)
 - **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr,
   Prowlarr — displayed as a 2-column row itself), Calendar (release calendar), Management
   (Seerr, Syncthing, Notifiarr)
