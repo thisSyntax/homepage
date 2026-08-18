@@ -2,9 +2,7 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/bookmarks
 #
-# Rendered as a single row (settings.yaml's `Quick Links` layout entry -
-# must match this category name exactly - sets style: row, header: false)
-# - kept in one category so no sub-header shows above the row.
+# Quick links shown in a single row at the top of the dashboard.
 - Quick Links:
     - Github:
         - abbr: GH

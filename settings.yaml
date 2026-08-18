@@ -23,11 +23,8 @@ blockHighlights:
 iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
-  # Rendering order follows this block's key order, not services.yaml's.
-  # Key names below must match the actual group name in services.yaml/
-  # bookmarks.yaml exactly - an unmatched key (e.g. "Bookmarks" when
-  # bookmarks.yaml's category is named "Quick Links") is silently ignored,
-  # and bookmarks then fall back to their default bottom-of-page placement.
+  # Display order follows this block's key order. Each key must match a
+  # group name in services.yaml or a category name in bookmarks.yaml.
   Quick Links:
     header: false
     style: row
@@ -56,9 +53,6 @@ layout:
     style: row
     columns: 3
     Arr Stack:
-      # Nested per request, despite this being confirmed to break the
-      # Calendar widget's radarr/sonarr service_group lookup - see the
-      # comment at the top of services.yaml.
       style: row
       columns: 2
     Calendar:

@@ -49,47 +49,17 @@ Every secret and host-specific value is a `{{HOMEPAGE_VAR_*}}` placeholder, reso
 
 ## Layout
 
-Single page, no tabs. `settings.yaml`'s `layout` block controls both the display order (top
-to bottom follows the order keys appear in that block, independent of `services.yaml`'s own
-order) and the columns, via Homepage's native nested-group support: a group can contain
-child groups, each with its own `style: row`/`column` and `columns` count, instead of the
-old approach of forcing a CSS grid onto a flat service list.
+Single page, no tabs. `settings.yaml`'s `layout` block sets the display order (top to
+bottom follows the order keys appear in that block) and the columns for each group, using
+Homepage's nested-group support: a group can contain child groups, each with its own
+`style: row`/`column` and `columns` count.
 
-Current top-to-bottom structure:
+Top-to-bottom structure:
 
-- **Quick Links** — `header: false`, single row (see `bookmarks.yaml`). This layout key
-  must match `bookmarks.yaml`'s category name exactly — a mismatch (it was briefly named
-  `Bookmarks` here while the file used `Quick Links`) is silently ignored and the bookmark
-  row falls back to Homepage's default bottom-of-page placement instead of respecting the
-  layout order.
+- **Quick Links** — bookmarks, single row (see `bookmarks.yaml`)
 - **Infrastructure** — Proxmox, Synology (row of 2)
 - **Services** — a row of 4 nested columns: Apps (Plex, Tautulli, Immich, Home Assistant),
-  Admin (Komodo), Network (Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 — a pair of Pi-hole
-  instances on a Raspberry Pi, not one of the `docker.yaml` hosts, so no `server`/`container`
-  fields)
-- **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr, Prowlarr
-  — itself a 2-column row), Calendar (two stacked cards: monthly grid, then agenda list),
+  Admin (Komodo), Network (Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 — on a Raspberry Pi)
+- **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr,
+  Prowlarr — itself a 2-column row), Calendar (a monthly grid card and an agenda list card),
   Management (Seerr, Syncthing, Notifiarr)
-
-**Known issue (by choice, not an oversight)**: per
-[Homepage's calendar widget docs](https://gethomepage.dev/widgets/services/calendar/), the
-Calendar's `radarr`/`sonarr` integrations' `service_group`/`service_name` lookup only works
-against **top-level** groups. Arr Stack is nested (`Media > Arr Stack`), which was confirmed
-live to break that lookup entirely — the calendar shows only the current day, no
-Radarr/Sonarr release events. This layout was chosen anyway, prioritizing the visual grouping
-over the integration. If that integration is wanted again, Arr Stack needs to move back to
-being its own top-level group (as it briefly was).
-
-Two other Calendar bugs were fixed independently of the above and remain fixed:
-- The integration's URL-link field is `baseUrl` (camelCase) — `baseurl` is silently accepted
-  by YAML but ignored by the widget, so links quietly did nothing.
-- `previousDays` only has an effect in `view: agenda`; it's inert under `view: monthly`.
-
-Since `previousDays` is agenda-only, the Calendar column runs two separate calendar widget
-instances stacked on top of each other rather than picking one view: **Calendar**
-(`view: monthly`, a plain grid, no `previousDays`) and **Agenda** (`view: agenda`, a list
-that does use `previousDays`). Both carry the same `integrations` block, so both would show
-Radarr/Sonarr events if the nested-group issue above gets resolved.
-
-(A two-tab Services/Grafana split was tried and dropped earlier — the Grafana iframe
-integration wasn't set up correctly.)

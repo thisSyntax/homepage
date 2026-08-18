@@ -5,15 +5,6 @@
 # Groups can nest (a list item that is itself a list becomes a sub-group/
 # column) - see settings.yaml's `layout` for the row/column styling that
 # pairs with the group names used here.
-#
-# KNOWN ISSUE: Arr Stack is nested here (Media > Arr Stack) for the desired
-# visual layout, but per Homepage's own docs
-# (gethomepage.dev/widgets/services/calendar/) the Calendar widget's
-# radarr/sonarr service_group/service_name lookup only works against
-# TOP-LEVEL groups. This exact nesting was confirmed live to break that
-# lookup (calendar showed only the current day, no events). Layout was
-# prioritized over the integration on request - if new-release events
-# aren't appearing on the Calendar card, this is why.
 - Infrastructure:
     - Proxmox:
         icon: proxmox.png
@@ -84,7 +75,7 @@
               secret: {{HOMEPAGE_VAR_KOMODO_SECRET}}
               showSummary: false # optional, default: false. Takes precedence over showStacks
               showStacks: true # optional, default: false
-              fields: ["running", "down", "total"] # Allowed fields (max 4): ["total", "running", "stopped", "unhealthy", "unknown"]
+              fields: ["running", "down", "total"] # allowed fields (max 4): total, running, stopped, unhealthy, unknown
 
     - Network:
         - Speedtest-Tracker:
@@ -104,7 +95,7 @@
               type: pihole
               url: http://{{HOMEPAGE_VAR_PIHOLE1_IP}}
               version: 6 # required if running v6 or higher, defaults to 5
-              key: {{HOMEPAGE_VAR_PIHOLE1_API_KEY}} # optional, in v6 can be your password or app password
+              key: {{HOMEPAGE_VAR_PIHOLE1_API_KEY}} # in v6 this is your password or an app password
         - Pi-hole 2:
             icon: pihole
             href: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
@@ -112,8 +103,7 @@
               type: pihole
               url: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
               version: 6 # required if running v6 or higher, defaults to 5
-              key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # optional, in v6 can be your password or app password
-        
+              key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # in v6 this is your password or an app password
 
 - Media:
     - Arr Stack:
@@ -126,7 +116,7 @@
               type: radarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
               key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
-              fields: ["wanted", "missing", "movies"] # allowed: wanted, missing, queued, movies (queued needs enableQueue: true, omitted here)
+              fields: ["wanted", "missing", "movies"] # allowed fields: wanted, missing, queued, movies
         - Sonarr:
             icon: sonarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
@@ -136,7 +126,7 @@
               type: sonarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
-              fields: ["wanted", "series"] # allowed: wanted, queued, series (queued needs enableQueue: true, omitted here)
+              fields: ["wanted", "series"] # allowed fields: wanted, queued, series
         - Lidarr:
             icon: lidarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
@@ -146,7 +136,7 @@
               type: lidarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
-              fields: ["wanted", "artists"] # allowed: wanted, queued, artists (queued needs enableQueue: true, omitted here)
+              fields: ["wanted", "artists"] # allowed fields: wanted, queued, artists
         - Bazarr:
             icon: bazarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
@@ -156,7 +146,7 @@
               type: bazarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-              fields: ["missingEpisodes", "missingMovies"] # only 2 fields exist for this widget
+              fields: ["missingEpisodes", "missingMovies"]
         - Prowlarr:
             icon: prowlarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
@@ -166,63 +156,61 @@
               type: prowlarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
-              fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
+              fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed fields: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
 
     - Calendar:
         - Calendar:
             icon: mdi-calendar-month-outline-#ffffff
             widget:
               type: calendar
-              firstDayInWeek: sunday # optional - defaults to monday
-              view: monthly # optional - possible values monthly, agenda
-              maxEvents: 15 # optional - defaults to 10
-              showTime: true # optional - show time for event happening today - defaults to false
-              timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
-              integrations: # optional
-                - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Arr Stack # group name where widget exists - nested under Media, which is confirmed NOT to resolve (see comment at top of file); kept for when this is revisited
-                  service_name: Radarr # service name for that widget
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
-                  params: # optional - additional params for the service
-                    unmonitored: true # optional - defaults to false, used with *arr stack
-                - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Arr Stack # group name where widget exists - nested under Media, which is confirmed NOT to resolve (see comment at top of file); kept for when this is revisited
-                  service_name: Sonarr # service name for that widget
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
-                  params: # optional - additional params for the service
-                    unmonitored: true # optional - defaults to false, used with *arr stack
+              firstDayInWeek: sunday
+              view: monthly
+              maxEvents: 10
+              showTime: true
+              timezone: America/New_York
+              integrations:
+                - type: radarr
+                  service_group: Arr Stack
+                  service_name: Radarr
+                  params:
+                    unmonitored: true
+                - type: sonarr
+                  service_group: Arr Stack
+                  service_name: Sonarr
+                  params:
+                    unmonitored: true
         - Agenda:
             icon: mdi-calendar-month-outline-#ffffff
             widget:
               type: calendar
-              firstDayInWeek: sunday # optional - defaults to monday
-              view: agenda # optional - possible values monthly, agenda - agenda is required for previousDays to have any effect
-              maxEvents: 15 # optional - defaults to 10
-              showTime: true # optional - show time for event happening today - defaults to false
-              previousDays: 7 # optional - shows events since seven days ago - defaults to 0 - only applies in agenda view
-              timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
-              integrations: # optional
-                - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Arr Stack # group name where widget exists - nested under Media, which is confirmed NOT to resolve (see comment at top of file); kept for when this is revisited
-                  service_name: Radarr # service name for that widget
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
-                  params: # optional - additional params for the service
-                    unmonitored: true # optional - defaults to false, used with *arr stack
-                - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Arr Stack # group name where widget exists - nested under Media, which is confirmed NOT to resolve (see comment at top of file); kept for when this is revisited
-                  service_name: Sonarr # service name for that widget
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
-                  params: # optional - additional params for the service
-                    unmonitored: true # optional - defaults to false, used with *arr stack
+              firstDayInWeek: sunday
+              view: agenda
+              maxEvents: 10
+              showTime: true
+              previousDays: 0
+              timezone: America/New_York
+              integrations:
+                - type: radarr
+                  service_group: Arr Stack
+                  service_name: Radarr
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}
+                  params:
+                    unmonitored: true
+                - type: sonarr
+                  service_group: Arr Stack
+                  service_name: Sonarr
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}
+                  params:
+                    unmonitored: true
 
     - Management:
         - Seerr:
             icon: seerr
             href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
-            container: seerr # renamed from `jellyseerr` when migrated to Seerr
+            container: seerr
             widget:
-              type: seerr # Jellyseerr/Overseerr merged into Seerr (Feb 2026); `jellyseerr` still works as a legacy alias but `seerr` is the maintained type
+              type: seerr
               url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
         - Syncthing:
