@@ -51,18 +51,16 @@ layout:
     DNS:
       style: column
 
-  Arr Stack:
-    # Kept top-level (not nested) because Calendar's radarr/sonarr
-    # integrations only resolve service_group against top-level groups -
-    # see the comment at the top of services.yaml.
+  Media:
     icon: si-vlcmediaplayer-#ffffff
     style: row
     columns: 3
-
-  Media:
-    icon: mdi-calendar-month-outline-#ffffff
-    style: row
-    columns: 2
+    Arr Stack:
+      # Nested per request, despite this being confirmed to break the
+      # Calendar widget's radarr/sonarr service_group lookup - see the
+      # comment at the top of services.yaml.
+      style: row
+      columns: 2
     Calendar:
       style: column
     Management:

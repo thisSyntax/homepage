@@ -67,19 +67,22 @@ Current top-to-bottom structure:
   Admin (Komodo), Network (Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 — a pair of Pi-hole
   instances on a Raspberry Pi, not one of the `docker.yaml` hosts, so no `server`/`container`
   fields)
-- **Arr Stack** — Radarr, Sonarr, Lidarr, Bazarr, Prowlarr (row of 3). Deliberately
-  top-level, not nested — see the caveat below.
-- **Media** — a row of 2 nested columns: Calendar (release calendar, agenda view),
-  Management (Seerr, Syncthing, Notifiarr)
+- **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr, Prowlarr
+  — itself a 2-column row), Calendar (release calendar, agenda view), Management (Seerr,
+  Syncthing, Notifiarr)
 
-**Caveat (confirmed, not speculative)**: per
+**Known issue (by choice, not an oversight)**: per
 [Homepage's calendar widget docs](https://gethomepage.dev/widgets/services/calendar/), the
-`radarr`/`sonarr` integrations' `service_group`/`service_name` lookup only works against
-**top-level** groups. This was tried with Radarr/Sonarr nested (`Media > Arr Stack`) and
-confirmed broken live — no events appeared, only the current day. Arr Stack was pulled back
-out to top-level to fix it. Two related gotchas hit at the same time:
+Calendar's `radarr`/`sonarr` integrations' `service_group`/`service_name` lookup only works
+against **top-level** groups. Arr Stack is nested (`Media > Arr Stack`), which was confirmed
+live to break that lookup entirely — the calendar shows only the current day, no
+Radarr/Sonarr release events. This layout was chosen anyway, prioritizing the visual grouping
+over the integration. If that integration is wanted again, Arr Stack needs to move back to
+being its own top-level group (as it briefly was).
+
+Two other Calendar bugs were fixed independently of the above and remain fixed:
 - The integration's URL-link field is `baseUrl` (camelCase) — `baseurl` is silently accepted
-  by YAML but ignored by the widget, so links quietly do nothing.
+  by YAML but ignored by the widget, so links quietly did nothing.
 - `previousDays` only has an effect in `view: agenda`; it's inert under `view: monthly`.
   Calendar is set to `view: agenda` for this reason.
 
