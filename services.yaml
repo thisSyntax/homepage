@@ -226,6 +226,10 @@
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
             server: docker-media
             container: syncthing
+            widget:
+              type: syncthing
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
+              key: {{HOMEPAGE_VAR_SYNCTHING_API_KEY}} # see https://docs.syncthing.net/users/api.html
         - Notifiarr:
             icon: notifiarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
