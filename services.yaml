@@ -80,10 +80,10 @@
     - Network:
         - Unifi Controller:
             icon: unifi
-            href: http://{{HOMEPAGE_VAR_UNIFI_IP}}
+            href: https://{{HOMEPAGE_VAR_UNIFI_IP}}
             widget:
               type: unifi
-              url: http://{{HOMEPAGE_VAR_UNIFI_IP}}
+              url: https://{{HOMEPAGE_VAR_UNIFI_IP}}
               username: {{HOMEPAGE_VAR_UNIFI_USERNAME}}
               password: {{HOMEPAGE_VAR_UNIFI_PASSWORD}}
         - Speedtest-Tracker:
