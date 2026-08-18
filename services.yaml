@@ -5,7 +5,7 @@
 # Custom: a service's `id: col-N__<name>` prefix sets its column span in the
 # 4-column grid defined in custom.css (col-1/2/3 = that many columns; no
 # prefix = full width). Not a Homepage-native option.
-- At a Glance:
+- Info:
     # - Weather:
     #     id: __weather
     #     icon: mdi-weather-hazy-#ffffff
@@ -53,35 +53,6 @@
               params: # optional - additional params for the service
                 unmonitored: true # optional - defaults to false, used with *arr stack
 
-    - Plex:
-        id: col-1__plex
-        icon: plex
-        href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        widget:
-          type: plex
-          url: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
-    - Tautulli:
-        id: col-1__tautulli
-        icon: tautulli
-        href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: docker-media
-        container: tautulli
-        widget:
-          type: tautulli
-          url: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_TAUTULLI_API_KEY}} # see https://tautulli.com/api/v2
-    - Jellyseerr:
-        id: col-1__jellyseerr
-        icon: jellyseerr
-        href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-        server: docker-media
-        container: jellyseerr
-        widget:
-          type: jellyseerr
-          url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-          key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
-
 - System:
     - Proxmox:
         id: __proxmox
@@ -119,6 +90,33 @@
           fields: ["volumeAvailable"]
 
 - Apps:
+    - Plex:
+        icon: plex
+        href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+        widget:
+          type: plex
+          url: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+          key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
+    - Tautulli:
+        id: col-2__tautulli
+        icon: tautulli
+        href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+        server: docker-media
+        container: tautulli
+        widget:
+          type: tautulli
+          url: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+          key: {{HOMEPAGE_VAR_TAUTULLI_API_KEY}} # see https://tautulli.com/api/v2
+    - Jellyseerr:
+        id: col-2__jellyseerr
+        icon: jellyseerr
+        href: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+        server: docker-media
+        container: jellyseerr
+        widget:
+          type: jellyseerr
+          url: https://overseerr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+          key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
     - Immich:
         id: __immich-server
         icon: immich
