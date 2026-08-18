@@ -126,6 +126,7 @@
               type: radarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
               key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+              fields: ["wanted", "missing", "movies"] # allowed: wanted, missing, queued, movies (queued needs enableQueue: true, omitted here)
         - Sonarr:
             icon: sonarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
@@ -135,6 +136,7 @@
               type: sonarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+              fields: ["wanted", "series"] # allowed: wanted, queued, series (queued needs enableQueue: true, omitted here)
         - Lidarr:
             icon: lidarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
@@ -144,6 +146,7 @@
               type: lidarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
+              fields: ["wanted", "artists"] # allowed: wanted, queued, artists (queued needs enableQueue: true, omitted here)
         - Bazarr:
             icon: bazarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
@@ -153,6 +156,7 @@
               type: bazarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+              fields: ["missingEpisodes", "missingMovies"] # only 2 fields exist for this widget
         - Prowlarr:
             icon: prowlarr
             href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
@@ -162,6 +166,7 @@
               type: prowlarr
               url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
+              fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
 
     - Calendar:
         - Calendar:
