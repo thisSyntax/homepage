@@ -62,4 +62,6 @@ Configured via `settings.yaml`'s `layout`:
 - **Services** — System, Apps, Admin, Media Management, Monitoring & Networking, Tools, Bookmarks
 - **Grafana** — full-width Grafana iframe
 
-The `Info` group has no tab assignment, so it renders above the tab bar on every tab.
+The `At a Glance` group has no tab assignment, so it renders above the tab bar on every
+tab. It holds weather, the release calendar, and Plex/Tautulli/Jellyseerr — the services
+meant to be visible at a glance without switching tabs. `Apps` now holds only Immich.

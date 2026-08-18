@@ -23,9 +23,9 @@ blockHighlights:
 iconStyle: theme # optional, defaults to gradient
 useEqualHeights: true
 layout:
-  Info:
-    icon: mdi-information-outline-#ffffff
-    columns: 1
+  At a Glance:
+    icon: mdi-eye-outline-#ffffff
+    columns: 4
   System:
     icon: mdi-desktop-classic-#ffffff
     tab: Services
