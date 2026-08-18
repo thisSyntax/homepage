@@ -67,17 +67,21 @@ Current top-to-bottom structure:
   Admin (Komodo), Network (Speedtest-Tracker), DNS (Pi-hole 1, Pi-hole 2 — a pair of Pi-hole
   instances on a Raspberry Pi, not one of the `docker.yaml` hosts, so no `server`/`container`
   fields)
-- **Media** — a row of 3 nested columns: Arr Stack (Radarr, Sonarr, Lidarr, Bazarr,
-  Prowlarr — displayed as a 2-column row itself), Calendar (release calendar), Management
-  (Seerr, Syncthing, Notifiarr)
+- **Arr Stack** — Radarr, Sonarr, Lidarr, Bazarr, Prowlarr (row of 3). Deliberately
+  top-level, not nested — see the caveat below.
+- **Media** — a row of 2 nested columns: Calendar (release calendar, agenda view),
+  Management (Seerr, Syncthing, Notifiarr)
 
-**Caveat**: the Calendar widget's `radarr`/`sonarr` integrations (`service_group`/
-`service_name`) look up services by name and reportedly do **not** recurse into nested
-sub-groups. Radarr/Sonarr live two levels deep (`Media > Arr Stack`) — deeper than what's
-been confirmed to work — so `service_group: "Arr Stack"` is the best guess at the correct
-value, unverified. If new-release events stop appearing on the Calendar card, check this
-first — it likely means the lookup can no longer find Radarr/Sonarr at their current nesting
-depth, and pulling them out to a top-level (non-nested) group is the known-working fallback.
+**Caveat (confirmed, not speculative)**: per
+[Homepage's calendar widget docs](https://gethomepage.dev/widgets/services/calendar/), the
+`radarr`/`sonarr` integrations' `service_group`/`service_name` lookup only works against
+**top-level** groups. This was tried with Radarr/Sonarr nested (`Media > Arr Stack`) and
+confirmed broken live — no events appeared, only the current day. Arr Stack was pulled back
+out to top-level to fix it. Two related gotchas hit at the same time:
+- The integration's URL-link field is `baseUrl` (camelCase) — `baseurl` is silently accepted
+  by YAML but ignored by the widget, so links quietly do nothing.
+- `previousDays` only has an effect in `view: agenda`; it's inert under `view: monthly`.
+  Calendar is set to `view: agenda` for this reason.
 
 (A two-tab Services/Grafana split was tried and dropped earlier — the Grafana iframe
 integration wasn't set up correctly.)

@@ -4,14 +4,12 @@
 #
 # Groups can nest (a list item that is itself a list becomes a sub-group/
 # column) - see settings.yaml's `layout` for the row/column styling that
-# pairs with the group names used here. Calendar's radarr/sonarr
-# integrations below look up services by service_group/service_name, and
-# that lookup reportedly does NOT recurse into nested sub-groups.
-# Radarr/Sonarr now live two levels deep (Media > Arr Stack) - deeper than
-# what's been confirmed to work - so service_group: "Arr Stack" is the best
-# guess at the correct value, but this needs verifying live after a
-# /reload. If the calendar stops showing new releases, this is the first
-# thing to check.
+# pairs with the group names used here. EXCEPT: per Homepage's own docs
+# (gethomepage.dev/widgets/services/calendar/), the Calendar widget's
+# radarr/sonarr integrations look up services by service_group/service_name
+# and that lookup ONLY works against top-level (non-nested) groups - this
+# was tried nested once (Media > Arr Stack) and confirmed broken (no
+# events showed, only the current day). Arr Stack must stay top-level.
 - Infrastructure:
     - Proxmox:
         icon: proxmox.png
@@ -113,77 +111,76 @@
               key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # optional, in v6 can be your password or app password
         
 
+- Arr Stack:
+    - Radarr:
+        icon: radarr
+        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+        server: docker-media
+        container: radarr
+        widget:
+          type: radarr
+          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+          key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+    - Sonarr:
+        icon: sonarr
+        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+        server: docker-media
+        container: sonarr
+        widget:
+          type: sonarr
+          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+          key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+    - Lidarr:
+        icon: lidarr
+        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+        server: docker-media
+        container: lidarr
+        widget:
+          type: lidarr
+          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+          key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
+    - Bazarr:
+        icon: bazarr
+        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+        server: docker-media
+        container: bazarr
+        widget:
+          type: bazarr
+          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+          key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+    - Prowlarr:
+        icon: prowlarr
+        href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+        server: docker-media
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+          key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
+
 - Media:
-    - Arr Stack:
-        - Radarr:
-            icon: radarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
-            server: docker-media
-            container: radarr
-            widget:
-              type: radarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
-              key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
-        - Sonarr:
-            icon: sonarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
-            server: docker-media
-            container: sonarr
-            widget:
-              type: sonarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
-              key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
-        - Lidarr:
-            icon: lidarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
-            server: docker-media
-            container: lidarr
-            widget:
-              type: lidarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
-              key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
-        - Bazarr:
-            icon: bazarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
-            server: docker-media
-            container: bazarr
-            widget:
-              type: bazarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
-              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-        - Prowlarr:
-            icon: prowlarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
-            server: docker-media
-            container: prowlarr
-            widget:
-              type: prowlarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
-              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
-
-
     - Calendar:
         - Calendar:
             icon: mdi-calendar-month-outline-#ffffff
             widget:
               type: calendar
               firstDayInWeek: sunday # optional - defaults to monday
-              view: monthly # optional - possible values monthly, agenda
+              view: agenda # optional - possible values monthly, agenda - agenda is required for previousDays to have any effect
               maxEvents: 15 # optional - defaults to 10
               showTime: true # optional - show time for event happening today - defaults to false
-              previousDays: 3 # optional - shows events since three days ago - defaults to 0
+              previousDays: 7 # optional - shows events since seven days ago - defaults to 0 - only applies in agenda view
               timezone: America/New_York # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
               integrations: # optional
                 - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Arr Stack # group name where widget exists - must be the immediate (nested) group Radarr/Sonarr live in
+                  service_group: Arr Stack # group name where widget exists - must be a top-level group (see comment at top of file)
                   service_name: Radarr # service name for that widget
-                  baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
                   params: # optional - additional params for the service
                     unmonitored: true # optional - defaults to false, used with *arr stack
                 - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Arr Stack # group name where widget exists - must be the immediate (nested) group Radarr/Sonarr live in
+                  service_group: Arr Stack # group name where widget exists - must be a top-level group (see comment at top of file)
                   service_name: Sonarr # service name for that widget
-                  baseurl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages
+                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}} # optional - adds links to sonarr/radarr pages (field is camelCase - `baseurl` is silently ignored)
                   params: # optional - additional params for the service
                     unmonitored: true # optional - defaults to false, used with *arr stack
 
