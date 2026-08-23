@@ -99,7 +99,7 @@
 
     - DNS:
         - Pi-hole 1:
-            icon: pihole
+            icon: pi-hole
             href: http://{{HOMEPAGE_VAR_PIHOLE1_IP}}
             widget:
               type: pihole
@@ -107,7 +107,7 @@
               version: 6 # required if running v6 or higher, defaults to 5
               key: {{HOMEPAGE_VAR_PIHOLE1_API_KEY}} # in v6 this is your password or an app password
         - Pi-hole 2:
-            icon: pihole
+            icon: pi-hole
             href: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
             widget:
               type: pihole
