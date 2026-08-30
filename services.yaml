@@ -116,14 +116,8 @@
               key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # in v6 this is your password or an app password
         - Caddy Internal:
             icon: caddy
-            widget:
-                type: caddy
-                url: http://192.168.5.254:2019 # default admin port is 2019
         - Caddy External:
             icon: caddy
-            widget:
-                type: caddy
-                url: http://10.0.0.10:2019 # default admin port is 2019
 
 - Media:
     - Arr Stack:
