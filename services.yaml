@@ -119,9 +119,9 @@
             href: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/dashboard/
             widget:
               type: traefik
-              url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/api/overview
-              username: {{HOMEPAGE_VAR_ITRAEFIK_USER}} # optional
-              password: {{HOMEPAGE_VAR_ITRAEFIK_PASSWD}} # optional
+              url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              username: {{HOMEPAGE_VAR_ITRAEFIK_USER}}
+              password: {{HOMEPAGE_VAR_ITRAEFIK_PASSWD}}
         - Traefik External:
             icon: traefik
 
