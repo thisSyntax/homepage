@@ -120,8 +120,8 @@
             widget:
               type: traefik
               url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/dashboard/
-              username: {{HOMEPAG_VAR_ITRAEFIK_USER}} # optional
-              password: {{HOMEPAG_VAR_ITRAEFIK_PASSWD}} # optional
+              username: {{HOMEPAGE_VAR_ITRAEFIK_USER}} # optional
+              password: {{HOMEPAGE_VAR_ITRAEFIK_PASSWD}} # optional
         - Traefik External:
             icon: traefik
 
