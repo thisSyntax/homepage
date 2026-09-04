@@ -116,6 +116,12 @@
               key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # in v6 this is your password or an app password
         - Traefik Internal:
             icon: traefik
+            href: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/dashboard/
+            widget:
+              type: traefik
+              url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              username: username # optional
+              password: password # optional
         - Traefik External:
             icon: traefik
 
