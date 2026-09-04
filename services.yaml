@@ -100,24 +100,24 @@
     - DNS:
         - Pi-hole 1:
             icon: pi-hole
-            href: http://{{HOMEPAGE_VAR_PIHOLE1_IP}}
+            href: https://{{HOMEPAGE_VAR_PIHOLE1_IP}}/admin
             widget:
               type: pihole
-              url: http://{{HOMEPAGE_VAR_PIHOLE1_IP}}
+              url: https://{{HOMEPAGE_VAR_PIHOLE1_IP}}
               version: 6 # required if running v6 or higher, defaults to 5
               key: {{HOMEPAGE_VAR_PIHOLE1_API_KEY}} # in v6 this is your password or an app password
         - Pi-hole 2:
             icon: pi-hole
-            href: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
+            href: https://{{HOMEPAGE_VAR_PIHOLE2_IP}}/admin
             widget:
               type: pihole
-              url: http://{{HOMEPAGE_VAR_PIHOLE2_IP}}
+              url: https://{{HOMEPAGE_VAR_PIHOLE2_IP}}
               version: 6 # required if running v6 or higher, defaults to 5
               key: {{HOMEPAGE_VAR_PIHOLE2_API_KEY}} # in v6 this is your password or an app password
-        - Caddy Internal:
-            icon: caddy
-        - Caddy External:
-            icon: caddy
+        - Traefik Internal:
+            icon: traefik
+        - Traefik External:
+            icon: traefik
 
 - Media:
     - Arr Stack:
