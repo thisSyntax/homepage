@@ -119,9 +119,9 @@
             href: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/dashboard/
             widget:
               type: traefik
-              url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-              username: {{HOMEPAGE_VAR_ITRAEFIK_USER}}
-              password: {{HOMEPAGE_VAR_ITRAEFIK_PASSWD}}
+              url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/dashboard/
+              username: {{HOMEPAGE_VAR_ITRAEFIK_USER}} # optional
+              password: {{HOMEPAGE_VAR_ITRAEFIK_PASSWD}} # optional
         - Traefik External:
             icon: traefik
 
@@ -129,52 +129,52 @@
     - Arr Stack:
         - Radarr:
             icon: radarr
-            href: https://radarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
             server: docker-media
             container: radarr
             widget:
               type: radarr
-              url: https://radarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
               key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
               fields: ["wanted", "missing", "movies"] # allowed fields: wanted, missing, queued, movies
         - Sonarr:
             icon: sonarr
-            href: https://sonarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
             server: docker-media
             container: sonarr
             widget:
               type: sonarr
-              url: https://sonarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
               fields: ["wanted", "series"] # allowed fields: wanted, queued, series
         - Lidarr:
             icon: lidarr
-            href: https://lidarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
             server: docker-media
             container: lidarr
             widget:
               type: lidarr
-              url: https://lidarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
               fields: ["wanted", "artists"] # allowed fields: wanted, queued, artists
         - Bazarr:
             icon: bazarr
-            href: https://bazarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
             server: docker-media
             container: bazarr
             widget:
               type: bazarr
-              url: https://bazarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
               fields: ["missingEpisodes", "missingMovies"]
         - Prowlarr:
             icon: prowlarr
-            href: https://prowlarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
             server: docker-media
             container: prowlarr
             widget:
               type: prowlarr
-              url: https://prowlarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
               fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed fields: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
 
@@ -235,15 +235,15 @@
               key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
         - Syncthing:
             icon: syncthing
-            href: https://syncthing.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
             server: docker-media
             container: syncthing
             widget:
               type: syncthing
-              url: https://syncthing.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
               key: {{HOMEPAGE_VAR_SYNCTHING_API_KEY}} # see https://docs.syncthing.net/users/api.html
         - Notifiarr:
             icon: notifiarr
-            href: https://notifiarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
             server: docker-media
             container: notifiarr
