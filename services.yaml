@@ -129,52 +129,52 @@
     - Arr Stack:
         - Radarr:
             icon: radarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+            href: https://radarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: radarr
             widget:
               type: radarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+              url: https://radarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
               fields: ["wanted", "missing", "movies"] # allowed fields: wanted, missing, queued, movies
         - Sonarr:
             icon: sonarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+            href: https://sonarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: sonarr
             widget:
               type: sonarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+              url: https://sonarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
               fields: ["wanted", "series"] # allowed fields: wanted, queued, series
         - Lidarr:
             icon: lidarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+            href: https://lidarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: lidarr
             widget:
               type: lidarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+              url: https://lidarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
               fields: ["wanted", "artists"] # allowed fields: wanted, queued, artists
         - Bazarr:
             icon: bazarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+            href: https://bazarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: bazarr
             widget:
               type: bazarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+              url: https://bazarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
               fields: ["missingEpisodes", "missingMovies"]
         - Prowlarr:
             icon: prowlarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+            href: https://prowlarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: prowlarr
             widget:
               type: prowlarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+              url: https://prowlarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
               fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed fields: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
 
@@ -235,15 +235,15 @@
               key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}} # see https://jellyseerr.com/docs/api/getting-started/authentication
         - Syncthing:
             icon: syncthing
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
+            href: https://syncthing.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: syncthing
             widget:
               type: syncthing
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8384
+              url: https://syncthing.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_SYNCTHING_API_KEY}} # see https://docs.syncthing.net/users/api.html
         - Notifiarr:
             icon: notifiarr
-            href: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:5454
+            href: https://notifiarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
             server: docker-media
             container: notifiarr
