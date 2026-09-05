@@ -134,7 +134,7 @@
             container: radarr
             widget:
               type: radarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:7878
+              url: https://radarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
               fields: ["wanted", "missing", "movies"] # allowed fields: wanted, missing, queued, movies
         - Sonarr:
@@ -144,7 +144,7 @@
             container: sonarr
             widget:
               type: sonarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8989
+              url: https://sonarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
               fields: ["wanted", "series"] # allowed fields: wanted, queued, series
         - Lidarr:
@@ -154,7 +154,7 @@
             container: lidarr
             widget:
               type: lidarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:8686
+              url: https://lidarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
               fields: ["wanted", "artists"] # allowed fields: wanted, queued, artists
         - Bazarr:
@@ -164,7 +164,7 @@
             container: bazarr
             widget:
               type: bazarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:6767
+              url: https://bazarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
               fields: ["missingEpisodes", "missingMovies"]
         - Prowlarr:
@@ -174,7 +174,7 @@
             container: prowlarr
             widget:
               type: prowlarr
-              url: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}:9696
+              url: https://prowlarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
               fields: ["numberOfGrabs", "numberOfQueries", "numberOfFailGrabs"] # allowed fields: numberOfGrabs, numberOfQueries, numberOfFailGrabs, numberOfFailQueries
 
@@ -213,13 +213,13 @@
                 - type: radarr
                   service_group: Arr Stack
                   service_name: Radarr
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}
+                  baseUrl: https://radarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
                   params:
                     unmonitored: true
                 - type: sonarr
                   service_group: Arr Stack
                   service_name: Sonarr
-                  baseUrl: http://{{HOMEPAGE_VAR_DOCKER-MEDIA_IP}}
+                  baseUrl: https://sonarr.{{HOMEPAGE_VAR_WEB_DOMAIN}}
                   params:
                     unmonitored: true
 
