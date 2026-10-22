@@ -34,10 +34,10 @@
 
 /* Section colors - each top-level group is matched by a service it contains,
    since Homepage doesn't put the group name in the DOM */
-#layout-groups > .services-group:has(.service[data-name="Proxmox"]) {
+#layout-groups > .services-group:has(.service[data-name="Synology"]) {
   --section: var(--cp-cyan);       /* Infrastructure */
 }
-#layout-groups > .services-group:has(.service[data-name="Plex"]) {
+#layout-groups > .services-group:has(.service[data-name="Tautulli"]) {
   --section: var(--cp-yellow);     /* Services */
 }
 #layout-groups > .services-group:has(.service[data-name="Radarr"]) {
@@ -134,6 +134,32 @@
   color: var(--cp-text-dim);
 }
 
+/* Secondary link chip next to a service name, e.g. "▶ PLEX" on Tautulli.
+   Added by custom.js from a "Label|URL" description. */
+.cp-sublink {
+  position: relative;
+  z-index: 10;
+  align-self: center;
+  margin-left: .25rem;
+  padding: .05rem .55rem;
+  font-family: var(--cp-font-ui);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--section);
+  border: 1px solid color-mix(in oklab, var(--section) 55%, transparent);
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition: background .15s, color .15s;
+}
+.cp-sublink::before {
+  content: "▶ ";
+}
+.cp-sublink:hover {
+  color: #000;
+  background: var(--section);
+}
+
 /* Dashed leader from the name to the status marker */
 .service-title-text {
   flex: 0 1 auto;
@@ -196,6 +222,14 @@
   text-transform: uppercase;
   opacity: 1;
   color: color-mix(in oklab, var(--section) 70%, white);
+}
+
+
+/* Calendar card - keep only the month grid and its event dots; the Agenda card
+   next to it lists the events. The list has no class of its own: it's the last
+   block inside the month view's grid wrapper. */
+.service[data-name="Calendar"] .pb-1.w-full > .flex-col:last-child {
+  display: none;
 }
 
 
@@ -322,6 +356,8 @@
   border-radius: 0;
   clip-path: var(--chamfer);
   margin-bottom: .5rem;
+  width: fit-content;   /* size chips to their label instead of the full column */
+  min-width: 11rem;
 }
 .bookmark-icon {
   font-family: var(--cp-font-ui);

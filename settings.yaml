@@ -33,7 +33,7 @@ layout:
   Infrastructure:
     icon: mdi-desktop-classic-#ffffff
     style: row
-    columns: 2
+    columns: 3
 
   Services:
     icon: mdi-shield-crown-outline-#ffffff
@@ -56,7 +56,8 @@ layout:
       style: row
       columns: 2
     Calendar:
-      style: column
+      style: row   # month grid and agenda side by side
+      columns: 2
     Management:
       style: column
 

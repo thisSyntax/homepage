@@ -6,7 +6,9 @@
 # column) - see settings.yaml's `layout` for the row/column styling that
 # pairs with the group names used here.
 - Infrastructure:
-    - Proxmox:
+    # One card per node of the F-SI-CLU01 cluster. The API on either node answers
+    # for the whole cluster; `node` filters VMs, LXCs, CPU and memory to that node.
+    - F-SI-HV01:
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
         widget:
@@ -14,8 +16,18 @@
           url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}}
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
+          node: F-SI-HV01
+    - F-SI-HV02:
+        icon: proxmox.png
+        href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+        widget:
+          type: proxmox
+          url: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
+          username: {{HOMEPAGE_VAR_PROXMOX_API_ID}}
+          password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
+          node: F-SI-HV02
     - Synology:
-        icon: si-synology-#ffffff
+        icon: synology-dsm
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
           type: diskstation
@@ -25,16 +37,11 @@
 
 - Services:
     - Apps:
-        - Plex:
-            icon: plex
-            href: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-            widget:
-              type: plex
-              url: https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-              key: {{HOMEPAGE_VAR_PLEX_API_KEY}} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
         - Tautulli:
             icon: tautulli
             href: https://tautulli.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+            # "Label|URL" descriptions become a link chip next to the name (custom.js)
+            description: "Plex|https://plex.{{HOMEPAGE_VAR_WEB_DOMAIN}}"
             server: docker-media
             container: tautulli
             widget:
