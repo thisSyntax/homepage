@@ -1,26 +1,41 @@
-/* Font for stat numbers - delete this line to fall back to local monospace fonts */
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap");
+/* Fonts: Rajdhani (condensed, close to the Cyberpunk 2077 UI) for names and headers,
+   JetBrains Mono for numbers. Delete this line to fall back to local fonts. */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap");
 
 
 /* Design tokens - change the palette here */
 :root {
   --cp-font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --cp-font-ui: "Rajdhani", "Bahnschrift", "Arial Narrow", sans-serif;
+
   /* Tuned for cyberpunk-keyart-3440.jpg (violet/pink neon) */
   --cp-bg: #0c0a18;
-  --cp-teal: #2de2c4;
+  --cp-cyan: #00e5ff;
   --cp-yellow: #fcee0a;
   --cp-red: #ff3b5c;
+  --cp-glitch-a: rgb(255 0 60 / .7);
+  --cp-glitch-b: rgb(0 229 255 / .7);
   --cp-text-dim: rgb(255 255 255 / .55);
 
-  --accent: var(--cp-teal);
+  --accent: var(--cp-yellow);
   --section: var(--accent);   /* overridden per top-level group below */
+  --cut: 12px;
+}
+
+/* Angled corners (top-right and bottom-left), sized by each element's --cut.
+   Defined here rather than on :root, because a custom property resolves var()
+   where it's declared - on :root it would always use :root's --cut. */
+.services-list,
+#information-widgets .widget-container,
+.bookmark > a {
+  --chamfer: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
 }
 
 
 /* Section colors - each top-level group is matched by a service it contains,
    since Homepage doesn't put the group name in the DOM */
 #layout-groups > .services-group:has(.service[data-name="Proxmox"]) {
-  --section: var(--cp-teal);       /* Infrastructure */
+  --section: var(--cp-cyan);       /* Infrastructure */
 }
 #layout-groups > .services-group:has(.service[data-name="Plex"]) {
   --section: var(--cp-yellow);     /* Services */
@@ -30,48 +45,324 @@
 }
 
 
-/* Service cards - squared-off hardware panels, tinted by section color */
+/* Background - scanlines and a vignette over the wallpaper, under the content */
+#background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgb(0 0 0 / .18) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 40%, rgb(0 0 0 / .55) 100%);
+}
+
+
+/* Column panels - each list of services is one angled HUD panel.
+   The panel's own background shows as a 1px frame around the ::before fill;
+   ::after draws the corner brackets. :not(:empty) skips the empty list a
+   parent group renders above its subgroups. */
+.services-list:not(:empty) {
+  --cut: 14px;
+  position: relative;
+  isolation: isolate;
+  padding: .4rem .3rem;
+  background: color-mix(in oklab, var(--section) 40%, transparent);
+  clip-path: var(--chamfer);
+  backdrop-filter: blur(12px);
+}
+.services-list:not(:empty)::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--cp-bg) 92%, transparent),
+    color-mix(in oklab, var(--cp-bg) 84%, transparent));
+  clip-path: var(--chamfer);
+}
+.services-list:not(:empty)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  --b: linear-gradient(var(--section), var(--section));
+  background:
+    var(--b) top left / 32px 3px no-repeat,
+    var(--b) top left / 3px 40% no-repeat,
+    var(--b) bottom right / 32px 3px no-repeat,
+    var(--b) bottom right / 3px 40% no-repeat;
+  filter: drop-shadow(0 0 4px var(--section));
+}
+
+
+/* Services are rows inside the panel rather than separate cards */
 .service-card {
-  background: color-mix(in oklab, var(--cp-bg) 70%, transparent);
-  border: 1px solid color-mix(in oklab, var(--section) 18%, transparent);
-  border-left: 2px solid color-mix(in oklab, var(--section) 70%, transparent);
-  border-radius: 4px;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / .04);
-  transition: border-color .2s, box-shadow .2s, transform .2s;
+  background: transparent;
+  backdrop-filter: none;
+  border: 0;
+  border-bottom: 1px solid rgb(255 255 255 / .06);
+  border-radius: 0;
+  margin-bottom: 0;
+  transition: background .15s, box-shadow .15s;
+}
+.service:last-child > .service-card {
+  border-bottom: 0;
 }
 
 .service-card:hover {
-  background: color-mix(in oklab, var(--cp-bg) 60%, transparent);
-  border-color: var(--section);
-  box-shadow: 0 0 0 1px var(--section), 0 0 24px -6px var(--section);
-  transform: translateY(-1px);
+  background: linear-gradient(90deg, color-mix(in oklab, var(--section) 16%, transparent), transparent 70%);
+  box-shadow: inset 3px 0 0 var(--section);
+}
+
+.service-name {
+  font-family: var(--cp-font-ui);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+/* Chromatic-aberration "glitch" on the hovered service's name */
+.service-card:hover .service-name {
+  text-shadow: -1.5px 0 var(--cp-glitch-a), 1.5px 0 var(--cp-glitch-b);
 }
 
 .service-description {
+  font-family: var(--cp-font-mono);
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--cp-text-dim);
 }
 
+/* Dashed leader from the name to the status marker */
+.service-title-text {
+  flex: 0 1 auto;
+}
+.service-title::after {
+  content: "";
+  flex: 1;
+  align-self: center;
+  margin: 0 2.5rem 0 .25rem;
+  border-bottom: 1px dashed color-mix(in oklab, var(--section) 30%, transparent);
+}
 
-/* Widget stat blocks - fixed-width digits so values don't jitter on refresh */
+
+/* Widget stats as one inline line under the name: "121,267 QUERIES · 24,158 BLOCKED"
+   Monospace digits so values don't jitter on refresh. */
+.service-container {
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .15rem .9rem;
+  padding: 0 .5rem .5rem 3rem;  /* 3rem lines stats up under the name, past the icon */
+}
+
 .service-block {
-  background: rgb(0 0 0 / .25);
-  border-top: 1px solid color-mix(in oklab, var(--section) 25%, transparent);
-  border-radius: 2px;
+  flex: none;
+  flex-direction: row;
+  align-items: baseline;
+  gap: .4em;
+  margin: 0;
+  padding: 0;
+}
+/* Keep the blockHighlights colors from settings.yaml, as a small tag */
+.service-block:not([data-highlight-level]) {
+  background: none;
+}
+.service-block[data-highlight-level] {
+  padding: 0 .35rem;
+  border-radius: 0;
+}
+
+.service-block + .service-block::before {
+  content: "·";
+  margin-right: .5rem;
+  color: var(--cp-text-dim);
 }
 
 .service-block-value {
   font-family: var(--cp-font-mono);
   font-variant-numeric: tabular-nums;
   font-weight: 500;
-  font-size: .9rem;
+  font-size: .85rem;
   letter-spacing: -.01em;
+  color: #fff;
 }
 
 .service-block-label {
-  font-size: .6rem;
+  font-family: var(--cp-font-ui);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: 1;
+  color: color-mix(in oklab, var(--section) 70%, white);
+}
+
+
+/* Group headers - a numbered tag "[01] INFRASTRUCTURE" with a fading rule.
+   Subgroups (Apps, Admin, ...) get a small "// APPS" label instead. */
+#layout-groups {
+  counter-reset: section;
+}
+#layout-groups > .services-group {
+  counter-increment: section;
+}
+
+.service-group-icon {
+  display: none;  /* the number tag replaces the layout icons */
+}
+
+.service-group-name {
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--cp-font-ui);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: -1px 0 rgb(255 0 60 / .45), 1px 0 rgb(0 229 255 / .45), 0 1px 10px rgb(0 0 0 / .9);
+}
+.service-group-name::before {
+  content: counter(section, decimal-leading-zero);
+  padding: .1rem .55rem .1rem .4rem;
+  font-family: var(--cp-font-mono);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: #000;
+  background: var(--section);
+  text-shadow: none;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, calc(100% - 7px) 100%, 0 100%);
+  box-shadow: 0 0 12px var(--section);
+}
+
+.services-group button:has(> .service-group-name) {
+  margin-bottom: .5rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(90deg, var(--section), transparent 60%) 1;
+}
+
+.subgroup .service-group-name {
+  font-size: .85rem;
+  letter-spacing: .25em;
+  color: color-mix(in oklab, var(--section) 80%, white);
+  text-shadow: 0 1px 8px rgb(0 0 0 / .9);
+}
+.subgroup .service-group-name::before {
+  content: "//";
+  padding: 0;
+  font-size: .75rem;
+  color: var(--section);
+  background: none;
+  clip-path: none;
+  box-shadow: none;
+}
+.subgroup button:has(> .service-group-name) {
+  margin-bottom: .3rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+
+/* Container status markers (statusStyle: dot) - glowing diamonds.
+   The dot's color is a background class, so the glow is a blurred copy of it. */
+.docker-status .rounded-full {
+  position: relative;
+  border-radius: 1px;
+  transform: rotate(45deg) scale(.75);
+}
+.docker-status .rounded-full::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(4px);
+  opacity: .8;
+}
+
+
+/* Top bar - angled boxes with a yellow frame, search as a terminal prompt */
+#information-widgets .widget-container {
+  --cut: 8px;
+  background: color-mix(in oklab, var(--cp-bg) 82%, transparent);
+  border: 1px solid color-mix(in oklab, var(--cp-yellow) 30%, transparent);
+  border-radius: 0;
+  clip-path: var(--chamfer);
+}
+
+#information-widgets input[type="text"] {
+  font-family: var(--cp-font-mono);
+  color: var(--cp-yellow);
+  caret-color: var(--cp-yellow);
+  background: rgb(0 0 0 / .55);
+  border: 1px solid color-mix(in oklab, var(--cp-yellow) 45%, transparent);
+  border-radius: 0;
+}
+#information-widgets input[type="text"]::placeholder {
+  font-family: var(--cp-font-ui);
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--cp-yellow) 55%, transparent);
+}
+#information-widgets input[type="text"]:focus {
+  outline: none;
+  border-color: var(--cp-yellow);
+  box-shadow: 0 0 0 1px var(--cp-yellow), 0 0 18px -4px var(--cp-yellow);
+}
+
+
+/* Quick Links - yellow-tagged chips; the URL text is hidden */
+.bookmark > a {
+  --cut: 8px;
+  background: color-mix(in oklab, var(--cp-bg) 82%, transparent);
+  border-radius: 0;
+  clip-path: var(--chamfer);
+  margin-bottom: .5rem;
+}
+.bookmark-icon {
+  font-family: var(--cp-font-ui);
+  font-weight: 700;
+  color: #000;
+  background: var(--cp-yellow);
+  border-radius: 0;
+  transition: background .15s;
+}
+.bookmark > a:hover .bookmark-icon {
+  color: #000;
+  background: var(--cp-cyan);
+}
+.bookmark-name {
+  font-family: var(--cp-font-ui);
+  font-size: .85rem;
   font-weight: 600;
   letter-spacing: .12em;
-  color: var(--cp-text-dim);
+  text-transform: uppercase;
+}
+.bookmark-description {
+  display: none;
+}
+
+
+/* Boot-up flicker when the page loads - panels in each row come in one after another */
+@media (prefers-reduced-motion: no-preference) {
+  .services-list:not(:empty) {
+    animation: cp-boot .6s cubic-bezier(.2, .8, .2, 1) both;
+  }
+  .subgroup:nth-child(2) > * .services-list { animation-delay: .08s; }
+  .subgroup:nth-child(3) > * .services-list { animation-delay: .16s; }
+  .subgroup:nth-child(4) > * .services-list { animation-delay: .24s; }
+
+  @keyframes cp-boot {
+    0%   { opacity: 0; transform: translateY(6px); filter: brightness(2.5); }
+    35%  { opacity: .7; }
+    50%  { opacity: .15; }
+    70%  { opacity: .9; filter: brightness(1.3); }
+    100% { opacity: 1; transform: none; filter: none; }
+  }
 }
 
 
@@ -79,21 +370,21 @@
 ::-webkit-scrollbar {
     display: none;
 }
- 
- 
+
+
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
- 
- 
+
+
 /* Apply zoom specifically for the Homepage */
 html {
   font-size: 90%;
 }
 
- 
+
 /* Due to tailwind v4*/
 .container {
   @media(min-width: 767px) {
@@ -102,7 +393,7 @@ html {
   }
 }
 
- 
+
 /* For custom classes used in iFrame */
 .iframe-home-assistant-media {
   width: 300px;

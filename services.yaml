@@ -15,7 +15,7 @@
           username: {{HOMEPAGE_VAR_PROXMOX_API_ID}}
           password: {{HOMEPAGE_VAR_PROXMOX_API_KEY}}
     - Synology:
-        icon: synology
+        icon: si-synology-#ffffff
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
         widget:
           type: diskstation
@@ -97,7 +97,7 @@
               version: 2 # required if running v2 or higher, defaults to 1
               key: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}} # in v2 this is your password or an app password
 
-    - DNS:
+    - DNS & Proxy:
         - Pi-hole 1:
             icon: pi-hole
             href: https://{{HOMEPAGE_VAR_PIHOLE1_IP}}/admin
