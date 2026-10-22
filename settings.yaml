@@ -5,14 +5,14 @@
 title: Fey Server Infrastructure
 
 background:
-  image: /images/cyberpunk.jpg
+  image: /images/cyberpunk-keyart-3440.jpg
   opacity: 70 # 0-100
 
 cardBlur: md # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
 
 theme: dark # or light
 
-color: teal
+color: slate # also tints the background overlay - slate keeps the wallpaper's own colors
 
 blockHighlights:
   levels:
