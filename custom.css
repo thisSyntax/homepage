@@ -312,6 +312,48 @@
   }
 }
 
+/* Narrow rows with 2+ stats - a readout instead of a wrapping inline line:
+     QUERIES ············· 214,592
+     BLOCKED ········ 66,833 (31%)
+   label first, a dotted leader, the value right-aligned under the end of the
+   title's dashed leader. Counted by :has(), so new cards follow automatically;
+   graph rows keep their own layout. */
+@container card (max-width: 639.98px) {
+  .service:not(:has(iframe)) .service-container:has(> .service-block:nth-child(2)) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .1rem;
+    padding-right: 2.5rem;  /* = .service-title::after's margin, where the leader ends */
+  }
+  .service:not(:has(iframe)) .service-container:has(> .service-block:nth-child(2)) > .service-block {
+    display: flex;
+    align-items: baseline;
+  }
+  /* Stats are rendered value-then-label; order swaps them around the leader.
+     nowrap/none so values with spaces ("909 Mbit/s") don't wrap to two lines */
+  .service:not(:has(iframe)) .service-container:has(> .service-block:nth-child(2)) > .service-block > .service-block-label {
+    order: 0;
+    flex: none;
+    white-space: nowrap;
+  }
+  .service:not(:has(iframe)) .service-container:has(> .service-block:nth-child(2)) > .service-block > .service-block-value {
+    order: 2;
+    flex: none;
+    white-space: nowrap;
+  }
+  /* The "·" separator pseudo-element becomes the dotted leader, on every row */
+  .service:not(:has(iframe)) .service-container:has(> .service-block:nth-child(2)) > .service-block::before {
+    content: "";
+    position: static;
+    width: auto;
+    order: 1;
+    flex: 1 1 1rem;
+    margin: 0 .45em;
+    transform: translateY(-.25em);
+    border-bottom: 1px dotted color-mix(in oklab, var(--section) 40%, transparent);
+  }
+}
+
 
 /* Calendar column - month grid and agenda sit side by side, but stack when the
    column is too narrow for both (the grid's day numbers start overlapping). */
@@ -420,6 +462,60 @@
   content: "◆ ";
   color: #10b981;   /* same green as the status dots */
   text-shadow: 0 0 6px #10b981;
+}
+
+/* Tautulli streams - each row lines up with the stat readouts (label column to
+   leader end) and its playback progress becomes an underline: solid section
+   color for the played part over the readouts' dotted track. The widget sizes
+   the fill with an inline width, which is how it's picked out here. Same rules
+   for one stream (title row + progress row) and several (one row each). */
+.service[data-name="Tautulli"] .service-card > .flex.flex-col {
+  margin: 0;
+  padding: 0 2.5rem .5rem 3rem;  /* = the stats' --pl, and the leader's end */
+  gap: .2rem;
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div {
+  background: none;
+  border-radius: 0;
+  margin-top: 0;
+  padding-bottom: 3px;   /* room for the progress line under the text */
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px dotted color-mix(in oklab, var(--section) 40%, transparent);
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div > div[style*="width"] {
+  top: auto;
+  bottom: 0;
+  height: 0;
+  z-index: 1;
+  background: none;
+  border-radius: 0;
+  border-bottom: 2px solid var(--section);
+  box-shadow: 0 0 6px color-mix(in oklab, var(--section) 60%, transparent);
+}
+/* play/pause icon */
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div > div:first-of-type + div {
+  margin-left: 0;
+  color: var(--section);
+}
+/* position / duration */
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div > div:last-child {
+  margin-right: 0;
+  font-family: var(--cp-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: .8rem;
+  color: #fff;
+}
+.service[data-name="Tautulli"] .service-card .text-ellipsis {
+  font-family: var(--cp-font-ui);
+  font-size: .8rem;
+  letter-spacing: .03em;
+  color: color-mix(in oklab, var(--section) 15%, white);
 }
 
 /* Status markers (statusStyle: dot) - glowing diamonds, for Docker containers
