@@ -147,6 +147,7 @@
   font-weight: 700;
   letter-spacing: .15em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--section);
   border: 1px solid color-mix(in oklab, var(--section) 55%, transparent);
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
@@ -222,6 +223,51 @@
   text-transform: uppercase;
   opacity: 1;
   color: color-mix(in oklab, var(--section) 70%, white);
+}
+
+
+/* Wide rows - when a service row is wide enough, its stats sit on the same line
+   as the name, at the end of the dashed leader, instead of on a second line.
+   Each .service is a size container so this follows the row's own width. */
+.service {
+  container: card / inline-size;
+}
+
+@container card (min-width: 640px) {
+  .service:not([data-name="Calendar"]):not([data-name="Agenda"]) > .service-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .service:not([data-name="Calendar"]):not([data-name="Agenda"]) .service-title {
+    flex: 1 1 12rem;
+    min-width: 0;
+  }
+  .service:not([data-name="Calendar"]):not([data-name="Agenda"]) .service-title::after {
+    margin-right: .75rem;
+  }
+  .service:not([data-name="Calendar"]):not([data-name="Agenda"]) .service-container {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0 2.75rem 0 0;  /* room for the status marker */
+  }
+  /* Anything else in the card (container stats, errors, custom widget text)
+     keeps its own full-width line */
+  .service:not([data-name="Calendar"]):not([data-name="Agenda"]) > .service-card > :not(.service-title):not(.service-container) {
+    flex-basis: 100%;
+  }
+}
+
+
+/* Calendar column - month grid and agenda sit side by side, but stack when the
+   column is too narrow for both (the grid's day numbers start overlapping). */
+.subgroup:has(.service[data-name="Calendar"]) {
+  container: calendar / inline-size;
+}
+@container calendar (max-width: 520px) {
+  .services-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -349,7 +395,13 @@
 }
 
 
-/* Quick Links - yellow-tagged chips; the URL text is hidden */
+/* Quick Links - yellow-tagged chips packed side by side (not spread over the
+   layout's 4 columns); the URL text is hidden */
+.bookmark-group ul:has(> .bookmark) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 .5rem;
+}
 .bookmark > a {
   --cut: 8px;
   background: color-mix(in oklab, var(--cp-bg) 82%, transparent);
