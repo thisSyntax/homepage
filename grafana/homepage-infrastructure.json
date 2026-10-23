@@ -1,7 +1,7 @@
 {
   "uid": "homepage-nodes",
-  "title": "Homepage - Proxmox nodes",
-  "description": "Panels embedded in the Homepage dashboard's node cards (iframe widget). Pick the node with the var-node URL parameter.",
+  "title": "Homepage - Infrastructure",
+  "description": "Panels embedded in the Homepage Infrastructure cards (iframe widget): 1-2 Proxmox node CPU/network (pick the node with var-node), 3-4 Synology network/volume I/O.",
   "tags": ["homepage"],
   "timezone": "browser",
   "schemaVersion": 39,

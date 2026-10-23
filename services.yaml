@@ -8,7 +8,7 @@
 - Infrastructure:
     # One card per node of the F-SI-CLU01 cluster. The API on either node answers
     # for the whole cluster; `node` filters VMs, LXCs, CPU and memory to that node.
-    # The graphs are panels of grafana/homepage-proxmox-nodes.json (panelId 1 = CPU,
+    # The graphs are panels of grafana/homepage-infrastructure.json (panelId 1 = CPU,
     # 2 = network). Iframes load in the browser, so you must be logged into Grafana.
     - F-SI-HV01:
         icon: proxmox.png
@@ -21,12 +21,12 @@
             node: F-SI-HV01
           - type: iframe
             name: hv01-cpu
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV01&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV01&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: hv01-net
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV01&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV01&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
     - F-SI-HV02:
@@ -40,12 +40,12 @@
             node: F-SI-HV02
           - type: iframe
             name: hv02-cpu
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV02&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: hv02-net
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
     # Graphs: panels 3 (network) and 4 (volume I/O), from SNMP via snmp_exporter
@@ -59,12 +59,12 @@
             password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
           - type: iframe
             name: nas-net
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&panelId=3&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&panelId=3&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: nas-io
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&panelId=4&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&panelId=4&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
 
