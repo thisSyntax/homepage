@@ -64,16 +64,18 @@ function addServiceLinks() {
 }
 
 // "SYS.MON" button at the end of the top bar, opening the Grafana Docker
-// dashboard in kiosk mode. The Grafana address is taken from the node cards'
-// graph iframes, so it follows HOMEPAGE_VAR_GRAFANA_URL instead of living here.
+// dashboard in kiosk mode. The Grafana address is taken from the Grafana card's
+// link, so it follows HOMEPAGE_VAR_GRAFANA_URL instead of living here. Not from
+// the graph iframes: those use the embed host, whose auto-signed-in viewer
+// deliberately can't open the Docker dashboard.
 function addSysmonButton() {
     const bar = document.getElementById("information-widgets-right");
-    const graph = document.querySelector('iframe[src*="/d-solo/"]');
-    if (!bar || !graph || document.getElementById("cp-sysmon")) return;
+    const card = document.querySelector('.service[data-name="Grafana"] a[href^="http"]');
+    if (!bar || !card || document.getElementById("cp-sysmon")) return;
 
     let grafana;
     try {
-        grafana = new URL(graph.src).origin;
+        grafana = new URL(card.href).origin;
     } catch {
         return; // unset variable leaves a placeholder instead of a URL
     }
@@ -167,32 +169,48 @@ function sfxUnlock() {
     if (sfx.ctx.state === "suspended") sfx.ctx.resume();
 }
 
-// Optional sound files: /images/sfx-hover.<ext> and /images/sfx-click.<ext>
-// (wav, ogg or mp3, in the folder that holds the wallpaper). When one exists it
-// plays instead of the synthesised sound; when it doesn't, the synth is used.
-const SFX_FILES = { hover: "/images/sfx-hover", click: "/images/sfx-click" };
-const SFX_FORMATS = ["wav", "ogg", "mp3"];
+// Optional sound files, in the folder that holds the wallpaper. When one exists
+// it plays instead of the synthesised sound; when it doesn't, the synth is used.
+const SFX_FILES = { hover: "/images/sfx-hover.ogg", click: "/images/sfx-click.ogg" };
 const SFX_FILE_VOLUME = 0.6;
 
-async function sfxLoadSamples() {
-    sfx.samples = {};
-    for (const [name, base] of Object.entries(SFX_FILES)) {
-        for (const ext of SFX_FORMATS) {
-            try {
-                const res = await fetch(`${base}.${ext}`);
-                if (!res.ok) continue;
-                sfx.samples[name] = await sfx.ctx.decodeAudioData(await res.arrayBuffer());
-                break;
-            } catch {
-                // missing or undecodable - try the next format
-            }
+// Downloaded as soon as the page loads - fetching needs no user gesture, only
+// playback does. Decoding used to start at the first click, so that click ran
+// before the file was in and played the synth instead of the chosen sound.
+async function sfxFetchFiles() {
+    const files = {};
+    for (const [name, url] of Object.entries(SFX_FILES)) {
+        try {
+            const res = await fetch(url);
+            if (res.ok) files[name] = await res.arrayBuffer();
+        } catch {
+            // missing - that sound uses the synth
         }
     }
+    return files;
+}
+const sfxFiles = window.matchMedia("(hover: hover)").matches ? sfxFetchFiles() : Promise.resolve({});
+
+// Decoding needs the AudioContext, so it runs on unlock - by then the bytes are
+// usually already here, and it takes milliseconds
+async function sfxLoadSamples() {
+    const samples = {};
+    for (const [name, data] of Object.entries(await sfxFiles)) {
+        try {
+            samples[name] = await sfx.ctx.decodeAudioData(data.slice(0));
+        } catch {
+            // undecodable - that sound falls back to the synth
+        }
+    }
+    sfx.samples = samples;
 }
 
-// Plays a loaded file; false when there isn't one, so the caller synthesises
+// Plays a loaded file; false when there isn't one, so the caller synthesises.
+// Until the files have loaded it stays silent rather than guessing - otherwise
+// the first click would get the synth instead of the chosen sound.
 function sfxSample(name) {
-    const buffer = sfx.samples?.[name];
+    if (!sfx.samples) return true;
+    const buffer = sfx.samples[name];
     if (!buffer) return false;
     if (!sfxReady()) return true;   // muted or locked: stay silent, don't fall back
     const src = sfx.ctx.createBufferSource(), amp = sfx.ctx.createGain();
@@ -339,7 +357,11 @@ const observer = new MutationObserver((mutations) => {
 
 });
 
-observer.observe(document.body, { childList: true, subtree: true });
+// characterData too: a widget can fill in its text without adding nodes (the
+// Grafana card's "No items found"), which childList alone would miss whenever
+// no other card happened to re-render afterwards. Each function only rewrites
+// text that still matches what it looks for, so its own edits don't loop.
+observer.observe(document.body, { childList: true, subtree: true, characterData: true });
 
 
 // Run functions once DOM is loaded
