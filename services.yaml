@@ -118,12 +118,25 @@
               fields: ["running", "down", "total"] # allowed fields (max 4): total, running, stopped, unhealthy, unknown
         # Grafana and Prometheus run as LXCs, so siteMonitor (an HTTP check from the
         # Homepage server) drives their status dot instead of Docker.
-        # No grafana widget: its stats come from /api/admin/stats, which needs a
-        # Grafana server-admin login - too much privilege for a public Grafana.
+        # Not the built-in grafana widget: it only does username/password, and its
+        # stats come from /api/admin/stats, which needs a Grafana server admin.
+        # customapi lists active alerts instead, with a Viewer service-account token.
         - Grafana:
             icon: grafana
             href: "{{HOMEPAGE_VAR_GRAFANA_URL}}"
             siteMonitor: "{{HOMEPAGE_VAR_GRAFANA_URL}}/api/health"
+            widget:
+              type: customapi
+              url: "{{HOMEPAGE_VAR_GRAFANA_URL}}/api/alertmanager/grafana/api/v2/alerts?active=true&silenced=false&inhibited=false"
+              headers:
+                Authorization: "Bearer {{HOMEPAGE_VAR_GRAFANA_TOKEN}}"
+              refreshInterval: 60000
+              display: dynamic-list
+              mappings:
+                name: labels.alertname
+                label: status.state
+                limit: 5
+                target: "{{HOMEPAGE_VAR_GRAFANA_URL}}/alerting/list"
         - Prometheus:
             icon: prometheus
             href: "{{HOMEPAGE_VAR_PROMETHEUS_URL}}"
