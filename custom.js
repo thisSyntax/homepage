@@ -58,11 +58,59 @@ function addSysmonButton() {
     const link = document.createElement("a");
     link.id = "cp-sysmon";
     link.className = "widget-container cp-sysmon";
-    link.href = `${grafana}/d/homepage-docker/homepage-docker?orgId=1&kiosk`;
+    link.href = `${grafana}/d/homepage-docker/homepage-docker?orgId=1&kiosk&theme=dark`;
     link.target = "_blank";
     link.rel = "noreferrer";
     link.innerHTML = '<span class="cp-sysmon-label">SYS.MON</span><span class="cp-sysmon-sub">Docker</span>';
+    // A plain click opens the dashboard in a framed overlay; ctrl/cmd/shift or
+    // middle click still open it in a new tab.
+    link.addEventListener("click", (e) => {
+        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+        e.preventDefault();
+        openSysmon(link.href);
+    });
     bar.append(link);
+}
+
+function openSysmon(url) {
+    let overlay = document.getElementById("cp-sysmon-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "cp-sysmon-overlay";
+        overlay.innerHTML = `
+            <div class="cp-sysmon-frame" role="dialog" aria-modal="true" aria-label="Docker monitor">
+                <div class="cp-sysmon-inner">
+                    <div class="cp-sysmon-bar">
+                        <span class="cp-sysmon-title">SYS.MON // Docker</span>
+                        <a class="cp-sysmon-tab" target="_blank" rel="noreferrer">Open in tab</a>
+                        <button type="button" class="cp-sysmon-close" aria-label="Close">&#x2715;</button>
+                    </div>
+                    <iframe title="Grafana Docker dashboard"></iframe>
+                </div>
+            </div>`;
+        // Close on the X, a click outside the frame, or Escape (Escape only
+        // reaches us while focus isn't inside the Grafana iframe)
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay || e.target.closest(".cp-sysmon-close")) closeSysmon();
+        });
+        overlay.querySelector(".cp-sysmon-tab").addEventListener("click", closeSysmon);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !overlay.hidden) closeSysmon();
+        });
+        document.body.append(overlay);
+    }
+
+    overlay.querySelector(".cp-sysmon-tab").href = url;
+    const frame = overlay.querySelector("iframe");
+    if (frame.getAttribute("src") !== url) frame.src = url; // keep it loaded between opens
+    overlay.hidden = false;
+    document.documentElement.classList.add("cp-sysmon-open");
+}
+
+function closeSysmon() {
+    const overlay = document.getElementById("cp-sysmon-overlay");
+    if (overlay) overlay.hidden = true;
+    document.documentElement.classList.remove("cp-sysmon-open");
 }
 
 // Enhanced MutationObserver that handles all functions

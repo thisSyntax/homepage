@@ -1,7 +1,7 @@
 {
   "uid": "homepage-nodes",
   "title": "Homepage - Infrastructure",
-  "description": "Panels embedded in the Homepage Infrastructure cards (iframe widget): 1-2 Proxmox node CPU/network (pick the node with var-node), 3-4 Synology network/volume I/O.",
+  "description": "Panels embedded in the Homepage Infrastructure cards (iframe widget): 1-2 Proxmox node CPU/network (pick the node with var-node), 3-4 Synology network/volume I/O over SNMP (job synology, 1m scrapes, hence the fixed 5m rate windows; eth* only). The Synology counters get a _total suffix in Prometheus (metric_relabel_configs) so rate() does not warn.",
   "tags": [
     "homepage"
   ],
@@ -245,7 +245,6 @@
       "id": 3,
       "type": "timeseries",
       "title": "Network",
-      "description": "Synology over SNMP (job synology, scraped every 1m - hence the fixed 5m rate window). eth* only: lo and sit0 aren't real traffic.",
       "transparent": true,
       "gridPos": {
         "h": 6,
@@ -260,12 +259,12 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "8 * sum(rate(ifHCInOctets{job=\"synology\", ifName=~\"eth.*\"}[5m]))",
+          "expr": "8 * sum(rate(ifHCInOctets_total{job=\"synology\", ifName=~\"eth.*\"}[5m]))",
           "legendFormat": "In"
         },
         {
           "refId": "B",
-          "expr": "8 * sum(rate(ifHCOutOctets{job=\"synology\", ifName=~\"eth.*\"}[5m]))",
+          "expr": "8 * sum(rate(ifHCOutOctets_total{job=\"synology\", ifName=~\"eth.*\"}[5m]))",
           "legendFormat": "Out"
         }
       ],
@@ -338,7 +337,6 @@
       "id": 4,
       "type": "timeseries",
       "title": "Volume I/O",
-      "description": "Synology volume read/write throughput (spaceIO*X are 64-bit byte counters).",
       "transparent": true,
       "gridPos": {
         "h": 6,
@@ -353,12 +351,12 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "sum(rate(spaceIONReadX{job=\"synology\"}[5m]))",
+          "expr": "sum(rate(spaceIONReadX_total{job=\"synology\"}[5m]))",
           "legendFormat": "Read"
         },
         {
           "refId": "B",
-          "expr": "sum(rate(spaceIONWrittenX{job=\"synology\"}[5m]))",
+          "expr": "sum(rate(spaceIONWrittenX_total{job=\"synology\"}[5m]))",
           "legendFormat": "Write"
         }
       ],

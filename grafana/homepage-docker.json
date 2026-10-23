@@ -2,13 +2,18 @@
   "uid": "homepage-docker",
   "title": "Homepage - Docker",
   "description": "Docker hosts and containers (cAdvisor + node-exporter, one Prometheus job per host). Opened in kiosk mode from the SYS.MON button on Homepage.",
-  "tags": ["homepage"],
+  "tags": [
+    "homepage"
+  ],
   "timezone": "browser",
   "schemaVersion": 39,
   "editable": true,
   "graphTooltip": 1,
   "style": "dark",
-  "time": { "from": "now-6h", "to": "now" },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
   "refresh": "1m",
   "templating": {
     "list": [
@@ -24,14 +29,27 @@
         "name": "host",
         "label": "Host",
         "type": "query",
-        "datasource": { "type": "prometheus", "uid": "${datasource}" },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
         "definition": "label_values(container_memory_working_set_bytes, job)",
-        "query": { "query": "label_values(container_memory_working_set_bytes, job)", "refId": "host" },
+        "query": {
+          "query": "label_values(container_memory_working_set_bytes, job)",
+          "refId": "host"
+        },
         "refresh": 1,
         "sort": 1,
         "includeAll": true,
         "multi": true,
-        "current": { "text": ["All"], "value": ["$__all"] }
+        "current": {
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        }
       }
     ]
   },
@@ -41,8 +59,16 @@
       "type": "stat",
       "title": "Containers",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -54,12 +80,21 @@
         "defaults": {
           "unit": "none",
           "decimals": 0,
-          "color": { "mode": "fixed", "fixedColor": "#00e5ff" }
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#00e5ff"
+          }
         },
         "overrides": []
       },
       "options": {
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "center",
@@ -72,8 +107,16 @@
       "type": "bargauge",
       "title": "Host CPU",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 7, "x": 4, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 4,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -89,13 +132,24 @@
           "min": 0,
           "max": 100,
           "decimals": 0,
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "#00e5ff", "value": null },
-              { "color": "#fcee0a", "value": 70 },
-              { "color": "#ff3b5c", "value": 90 }
+              {
+                "color": "#00e5ff",
+                "value": null
+              },
+              {
+                "color": "#fcee0a",
+                "value": 70
+              },
+              {
+                "color": "#ff3b5c",
+                "value": 90
+              }
             ]
           }
         },
@@ -107,7 +161,13 @@
         "showUnfilled": true,
         "valueMode": "color",
         "namePlacement": "left",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
       }
     },
     {
@@ -115,8 +175,16 @@
       "type": "bargauge",
       "title": "Host memory",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 7, "x": 11, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 11,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -132,13 +200,24 @@
           "min": 0,
           "max": 100,
           "decimals": 0,
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "#00e5ff", "value": null },
-              { "color": "#fcee0a", "value": 80 },
-              { "color": "#ff3b5c", "value": 90 }
+              {
+                "color": "#00e5ff",
+                "value": null
+              },
+              {
+                "color": "#fcee0a",
+                "value": 80
+              },
+              {
+                "color": "#ff3b5c",
+                "value": 90
+              }
             ]
           }
         },
@@ -150,21 +229,35 @@
         "showUnfilled": true,
         "valueMode": "color",
         "namePlacement": "left",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
       }
     },
     {
       "id": 4,
       "type": "bargauge",
-      "title": "Host disk /",
-      "description": "node-exporter runs in a container, so / is its overlay filesystem - which reports the size and free space of the disk holding Docker's data.",
+      "title": "Fullest disk",
+      "description": "Fullest real filesystem (ext4/xfs/btrfs/zfs) node-exporter can see per host. Its own / is an overlay filesystem, which node-exporter skips by default.",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
-          "expr": "100 * (1 - max by (job) (node_filesystem_avail_bytes{job=~\"$host\", mountpoint=\"/\"}) / max by (job) (node_filesystem_size_bytes{job=~\"$host\", mountpoint=\"/\"}))",
+          "expr": "100 * max by (job) (1 - node_filesystem_avail_bytes{job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"} / node_filesystem_size_bytes{job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"})",
           "legendFormat": "{{job}}",
           "instant": true,
           "range": false
@@ -176,13 +269,24 @@
           "min": 0,
           "max": 100,
           "decimals": 0,
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "#00e5ff", "value": null },
-              { "color": "#fcee0a", "value": 80 },
-              { "color": "#ff3b5c", "value": 90 }
+              {
+                "color": "#00e5ff",
+                "value": null
+              },
+              {
+                "color": "#fcee0a",
+                "value": 80
+              },
+              {
+                "color": "#ff3b5c",
+                "value": 90
+              }
             ]
           }
         },
@@ -194,7 +298,13 @@
         "showUnfilled": true,
         "valueMode": "color",
         "namePlacement": "left",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
       }
     },
     {
@@ -202,8 +312,16 @@
       "type": "bargauge",
       "title": "Top CPU (100% = one core)",
       "transparent": true,
-      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 6 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -219,13 +337,24 @@
           "min": 0,
           "max": 100,
           "decimals": 1,
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "#00e5ff", "value": null },
-              { "color": "#fcee0a", "value": 50 },
-              { "color": "#ff3b5c", "value": 80 }
+              {
+                "color": "#00e5ff",
+                "value": null
+              },
+              {
+                "color": "#fcee0a",
+                "value": 50
+              },
+              {
+                "color": "#ff3b5c",
+                "value": 80
+              }
             ]
           }
         },
@@ -237,7 +366,13 @@
         "showUnfilled": true,
         "valueMode": "color",
         "namePlacement": "left",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
       }
     },
     {
@@ -245,8 +380,16 @@
       "type": "bargauge",
       "title": "Top memory",
       "transparent": true,
-      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 6 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -261,13 +404,24 @@
           "unit": "bytes",
           "min": 0,
           "decimals": 1,
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "#00e5ff", "value": null },
-              { "color": "#fcee0a", "value": 1073741824 },
-              { "color": "#ff3b5c", "value": 2147483648 }
+              {
+                "color": "#00e5ff",
+                "value": null
+              },
+              {
+                "color": "#fcee0a",
+                "value": 1073741824
+              },
+              {
+                "color": "#ff3b5c",
+                "value": 2147483648
+              }
             ]
           }
         },
@@ -279,7 +433,13 @@
         "showUnfilled": true,
         "valueMode": "color",
         "namePlacement": "left",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
       }
     },
     {
@@ -287,8 +447,16 @@
       "type": "timeseries",
       "title": "CPU by container",
       "transparent": true,
-      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 15 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -301,7 +469,9 @@
           "unit": "percent",
           "min": 0,
           "decimals": 1,
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
@@ -316,8 +486,16 @@
         "overrides": []
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       }
     },
     {
@@ -325,8 +503,16 @@
       "type": "timeseries",
       "title": "Memory by container",
       "transparent": true,
-      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 15 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -339,7 +525,9 @@
           "unit": "bytes",
           "min": 0,
           "decimals": 1,
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
@@ -354,8 +542,16 @@
         "overrides": []
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       }
     },
     {
@@ -364,8 +560,16 @@
       "title": "Network in (top 10)",
       "description": "Containers using host networking don't show here - cAdvisor only sees per-container network namespaces.",
       "transparent": true,
-      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 24 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 24
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -378,7 +582,9 @@
           "unit": "bps",
           "min": 0,
           "decimals": 0,
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
@@ -393,8 +599,16 @@
         "overrides": []
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       }
     },
     {
@@ -402,8 +616,16 @@
       "type": "timeseries",
       "title": "Network out (top 10)",
       "transparent": true,
-      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 24 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 24
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -416,7 +638,9 @@
           "unit": "bps",
           "min": 0,
           "decimals": 0,
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
@@ -431,8 +655,16 @@
         "overrides": []
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       }
     },
     {
@@ -441,8 +673,16 @@
       "title": "Recently started",
       "description": "Containers with the shortest uptime - a container that keeps showing up here is crash-looping.",
       "transparent": true,
-      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 24 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 24
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -456,32 +696,82 @@
         {
           "id": "organize",
           "options": {
-            "excludeByName": { "Time": true },
-            "indexByName": { "name": 0, "job": 1, "Value": 2 },
-            "renameByName": { "name": "Container", "job": "Host", "Value": "Up for" }
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {
+              "name": 0,
+              "job": 1,
+              "Value": 2
+            },
+            "renameByName": {
+              "name": "Container",
+              "job": "Host",
+              "Value": "Up for"
+            }
           }
         },
-        { "id": "sortBy", "options": { "sort": [{ "field": "Up for", "desc": false }] } }
+        {
+          "id": "sortBy",
+          "options": {
+            "sort": [
+              {
+                "field": "Up for",
+                "desc": false
+              }
+            ]
+          }
+        }
       ],
       "fieldConfig": {
         "defaults": {
-          "custom": { "align": "left", "cellOptions": { "type": "auto" } }
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "Up for" },
+            "matcher": {
+              "id": "byName",
+              "options": "Up for"
+            },
             "properties": [
-              { "id": "unit", "value": "dtdurations" },
-              { "id": "custom.cellOptions", "value": { "type": "color-text" } },
-              { "id": "color", "value": { "mode": "thresholds" } },
+              {
+                "id": "unit",
+                "value": "dtdurations"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
               {
                 "id": "thresholds",
                 "value": {
                   "mode": "absolute",
                   "steps": [
-                    { "color": "#ff3b5c", "value": null },
-                    { "color": "#fcee0a", "value": 3600 },
-                    { "color": "#00e5ff", "value": 86400 }
+                    {
+                      "color": "#ff3b5c",
+                      "value": null
+                    },
+                    {
+                      "color": "#fcee0a",
+                      "value": 3600
+                    },
+                    {
+                      "color": "#00e5ff",
+                      "value": 86400
+                    }
                   ]
                 }
               }
@@ -492,7 +782,13 @@
       "options": {
         "showHeader": true,
         "cellHeight": "sm",
-        "footer": { "show": false, "reducer": ["sum"], "fields": "" }
+        "footer": {
+          "show": false,
+          "reducer": [
+            "sum"
+          ],
+          "fields": ""
+        }
       }
     }
   ]

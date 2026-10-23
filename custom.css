@@ -411,6 +411,85 @@
   color: rgb(0 0 0 / .65);
 }
 
+/* SYS.MON overlay - the Grafana dashboard in an angled yellow HUD frame */
+html.cp-sysmon-open {
+  overflow: hidden;
+}
+#cp-sysmon-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: rgb(5 4 12 / .72);
+  backdrop-filter: blur(4px);
+}
+#cp-sysmon-overlay[hidden] {
+  display: none;
+}
+.cp-sysmon-frame,
+.cp-sysmon-inner {
+  --cut: 18px;
+  --chamfer: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  clip-path: var(--chamfer);
+}
+/* 1px frame: the outer box is the frame color, the inner box covers all but 1px */
+.cp-sysmon-frame {
+  width: min(96vw, 1800px);
+  height: 90vh;
+  padding: 1px;
+  background: color-mix(in oklab, var(--cp-yellow) 70%, transparent);
+  filter: drop-shadow(0 0 18px color-mix(in oklab, var(--cp-yellow) 25%, transparent));
+}
+.cp-sysmon-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--cp-bg);
+}
+.cp-sysmon-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .4rem 1.6rem .4rem 1rem;
+  font-family: var(--cp-font-ui);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cp-yellow);
+  border-bottom: 1px solid color-mix(in oklab, var(--cp-yellow) 30%, transparent);
+}
+.cp-sysmon-title {
+  flex: 1;
+}
+.cp-sysmon-title::before {
+  content: "▶ ";
+  font-size: .7em;
+}
+.cp-sysmon-tab {
+  font-size: .75rem;
+  color: var(--cp-text-dim);
+}
+.cp-sysmon-tab:hover {
+  color: var(--cp-yellow);
+}
+.cp-sysmon-close {
+  padding: 0 .5rem;
+  font-size: 1rem;
+  color: var(--cp-yellow);
+  border: 1px solid color-mix(in oklab, var(--cp-yellow) 45%, transparent);
+}
+.cp-sysmon-close:hover {
+  background: var(--cp-yellow);
+  color: #000;
+}
+.cp-sysmon-inner iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #111217;   /* Grafana's dark background, so loading doesn't flash */
+}
+
 #information-widgets input[type="text"] {
   font-family: var(--cp-font-mono);
   color: var(--cp-yellow);
