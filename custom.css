@@ -495,3 +495,11 @@ html {
   height: 800px;
   margin: -13px 0px 0px 0px;
 }
+
+/* Grafana panels in the node cards: `screen` drops Grafana's dark page
+   background so only the lines show over the HUD panel. */
+.service iframe[src*="/d-solo/"] {
+  width: 100%;
+  border: 0;
+  mix-blend-mode: screen;
+}

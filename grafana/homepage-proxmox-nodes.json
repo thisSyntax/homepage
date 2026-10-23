@@ -1,0 +1,141 @@
+{
+  "uid": "homepage-nodes",
+  "title": "Homepage - Proxmox nodes",
+  "description": "Panels embedded in the Homepage dashboard's node cards (iframe widget). Pick the node with the var-node URL parameter.",
+  "tags": ["homepage"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "editable": true,
+  "graphTooltip": 0,
+  "time": { "from": "now-6h", "to": "now" },
+  "refresh": "1m",
+  "templating": {
+    "list": [
+      {
+        "name": "datasource",
+        "label": "Datasource",
+        "type": "datasource",
+        "query": "prometheus",
+        "hide": 0,
+        "current": {}
+      },
+      {
+        "name": "node",
+        "label": "Node",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "${datasource}" },
+        "definition": "label_values(up{job=\"proxmox-nodes\"}, node)",
+        "query": { "query": "label_values(up{job=\"proxmox-nodes\"}, node)", "refId": "node" },
+        "refresh": 1,
+        "sort": 1,
+        "includeAll": false,
+        "multi": false,
+        "current": {}
+      },
+      {
+        "name": "nic",
+        "label": "Physical NICs (regex)",
+        "description": "Physical interfaces only: the vmbr bridges don't count traffic they forward to guests, and tap/veth/fw* would double count it.",
+        "type": "custom",
+        "query": "en.*|eth.*",
+        "hide": 2,
+        "current": { "text": "en.*|eth.*", "value": "en.*|eth.*" },
+        "options": [{ "text": "en.*|eth.*", "value": "en.*|eth.*", "selected": true }]
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "CPU",
+      "transparent": true,
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{job=\"proxmox-nodes\", node=\"$node\", mode=\"idle\"}[$__rate_interval])))",
+          "legendFormat": "CPU"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "decimals": 0,
+          "color": { "mode": "fixed", "fixedColor": "#00e5ff" },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 25,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "axisPlacement": "right",
+            "axisSoftMax": 20,
+            "axisBorderShow": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
+        "tooltip": { "mode": "single", "sort": "none" }
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Network",
+      "transparent": true,
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "8 * sum(rate(node_network_receive_bytes_total{job=\"proxmox-nodes\", node=\"$node\", device=~\"$nic\"}[$__rate_interval]))",
+          "legendFormat": "In"
+        },
+        {
+          "refId": "B",
+          "expr": "8 * sum(rate(node_network_transmit_bytes_total{job=\"proxmox-nodes\", node=\"$node\", device=~\"$nic\"}[$__rate_interval]))",
+          "legendFormat": "Out"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "decimals": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "axisPlacement": "right",
+            "axisBorderShow": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "In" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "#00e5ff" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Out" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "#fcee0a" } },
+              { "id": "custom.transform", "value": "negative-Y" }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "none" }
+      }
+    }
+  ]
+}
