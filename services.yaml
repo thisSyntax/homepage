@@ -270,7 +270,10 @@
             href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
             widget:
               type: qbittorrent
-              url: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+              # The seedbox's nginx asks for HTTP basic auth before qBittorrent's own
+              # login, so this URL carries user:pass@ - kept out of href, which the
+              # browser sees
+              url: "{{HOMEPAGE_VAR_QBITTORRENT_API_URL}}"
               username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
               password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
               fields: ["leech", "download", "seed", "upload"]
