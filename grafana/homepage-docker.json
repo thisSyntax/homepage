@@ -595,7 +595,7 @@
             "fillOpacity": 8,
             "gradientMode": "opacity",
             "showPoints": "never",
-            "axisPlacement": "right",
+            "axisPlacement": "left",
             "axisBorderShow": false
           },
           "links": [
@@ -663,7 +663,7 @@
             "fillOpacity": 8,
             "gradientMode": "opacity",
             "showPoints": "never",
-            "axisPlacement": "right",
+            "axisPlacement": "left",
             "axisBorderShow": false
           },
           "links": [
@@ -732,7 +732,7 @@
             "fillOpacity": 8,
             "gradientMode": "opacity",
             "showPoints": "never",
-            "axisPlacement": "right",
+            "axisPlacement": "left",
             "axisBorderShow": false
           },
           "links": [
@@ -800,7 +800,7 @@
             "fillOpacity": 8,
             "gradientMode": "opacity",
             "showPoints": "never",
-            "axisPlacement": "right",
+            "axisPlacement": "left",
             "axisBorderShow": false
           },
           "links": [
