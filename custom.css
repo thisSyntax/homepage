@@ -508,6 +508,12 @@ html {
 .service[data-name] .service-container:has(iframe[src*="/d-solo/"]) {
   padding-right: .5rem;
 }
+/* The iframe widget wraps the iframe in a shrink-to-fit element, so width: 100%
+   fell back to the browser's 300px iframe default - stretch the wrapper */
+.service[data-name] .service-container:has(iframe[src*="/d-solo/"]) > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
 /* Wide cards: title + stats on the first line, CPU and network graphs side by
    side below (the one-line row layout above would treat each graph as a stat) */
 @container card (min-width: 640px) {
