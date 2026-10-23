@@ -18,6 +18,19 @@ function renameLabels() {
     });
 }
 
+// Shorten plain stat values of a million or more (e.g. Pi-hole gravity
+// "2,190,527" -> "2.19M"); the full number stays available on hover
+const compactNumber = new Intl.NumberFormat("en-US", { notation: "compact", maximumSignificantDigits: 3 });
+
+function compactLargeNumbers() {
+    document.querySelectorAll(".service-block-value").forEach((el) => {
+        const text = el.textContent.trim();
+        if (!/^\d{1,3}(,\d{3}){2,}$/.test(text)) return;
+        el.title = text;
+        el.textContent = compactNumber.format(Number(text.replaceAll(",", "")));
+    });
+}
+
 // Turn a "Label|https://url" service description into a small link chip next to
 // the service name, so a card can link somewhere besides its own href.
 function addServiceLinks() {
@@ -129,6 +142,7 @@ const observer = new MutationObserver((mutations) => {
     // Run all functions
     renameLabels();
     addServiceLinks();
+    compactLargeNumbers();
     addSysmonButton();
 
 });
@@ -140,11 +154,13 @@ observer.observe(document.body, { childList: true, subtree: true });
 if (document.readyState !== "loading") {
     renameLabels();
     addServiceLinks();
+    compactLargeNumbers();
     addSysmonButton();
 } else {
     document.addEventListener("DOMContentLoaded", () => {
         renameLabels();
         addServiceLinks();
+        compactLargeNumbers();
         addSysmonButton();
     }, { once: true });
 }
