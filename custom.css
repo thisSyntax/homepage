@@ -373,6 +373,44 @@
   clip-path: var(--chamfer);
 }
 
+/* SYS.MON button (custom.js) - opens the Grafana Docker dashboard. It carries
+   .widget-container, so it gets the frame and angled corners above. */
+#information-widgets .cp-sysmon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  margin-left: .5rem;
+  padding: .3rem 1.2rem .3rem .85rem;
+  font-family: var(--cp-font-ui);
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--cp-yellow);
+  transition: background .15s, color .15s;
+}
+.cp-sysmon-label {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+.cp-sysmon-label::before {
+  content: "▶ ";
+  font-size: .7em;
+}
+.cp-sysmon-sub {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .25em;
+  color: var(--cp-text-dim);
+}
+#information-widgets .cp-sysmon:hover {
+  background: var(--cp-yellow);
+  color: #000;
+}
+#information-widgets .cp-sysmon:hover .cp-sysmon-sub {
+  color: rgb(0 0 0 / .65);
+}
+
 #information-widgets input[type="text"] {
   font-family: var(--cp-font-mono);
   color: var(--cp-yellow);

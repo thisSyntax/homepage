@@ -40,13 +40,39 @@ function addServiceLinks() {
     });
 }
 
+// "SYS.MON" button at the end of the top bar, opening the Grafana Docker
+// dashboard in kiosk mode. The Grafana address is taken from the node cards'
+// graph iframes, so it follows HOMEPAGE_VAR_GRAFANA_URL instead of living here.
+function addSysmonButton() {
+    const bar = document.getElementById("information-widgets-right");
+    const graph = document.querySelector('iframe[src*="/d-solo/"]');
+    if (!bar || !graph || document.getElementById("cp-sysmon")) return;
+
+    let grafana;
+    try {
+        grafana = new URL(graph.src).origin;
+    } catch {
+        return; // unset variable leaves a placeholder instead of a URL
+    }
+
+    const link = document.createElement("a");
+    link.id = "cp-sysmon";
+    link.className = "widget-container cp-sysmon";
+    link.href = `${grafana}/d/homepage-docker/homepage-docker?orgId=1&kiosk`;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.innerHTML = '<span class="cp-sysmon-label">SYS.MON</span><span class="cp-sysmon-sub">Docker</span>';
+    bar.append(link);
+}
+
 // Enhanced MutationObserver that handles all functions
 const observer = new MutationObserver((mutations) => {
     let shouldAddDockerButtons = false;
-    
+
     // Run all functions
     renameLabels();
     addServiceLinks();
+    addSysmonButton();
 
 });
 
@@ -57,9 +83,11 @@ observer.observe(document.body, { childList: true, subtree: true });
 if (document.readyState !== "loading") {
     renameLabels();
     addServiceLinks();
+    addSysmonButton();
 } else {
     document.addEventListener("DOMContentLoaded", () => {
         renameLabels();
         addServiceLinks();
+        addSysmonButton();
     }, { once: true });
 }
