@@ -64,7 +64,7 @@
   --cut: 14px;
   position: relative;
   isolation: isolate;
-  padding: .4rem .3rem;
+  padding: .55rem;   /* 2 x .55rem > the 14px corner cut, so rows stay clear of it */
   background: color-mix(in oklab, var(--section) 40%, transparent);
   clip-path: var(--chamfer);
   backdrop-filter: blur(12px);
@@ -120,15 +120,21 @@
   --diag: linear-gradient(to bottom left,
     transparent calc(50% - .75px), var(--rule) calc(50% - .75px),
     var(--rule) calc(50% + .75px), transparent calc(50% + .75px));
+  background: linear-gradient(90deg, color-mix(in oklab, var(--section) 24%, transparent), transparent 30%);
+  box-shadow:
+    inset 3px 0 0 var(--section),
+    inset 0 1px 0 var(--rule),
+    inset 0 -1px 0 var(--rule);
+}
+/* Not on rows with Grafana graphs: clip-path isolates the row, so the graphs'
+   screen blend no longer reaches the panel behind and they turn black. Those
+   rows stay rectangular - the panel padding keeps them clear of its corners. */
+.service-card:not(:has(iframe)):hover {
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
   background:
     var(--diag) top right / var(--cut) var(--cut) no-repeat border-box,
     var(--diag) bottom left / var(--cut) var(--cut) no-repeat border-box,
     linear-gradient(90deg, color-mix(in oklab, var(--section) 24%, transparent), transparent 30%);
-  box-shadow:
-    inset 3px 0 0 var(--section),
-    inset 0 1px 0 var(--rule),
-    inset 0 -1px 0 var(--rule);
 }
 
 .service-name {

@@ -212,21 +212,26 @@ function sfxNoise({ ms, freq, q, gain, at = 0 }) {
 
 // Hover: a crisp static tick with a tiny crushed down-chirp
 function sfxHover() {
-    sfxNoise({ ms: 14, freq: 7000, q: 5, gain: 0.06 });
-    sfxTone({ from: 2600, to: 1700, ms: 28, gain: 0.012, crush: true });
+    sfxNoise({ ms: 18, freq: 6000, q: 2, gain: 0.18 });
+    sfxTone({ from: 2600, to: 1700, ms: 35, gain: 0.03, crush: true });
 }
 
-// Click: a low synthetic thump, a static burst and a quick three-step data chatter
+// Click: a synthetic thump (pitched high enough for laptop speakers), a static
+// burst and a quick three-step data chatter
 function sfxClick() {
-    sfxTone({ type: "sine", from: 170, to: 50, ms: 150, gain: 0.12 });
-    sfxNoise({ ms: 50, freq: 2400, q: 2.5, gain: 0.07 });
+    sfxTone({ type: "triangle", from: 320, to: 90, ms: 140, gain: 0.25 });
+    sfxNoise({ ms: 55, freq: 2400, q: 1.5, gain: 0.18 });
     [0.025, 0.05, 0.075].forEach((at, i) =>
-        sfxTone({ from: 1700 + i * 450, to: 1200 + i * 350, ms: 18, gain: 0.012, at, crush: true }));
+        sfxTone({ from: 1700 + i * 450, to: 1200 + i * 350, ms: 22, gain: 0.03, at, crush: true }));
 }
 
 if (window.matchMedia("(hover: hover)").matches) {
-    document.addEventListener("pointerdown", sfxUnlock, true);
-    document.addEventListener("keydown", sfxUnlock, true);
+    // Retry the unlock on every kind of interaction until audio is running: some
+    // browsers only count the page as clicked once the click completes, so an
+    // unlock on pointerdown alone could stay suspended until something else ran
+    for (const type of ["pointerdown", "pointerup", "click", "keydown", "keyup"]) {
+        document.addEventListener(type, sfxUnlock, true);
+    }
     document.addEventListener("pointerover", (e) => {
         const el = e.target.closest?.(SFX_TARGETS);
         if (!el || el === sfx.hovered) return;   // moving within the same card
