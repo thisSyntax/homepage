@@ -27,6 +27,7 @@
    where it's declared - on :root it would always use :root's --cut. */
 .services-list,
 #information-widgets .widget-container,
+#information-widgets .information-widget-search,
 .bookmark > a {
   --chamfer: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
 }
@@ -442,8 +443,10 @@
 }
 
 
-/* Top bar - angled boxes with a yellow frame, search as a terminal prompt */
-#information-widgets .widget-container {
+/* Top bar - angled boxes with a yellow frame, search as a terminal prompt.
+   The search box is a form without the widget-container class, so it's named too. */
+#information-widgets .widget-container,
+#information-widgets .information-widget-search {
   --cut: 8px;
   --frame: color-mix(in oklab, var(--cp-yellow) 30%, transparent);
   position: relative;
@@ -454,7 +457,8 @@
 }
 /* The clip-path cuts the border off at the two angled corners - draw the
    diagonals back in, so the frame is unbroken */
-#information-widgets .widget-container::after {
+#information-widgets .widget-container::after,
+#information-widgets .information-widget-search::after {
   content: "";
   position: absolute;
   inset: -1px;   /* the border box, which the chamfer is measured against */
