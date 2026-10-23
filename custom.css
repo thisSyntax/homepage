@@ -111,12 +111,24 @@
 
 /* Hovered row reads as "selected": a short fade from the left plus thin top and
    bottom rules. (A long faint wash turned yellow into olive over the dark panels.) */
+/* It gets its own smaller angled corners (8px vs the panel's 14px), so the
+   rules don't run into the panel's cut corners, with the two diagonals drawn
+   in so the bracket is unbroken. */
 .service-card:hover {
-  background: linear-gradient(90deg, color-mix(in oklab, var(--section) 24%, transparent), transparent 30%);
+  --cut: 8px;
+  --rule: color-mix(in oklab, var(--section) 45%, transparent);
+  --diag: linear-gradient(to bottom left,
+    transparent calc(50% - .75px), var(--rule) calc(50% - .75px),
+    var(--rule) calc(50% + .75px), transparent calc(50% + .75px));
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  background:
+    var(--diag) top right / var(--cut) var(--cut) no-repeat border-box,
+    var(--diag) bottom left / var(--cut) var(--cut) no-repeat border-box,
+    linear-gradient(90deg, color-mix(in oklab, var(--section) 24%, transparent), transparent 30%);
   box-shadow:
     inset 3px 0 0 var(--section),
-    inset 0 1px 0 color-mix(in oklab, var(--section) 45%, transparent),
-    inset 0 -1px 0 color-mix(in oklab, var(--section) 45%, transparent);
+    inset 0 1px 0 var(--rule),
+    inset 0 -1px 0 var(--rule);
 }
 
 .service-name {
