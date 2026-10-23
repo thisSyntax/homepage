@@ -109,9 +109,14 @@
   border-bottom: 0;
 }
 
+/* Hovered row reads as "selected": a short fade from the left plus thin top and
+   bottom rules. (A long faint wash turned yellow into olive over the dark panels.) */
 .service-card:hover {
-  background: linear-gradient(90deg, color-mix(in oklab, var(--section) 16%, transparent), transparent 70%);
-  box-shadow: inset 3px 0 0 var(--section);
+  background: linear-gradient(90deg, color-mix(in oklab, var(--section) 24%, transparent), transparent 30%);
+  box-shadow:
+    inset 3px 0 0 var(--section),
+    inset 0 1px 0 color-mix(in oklab, var(--section) 45%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, var(--section) 45%, transparent);
 }
 
 .service-name {

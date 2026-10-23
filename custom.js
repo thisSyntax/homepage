@@ -156,23 +156,73 @@ function sfxUnlock() {
     if (sfx.ctx.state === "suspended") sfx.ctx.resume();
 }
 
-function sfxTone({ type = "square", from, to, ms, gain }) {
-    if (!sfx.on || !sfx.ctx || sfx.ctx.state !== "running") return;
-    const ctx = sfx.ctx, start = ctx.currentTime, end = start + ms / 1000;
+const sfxReady = () => sfx.on && sfx.ctx && sfx.ctx.state === "running";
+
+// Bit-crusher: quantise the waveform to a few levels for a lo-fi digital grit.
+// It runs before the volume stage, while the signal still spans -1..1.
+function sfxCrusher(ctx) {
+    if (!sfx.crushCurve) {
+        sfx.crushCurve = new Float32Array(1024);
+        for (let i = 0; i < 1024; i++) sfx.crushCurve[i] = Math.round((i / 511.5 - 1) * 6) / 6;
+    }
+    const shaper = ctx.createWaveShaper();
+    shaper.curve = sfx.crushCurve;
+    return shaper;
+}
+
+// Pitch-swept oscillator blip; `at` delays it (seconds) for little sequences
+function sfxTone({ type = "square", from, to, ms, gain, at = 0, crush = false }) {
+    if (!sfxReady()) return;
+    const ctx = sfx.ctx, start = ctx.currentTime + at, end = start + ms / 1000;
     const osc = ctx.createOscillator(), filter = ctx.createBiquadFilter(), amp = ctx.createGain();
     osc.type = type;
     osc.frequency.setValueAtTime(from, start);
     osc.frequency.exponentialRampToValueAtTime(to, end);
     filter.type = "lowpass";
-    filter.frequency.value = 3200;    // take the harsh edge off the square wave
+    filter.frequency.value = 4500;
     amp.gain.setValueAtTime(gain, start);
     amp.gain.exponentialRampToValueAtTime(0.0001, end);
-    osc.connect(filter).connect(amp).connect(ctx.destination);
+    let chain = osc.connect(filter);
+    if (crush) chain = chain.connect(sfxCrusher(ctx));
+    chain.connect(amp).connect(ctx.destination);
     osc.start(start);
     osc.stop(end);
 }
-const sfxHover = () => sfxTone({ from: 1400, to: 2200, ms: 45, gain: 0.02 });
-const sfxClick = () => sfxTone({ type: "sawtooth", from: 900, to: 300, ms: 90, gain: 0.03 });
+
+// Band-passed white-noise burst - the "tick" / static texture
+function sfxNoise({ ms, freq, q, gain, at = 0 }) {
+    if (!sfxReady()) return;
+    const ctx = sfx.ctx, start = ctx.currentTime + at, end = start + ms / 1000;
+    if (!sfx.noise) {
+        sfx.noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);   // 1s, reused
+        const data = sfx.noise.getChannelData(0);
+        for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    }
+    const src = ctx.createBufferSource(), band = ctx.createBiquadFilter(), amp = ctx.createGain();
+    src.buffer = sfx.noise;
+    band.type = "bandpass";
+    band.frequency.value = freq;
+    band.Q.value = q;
+    amp.gain.setValueAtTime(gain, start);
+    amp.gain.exponentialRampToValueAtTime(0.0001, end);
+    src.connect(band).connect(amp).connect(ctx.destination);
+    src.start(start, Math.random() * 0.9);
+    src.stop(end);
+}
+
+// Hover: a crisp static tick with a tiny crushed down-chirp
+function sfxHover() {
+    sfxNoise({ ms: 14, freq: 7000, q: 5, gain: 0.06 });
+    sfxTone({ from: 2600, to: 1700, ms: 28, gain: 0.012, crush: true });
+}
+
+// Click: a low synthetic thump, a static burst and a quick three-step data chatter
+function sfxClick() {
+    sfxTone({ type: "sine", from: 170, to: 50, ms: 150, gain: 0.12 });
+    sfxNoise({ ms: 50, freq: 2400, q: 2.5, gain: 0.07 });
+    [0.025, 0.05, 0.075].forEach((at, i) =>
+        sfxTone({ from: 1700 + i * 450, to: 1200 + i * 350, ms: 18, gain: 0.012, at, crush: true }));
+}
 
 if (window.matchMedia("(hover: hover)").matches) {
     document.addEventListener("pointerdown", sfxUnlock, true);
