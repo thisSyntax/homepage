@@ -28,18 +28,8 @@
       {
         "name": "host",
         "label": "Host",
-        "type": "query",
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(container_memory_working_set_bytes, job)",
-        "query": {
-          "query": "label_values(container_memory_working_set_bytes, job)",
-          "refId": "host"
-        },
-        "refresh": 1,
-        "sort": 1,
+        "type": "custom",
+        "query": "komodo,docker-essentials,docker-media,docker-others",
         "includeAll": true,
         "multi": true,
         "current": {
@@ -49,7 +39,30 @@
           "value": [
             "$__all"
           ]
-        }
+        },
+        "description": "Fixed list so the dropdown and host bars share one order. Adding a Docker host means adding it here and to the Host CPU / memory / disk queries.",
+        "options": [
+          {
+            "text": "komodo",
+            "value": "komodo",
+            "selected": false
+          },
+          {
+            "text": "docker-essentials",
+            "value": "docker-essentials",
+            "selected": false
+          },
+          {
+            "text": "docker-media",
+            "value": "docker-media",
+            "selected": false
+          },
+          {
+            "text": "docker-others",
+            "value": "docker-others",
+            "selected": false
+          }
+        ]
       }
     ]
   },
@@ -120,7 +133,28 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "100 * (1 - avg by (job) (rate(node_cpu_seconds_total{job=~\"$host\", mode=\"idle\"}[$__rate_interval])))",
+          "expr": "100 * (1 - avg by (job) (rate(node_cpu_seconds_total{job=\"komodo\", job=~\"$host\", mode=\"idle\"}[$__rate_interval])))",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "B",
+          "expr": "100 * (1 - avg by (job) (rate(node_cpu_seconds_total{job=\"docker-essentials\", job=~\"$host\", mode=\"idle\"}[$__rate_interval])))",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "C",
+          "expr": "100 * (1 - avg by (job) (rate(node_cpu_seconds_total{job=\"docker-media\", job=~\"$host\", mode=\"idle\"}[$__rate_interval])))",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "D",
+          "expr": "100 * (1 - avg by (job) (rate(node_cpu_seconds_total{job=\"docker-others\", job=~\"$host\", mode=\"idle\"}[$__rate_interval])))",
           "legendFormat": "{{job}}",
           "instant": true,
           "range": false
@@ -188,7 +222,28 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "100 * (1 - sum by (job) (node_memory_MemAvailable_bytes{job=~\"$host\"}) / sum by (job) (node_memory_MemTotal_bytes{job=~\"$host\"}))",
+          "expr": "100 * (1 - sum by (job) (node_memory_MemAvailable_bytes{job=\"komodo\", job=~\"$host\"}) / sum by (job) (node_memory_MemTotal_bytes{job=\"komodo\", job=~\"$host\"}))",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "B",
+          "expr": "100 * (1 - sum by (job) (node_memory_MemAvailable_bytes{job=\"docker-essentials\", job=~\"$host\"}) / sum by (job) (node_memory_MemTotal_bytes{job=\"docker-essentials\", job=~\"$host\"}))",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "C",
+          "expr": "100 * (1 - sum by (job) (node_memory_MemAvailable_bytes{job=\"docker-media\", job=~\"$host\"}) / sum by (job) (node_memory_MemTotal_bytes{job=\"docker-media\", job=~\"$host\"}))",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "D",
+          "expr": "100 * (1 - sum by (job) (node_memory_MemAvailable_bytes{job=\"docker-others\", job=~\"$host\"}) / sum by (job) (node_memory_MemTotal_bytes{job=\"docker-others\", job=~\"$host\"}))",
           "legendFormat": "{{job}}",
           "instant": true,
           "range": false
@@ -257,7 +312,28 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "100 * max by (job) (1 - node_filesystem_avail_bytes{job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"} / node_filesystem_size_bytes{job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"})",
+          "expr": "100 * max by (job) (1 - node_filesystem_avail_bytes{job=\"komodo\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"} / node_filesystem_size_bytes{job=\"komodo\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"})",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "B",
+          "expr": "100 * max by (job) (1 - node_filesystem_avail_bytes{job=\"docker-essentials\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"} / node_filesystem_size_bytes{job=\"docker-essentials\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"})",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "C",
+          "expr": "100 * max by (job) (1 - node_filesystem_avail_bytes{job=\"docker-media\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"} / node_filesystem_size_bytes{job=\"docker-media\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"})",
+          "legendFormat": "{{job}}",
+          "instant": true,
+          "range": false
+        },
+        {
+          "refId": "D",
+          "expr": "100 * max by (job) (1 - node_filesystem_avail_bytes{job=\"docker-others\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"} / node_filesystem_size_bytes{job=\"docker-others\", job=~\"$host\", fstype=~\"ext4|xfs|btrfs|zfs\"})",
           "legendFormat": "{{job}}",
           "instant": true,
           "range": false
