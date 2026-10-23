@@ -152,8 +152,45 @@ function sfxUnlock() {
         const Ctx = window.AudioContext || window.webkitAudioContext;
         if (!Ctx) return;
         sfx.ctx = new Ctx();
+        sfxLoadSamples();
     }
     if (sfx.ctx.state === "suspended") sfx.ctx.resume();
+}
+
+// Optional sound files: /images/sfx-hover.<ext> and /images/sfx-click.<ext>
+// (wav, ogg or mp3, in the folder that holds the wallpaper). When one exists it
+// plays instead of the synthesised sound; when it doesn't, the synth is used.
+const SFX_FILES = { hover: "/images/sfx-hover", click: "/images/sfx-click" };
+const SFX_FORMATS = ["wav", "ogg", "mp3"];
+const SFX_FILE_VOLUME = 0.6;
+
+async function sfxLoadSamples() {
+    sfx.samples = {};
+    for (const [name, base] of Object.entries(SFX_FILES)) {
+        for (const ext of SFX_FORMATS) {
+            try {
+                const res = await fetch(`${base}.${ext}`);
+                if (!res.ok) continue;
+                sfx.samples[name] = await sfx.ctx.decodeAudioData(await res.arrayBuffer());
+                break;
+            } catch {
+                // missing or undecodable - try the next format
+            }
+        }
+    }
+}
+
+// Plays a loaded file; false when there isn't one, so the caller synthesises
+function sfxSample(name) {
+    const buffer = sfx.samples?.[name];
+    if (!buffer) return false;
+    if (!sfxReady()) return true;   // muted or locked: stay silent, don't fall back
+    const src = sfx.ctx.createBufferSource(), amp = sfx.ctx.createGain();
+    src.buffer = buffer;
+    amp.gain.value = SFX_FILE_VOLUME;
+    src.connect(amp).connect(sfx.ctx.destination);
+    src.start();
+    return true;
 }
 
 const sfxReady = () => sfx.on && sfx.ctx && sfx.ctx.state === "running";
@@ -212,6 +249,7 @@ function sfxNoise({ ms, freq, q, gain, at = 0 }) {
 
 // Hover: a crisp static tick with a tiny crushed down-chirp
 function sfxHover() {
+    if (sfxSample("hover")) return;
     sfxNoise({ ms: 18, freq: 6000, q: 2, gain: 0.18 });
     sfxTone({ from: 2600, to: 1700, ms: 35, gain: 0.03, crush: true });
 }
@@ -219,6 +257,7 @@ function sfxHover() {
 // Click: a synthetic thump (pitched high enough for laptop speakers), a static
 // burst and a quick three-step data chatter
 function sfxClick() {
+    if (sfxSample("click")) return;
     sfxTone({ type: "triangle", from: 320, to: 90, ms: 140, gain: 0.25 });
     sfxNoise({ ms: 55, freq: 2400, q: 1.5, gain: 0.18 });
     [0.025, 0.05, 0.075].forEach((at, i) =>
