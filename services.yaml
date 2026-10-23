@@ -48,14 +48,25 @@
             src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
+    # Graphs: panels 3 (network) and 4 (volume I/O), from SNMP via snmp_exporter
     - Synology:
         icon: synology-dsm
         href: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
-        widget:
-          type: diskstation
-          url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
-          username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
-          password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+        widgets:
+          - type: diskstation
+            url: {{HOMEPAGE_VAR_SYNOLOGY_IP_URL}}
+            username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
+            password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+          - type: iframe
+            name: nas-net
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&panelId=3&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            classes: h-32
+            allowScrolling: no
+          - type: iframe
+            name: nas-io
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&panelId=4&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            classes: h-32
+            allowScrolling: no
 
 - Services:
     - Apps:

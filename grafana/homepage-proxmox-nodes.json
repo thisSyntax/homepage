@@ -136,6 +136,114 @@
         "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
         "tooltip": { "mode": "multi", "sort": "none" }
       }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Network",
+      "description": "Synology over SNMP (job synology, scraped every 1m - hence the fixed 5m rate window). eth* only: lo and sit0 aren't real traffic.",
+      "transparent": true,
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 6 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "8 * sum(rate(ifHCInOctets{job=\"synology\", ifName=~\"eth.*\"}[5m]))",
+          "legendFormat": "In"
+        },
+        {
+          "refId": "B",
+          "expr": "8 * sum(rate(ifHCOutOctets{job=\"synology\", ifName=~\"eth.*\"}[5m]))",
+          "legendFormat": "Out"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "decimals": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "axisPlacement": "right",
+            "axisBorderShow": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "In" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "#00e5ff" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Out" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "#fcee0a" } },
+              { "id": "custom.transform", "value": "negative-Y" }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "none" }
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Volume I/O",
+      "description": "Synology volume read/write throughput (spaceIO*X are 64-bit byte counters).",
+      "transparent": true,
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 6 },
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(spaceIONReadX{job=\"synology\"}[5m]))",
+          "legendFormat": "Read"
+        },
+        {
+          "refId": "B",
+          "expr": "sum(rate(spaceIONWrittenX{job=\"synology\"}[5m]))",
+          "legendFormat": "Write"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps",
+          "decimals": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "showPoints": "never",
+            "axisPlacement": "right",
+            "axisBorderShow": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Read" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "#00e5ff" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Write" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "#fcee0a" } },
+              { "id": "custom.transform", "value": "negative-Y" }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "none" }
+      }
     }
   ]
 }
