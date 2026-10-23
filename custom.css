@@ -105,6 +105,13 @@
   margin-bottom: 0;
   transition: background .15s, box-shadow .15s;
 }
+/* useEqualHeights sizes cards to calc(100% - .5rem) to leave room for the
+   margin removed above. In grid sections (style: row) that left an extra .5rem
+   under every row, so the hover bracket sat further from the panel's bottom
+   corner than in the Services columns. Fill the row instead. */
+.service-card[class*="h-[calc"] {
+  height: 100%;
+}
 .service:last-child > .service-card {
   border-bottom: 0;
 }
