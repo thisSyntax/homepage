@@ -21,12 +21,12 @@
             node: F-SI-HV01
           - type: iframe
             name: hv01-cpu
-            src: {{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV01&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV01&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: hv01-net
-            src: {{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV01&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV01&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
     - F-SI-HV02:
@@ -40,12 +40,12 @@
             node: F-SI-HV02
           - type: iframe
             name: hv02-cpu
-            src: {{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: hv02-net
-            src: {{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo
+            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-proxmox-nodes?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
     - Synology:
