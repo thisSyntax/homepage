@@ -399,6 +399,28 @@
 }
 
 
+/* Grafana card with no firing alerts (custom.js swaps in the text) - a quiet
+   all-clear readout instead of the widget's grey "No items found" box */
+.cp-all-clear {
+  background: none;
+  padding: 0 .5rem 0 2.75rem;
+  margin: 0;
+}
+.cp-all-clear > div {
+  padding: 0;
+  font-family: var(--cp-font-ui);
+  font-weight: 600;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--section) 70%, white);
+}
+.cp-all-clear > div::before {
+  content: "◆ ";
+  color: #10b981;   /* same green as the status dots */
+  text-shadow: 0 0 6px #10b981;
+}
+
 /* Status markers (statusStyle: dot) - glowing diamonds, for Docker containers
    and siteMonitor HTTP checks alike. The dot's color is a background class, so
    the glow is a blurred copy of it. */

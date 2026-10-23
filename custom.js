@@ -31,6 +31,16 @@ function compactLargeNumbers() {
     });
 }
 
+// Grafana card's empty alert list (customapi's "No items found") becomes an
+// all-clear status line; styled as .cp-all-clear in custom.css
+function restyleEmptyAlerts() {
+    document.querySelectorAll('.service[data-name="Grafana"] .font-thin').forEach((el) => {
+        if (el.textContent.trim() !== "No items found") return;
+        el.textContent = "No active alerts";
+        el.parentElement.classList.add("cp-all-clear");
+    });
+}
+
 // Turn a "Label|https://url" service description into a small link chip next to
 // the service name, so a card can link somewhere besides its own href.
 function addServiceLinks() {
@@ -323,6 +333,7 @@ const observer = new MutationObserver((mutations) => {
     renameLabels();
     addServiceLinks();
     compactLargeNumbers();
+    restyleEmptyAlerts();
     addSysmonButton();
     addSfxToggle();
 
@@ -336,6 +347,7 @@ if (document.readyState !== "loading") {
     renameLabels();
     addServiceLinks();
     compactLargeNumbers();
+    restyleEmptyAlerts();
     addSysmonButton();
     addSfxToggle();
 } else {
@@ -343,6 +355,7 @@ if (document.readyState !== "loading") {
         renameLabels();
         addServiceLinks();
         compactLargeNumbers();
+        restyleEmptyAlerts();
         addSysmonButton();
         addSfxToggle();
     }, { once: true });
