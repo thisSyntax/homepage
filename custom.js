@@ -135,6 +135,92 @@ function closeSysmon() {
     document.documentElement.classList.remove("cp-sysmon-open");
 }
 
+// Cyberpunk UI sounds, synthesised with Web Audio (no audio files): a short
+// rising blip on hover, a falling chirp on click. Browsers only allow audio
+// after the first click or key press on the page, so hovers are silent until
+// then. Mouse/trackpad only - phones have no hover. Muted with the SFX button.
+const SFX_TARGETS = ".service-card, .bookmark > a, .cp-sysmon, .cp-sublink, .cp-sysmon-close";
+const sfx = {
+    ctx: null,
+    on: (() => { try { return localStorage.getItem("cp-sfx") !== "off"; } catch { return true; } })(),
+    hovered: null,
+    lastAt: 0,
+};
+
+function sfxUnlock() {
+    if (!sfx.ctx) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;
+        sfx.ctx = new Ctx();
+    }
+    if (sfx.ctx.state === "suspended") sfx.ctx.resume();
+}
+
+function sfxTone({ type = "square", from, to, ms, gain }) {
+    if (!sfx.on || !sfx.ctx || sfx.ctx.state !== "running") return;
+    const ctx = sfx.ctx, start = ctx.currentTime, end = start + ms / 1000;
+    const osc = ctx.createOscillator(), filter = ctx.createBiquadFilter(), amp = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(from, start);
+    osc.frequency.exponentialRampToValueAtTime(to, end);
+    filter.type = "lowpass";
+    filter.frequency.value = 3200;    // take the harsh edge off the square wave
+    amp.gain.setValueAtTime(gain, start);
+    amp.gain.exponentialRampToValueAtTime(0.0001, end);
+    osc.connect(filter).connect(amp).connect(ctx.destination);
+    osc.start(start);
+    osc.stop(end);
+}
+const sfxHover = () => sfxTone({ from: 1400, to: 2200, ms: 45, gain: 0.02 });
+const sfxClick = () => sfxTone({ type: "sawtooth", from: 900, to: 300, ms: 90, gain: 0.03 });
+
+if (window.matchMedia("(hover: hover)").matches) {
+    document.addEventListener("pointerdown", sfxUnlock, true);
+    document.addEventListener("keydown", sfxUnlock, true);
+    document.addEventListener("pointerover", (e) => {
+        const el = e.target.closest?.(SFX_TARGETS);
+        if (!el || el === sfx.hovered) return;   // moving within the same card
+        sfx.hovered = el;
+        const now = performance.now();
+        if (now - sfx.lastAt < 60) return;       // no machine-gun when sweeping across rows
+        sfx.lastAt = now;
+        sfxHover();
+    });
+    document.addEventListener("pointerout", (e) => {
+        if (sfx.hovered && !sfx.hovered.contains(e.relatedTarget)) sfx.hovered = null;
+    });
+    document.addEventListener("click", (e) => {
+        if (e.target.closest?.(SFX_TARGETS)) sfxClick();
+    }, true);
+}
+
+// SFX on/off button after SYS.MON, remembered per browser
+function addSfxToggle() {
+    const bar = document.getElementById("information-widgets-right");
+    if (!bar || !document.getElementById("cp-sysmon") || document.getElementById("cp-sfx")) return;
+    if (!window.matchMedia("(hover: hover)").matches) return;
+
+    const sibling = bar.querySelector(".widget-container:not(.cp-sysmon)");
+    const button = document.createElement("button");
+    button.id = "cp-sfx";
+    button.type = "button";
+    button.className = `${sibling ? sibling.className : "widget-container"} cp-sfx`;
+
+    const render = () => {
+        button.textContent = sfx.on ? "SFX" : "MUTE";
+        button.setAttribute("aria-pressed", String(sfx.on));
+        button.title = sfx.on ? "UI sounds on - click to mute" : "UI sounds off - click to turn on";
+    };
+    button.addEventListener("click", () => {
+        sfx.on = !sfx.on;
+        try { localStorage.setItem("cp-sfx", sfx.on ? "on" : "off"); } catch { /* private mode */ }
+        render();
+        if (sfx.on) sfxClick();
+    });
+    render();
+    bar.append(button);
+}
+
 // Enhanced MutationObserver that handles all functions
 const observer = new MutationObserver((mutations) => {
     let shouldAddDockerButtons = false;
@@ -144,6 +230,7 @@ const observer = new MutationObserver((mutations) => {
     addServiceLinks();
     compactLargeNumbers();
     addSysmonButton();
+    addSfxToggle();
 
 });
 
@@ -156,11 +243,13 @@ if (document.readyState !== "loading") {
     addServiceLinks();
     compactLargeNumbers();
     addSysmonButton();
+    addSfxToggle();
 } else {
     document.addEventListener("DOMContentLoaded", () => {
         renameLabels();
         addServiceLinks();
         compactLargeNumbers();
         addSysmonButton();
+        addSfxToggle();
     }, { once: true });
 }

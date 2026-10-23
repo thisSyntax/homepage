@@ -424,6 +424,29 @@
   color: rgb(0 0 0 / .65);
 }
 
+/* SFX toggle (custom.js) - mutes the hover/click sounds; muted shows struck through */
+#information-widgets .cp-sfx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.5rem;
+  font-family: var(--cp-font-ui);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  color: var(--cp-cyan);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+#information-widgets .cp-sfx[aria-pressed="false"] {
+  color: var(--cp-text-dim);
+  text-decoration: line-through;
+}
+#information-widgets .cp-sfx:hover {
+  background: var(--cp-cyan);
+  color: #000;
+}
+
 /* SYS.MON overlay - the Grafana dashboard in an angled yellow HUD frame */
 html.cp-sysmon-open {
   overflow: hidden;
@@ -632,6 +655,10 @@ html {
 .service iframe[src*="/d-solo/"] {
   width: 100%;
   border: 0;
+  /* Display-only: no Grafana menu, crosshair or tooltip, and clicks fall
+     through to the card's link. (The widget's allowScrolling: no is meant to
+     do this, but Homepage nests its style object one level too deep.) */
+  pointer-events: none;
   filter: contrast(1.4);
   mix-blend-mode: screen;
 }
