@@ -275,28 +275,24 @@
             # itself trusts the seedbox and needs no second login.
             widget:
               type: customapi
-              url: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}/api/v2/transfer/info"
+              # sync/maindata = speeds (server_state) + the full torrent list in one call;
+              # format: size counts the torrents
+              url: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}/api/v2/sync/maindata"
               username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
               password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
-              refreshInterval: 10000
+              refreshInterval: 15000
               mappings:
-                - field: dl_info_speed
+                - field: torrents
+                  label: Torrents
+                  format: size
+                - field: server_state.dl_info_speed
                   label: Download
                   format: bytes
                   suffix: /s
-                - field: up_info_speed
+                - field: server_state.up_info_speed
                   label: Upload
                   format: bytes
                   suffix: /s
-                - field: connection_status
-                  label: Status
-                  remap:
-                    - value: connected
-                      to: Online
-                    - value: firewalled
-                      to: Firewalled
-                    - value: disconnected
-                      to: Offline
 
     - Calendar:
         - Calendar:
