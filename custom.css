@@ -200,13 +200,23 @@
 /* Widget stats as one inline line under the name: "121,267 QUERIES · 24,158 BLOCKED"
    Monospace digits so values don't jitter on refresh. */
 .service-container {
+  --sep: 1.4rem;                /* space between stats; the "·" sits centred in it */
+  --pl: 3rem;                   /* lines stats up under the name, past the icon */
   flex-wrap: wrap;
   align-items: baseline;
-  gap: .15rem .9rem;
-  padding: 0 .5rem .5rem 3rem;  /* 3rem lines stats up under the name, past the icon */
+  gap: .15rem var(--sep);
+  padding: 0 .5rem .5rem var(--pl);
+}
+/* Each separator hangs in the gap to the left of its stat. A stat that wraps to
+   the start of a line pushes its "·" past the content edge, where this clip
+   hides it - so no line begins with a dot. Not on graph rows: clip-path would
+   stop the Grafana iframes blending into the panel. */
+.service-container:not(:has(iframe)) {
+  clip-path: inset(-1rem -1rem -1rem var(--pl));
 }
 
 .service-block {
+  position: relative;
   flex: none;
   flex-direction: row;
   align-items: baseline;
@@ -225,7 +235,10 @@
 
 .service-block + .service-block::before {
   content: "·";
-  margin-right: .5rem;
+  position: absolute;
+  right: 100%;
+  width: var(--sep);
+  text-align: center;
   color: var(--cp-text-dim);
 }
 
@@ -270,6 +283,7 @@
     margin-right: .75rem;
   }
   .service:not([data-name="Calendar"]):not([data-name="Agenda"]) .service-container {
+    --pl: 0;
     flex: 0 0 auto;
     width: auto;
     padding: 0 2.75rem 0 0;  /* room for the status marker */
