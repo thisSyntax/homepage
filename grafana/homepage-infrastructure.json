@@ -2,12 +2,17 @@
   "uid": "homepage-nodes",
   "title": "Homepage - Infrastructure",
   "description": "Panels embedded in the Homepage Infrastructure cards (iframe widget): 1-2 Proxmox node CPU/network (pick the node with var-node), 3-4 Synology network/volume I/O.",
-  "tags": ["homepage"],
+  "tags": [
+    "homepage"
+  ],
   "timezone": "browser",
   "schemaVersion": 39,
   "editable": true,
   "graphTooltip": 0,
-  "time": { "from": "now-6h", "to": "now" },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
   "refresh": "1m",
   "templating": {
     "list": [
@@ -23,9 +28,15 @@
         "name": "node",
         "label": "Node",
         "type": "query",
-        "datasource": { "type": "prometheus", "uid": "${datasource}" },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
         "definition": "label_values(up{job=\"proxmox-nodes\"}, node)",
-        "query": { "query": "label_values(up{job=\"proxmox-nodes\"}, node)", "refId": "node" },
+        "query": {
+          "query": "label_values(up{job=\"proxmox-nodes\"}, node)",
+          "refId": "node"
+        },
         "refresh": 1,
         "sort": 1,
         "includeAll": false,
@@ -39,19 +50,49 @@
         "type": "custom",
         "query": "en.*|eth.*",
         "hide": 2,
-        "current": { "text": "en.*|eth.*", "value": "en.*|eth.*" },
-        "options": [{ "text": "en.*|eth.*", "value": "en.*|eth.*", "selected": true }]
+        "current": {
+          "text": "en.*|eth.*",
+          "value": "en.*|eth.*"
+        },
+        "options": [
+          {
+            "text": "en.*|eth.*",
+            "value": "en.*|eth.*",
+            "selected": true
+          }
+        ]
       }
     ]
   },
   "panels": [
     {
+      "id": 5,
+      "type": "row",
+      "title": "Proxmox nodes - $node",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "panels": []
+    },
+    {
       "id": 1,
       "type": "timeseries",
       "title": "CPU",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -64,7 +105,10 @@
           "unit": "percent",
           "min": 0,
           "decimals": 0,
-          "color": { "mode": "fixed", "fixedColor": "#00e5ff" },
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#00e5ff"
+          },
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
@@ -80,8 +124,16 @@
         "overrides": []
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "single", "sort": "none" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       }
     },
     {
@@ -89,8 +141,16 @@
       "type": "timeseries",
       "title": "Network",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 0 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -120,22 +180,66 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "In" },
-            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "#00e5ff" } }]
+            "matcher": {
+              "id": "byName",
+              "options": "In"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#00e5ff"
+                }
+              }
+            ]
           },
           {
-            "matcher": { "id": "byName", "options": "Out" },
+            "matcher": {
+              "id": "byName",
+              "options": "Out"
+            },
             "properties": [
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "#fcee0a" } },
-              { "id": "custom.transform", "value": "negative-Y" }
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#fcee0a"
+                }
+              },
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
             ]
           }
         ]
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       }
+    },
+    {
+      "id": 6,
+      "type": "row",
+      "title": "Synology",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "panels": []
     },
     {
       "id": 3,
@@ -143,8 +247,16 @@
       "title": "Network",
       "description": "Synology over SNMP (job synology, scraped every 1m - hence the fixed 5m rate window). eth* only: lo and sit0 aren't real traffic.",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 6 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -174,21 +286,52 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "In" },
-            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "#00e5ff" } }]
+            "matcher": {
+              "id": "byName",
+              "options": "In"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#00e5ff"
+                }
+              }
+            ]
           },
           {
-            "matcher": { "id": "byName", "options": "Out" },
+            "matcher": {
+              "id": "byName",
+              "options": "Out"
+            },
             "properties": [
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "#fcee0a" } },
-              { "id": "custom.transform", "value": "negative-Y" }
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#fcee0a"
+                }
+              },
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
             ]
           }
         ]
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       }
     },
     {
@@ -197,8 +340,16 @@
       "title": "Volume I/O",
       "description": "Synology volume read/write throughput (spaceIO*X are 64-bit byte counters).",
       "transparent": true,
-      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 6 },
-      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "targets": [
         {
           "refId": "A",
@@ -228,21 +379,52 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "Read" },
-            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "#00e5ff" } }]
+            "matcher": {
+              "id": "byName",
+              "options": "Read"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#00e5ff"
+                }
+              }
+            ]
           },
           {
-            "matcher": { "id": "byName", "options": "Write" },
+            "matcher": {
+              "id": "byName",
+              "options": "Write"
+            },
             "properties": [
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "#fcee0a" } },
-              { "id": "custom.transform", "value": "negative-Y" }
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#fcee0a"
+                }
+              },
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
             ]
           }
         ]
       },
       "options": {
-        "legend": { "showLegend": false, "displayMode": "list", "placement": "bottom", "calcs": [] },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       }
     }
   ]
