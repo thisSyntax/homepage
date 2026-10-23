@@ -496,10 +496,34 @@ html {
   margin: -13px 0px 0px 0px;
 }
 
-/* Grafana panels in the node cards: `screen` drops Grafana's dark page
-   background so only the lines show over the HUD panel. */
+/* Grafana panels in the node cards. contrast() pushes Grafana's dark-grey page
+   and panel background to black, which `screen` then drops, so only the lines
+   and labels show over the HUD panel. */
 .service iframe[src*="/d-solo/"] {
   width: 100%;
   border: 0;
+  filter: contrast(1.4);
   mix-blend-mode: screen;
+}
+.service[data-name] .service-container:has(iframe[src*="/d-solo/"]) {
+  padding-right: .5rem;
+}
+/* Wide cards: title + stats on the first line, CPU and network graphs side by
+   side below (the one-line row layout above would treat each graph as a stat) */
+@container card (min-width: 640px) {
+  .service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+  .service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card > .service-container:not(:has(iframe)) {
+    justify-self: end;
+  }
+  .service[data-name] .service-container:has(iframe[src*="/d-solo/"]) {
+    width: 100%;
+    padding: .25rem .75rem 0;
+  }
+  .service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card > :not(.service-title):not(.service-container) {
+    grid-column: 1 / -1;
+  }
 }
