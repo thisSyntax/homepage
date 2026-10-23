@@ -268,15 +268,35 @@
         - qBittorrent:
             icon: qbittorrent
             href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+            # customapi, not the qbittorrent widget: the seedbox's nginx wants HTTP basic
+            # auth before qBittorrent, and the qbittorrent widget only does qBittorrent's
+            # own login (user:pass@ in its URL is dropped by Homepage's HTTP client).
+            # customapi sends username/password as a basic-auth header; qBittorrent
+            # itself trusts the seedbox and needs no second login.
             widget:
-              type: qbittorrent
-              # The seedbox's nginx asks for HTTP basic auth before qBittorrent (plain
-              # URL gets "401 Authorization Required"), so this URL carries
-              # user:pass@ - kept out of href, which the browser sees
-              url: "{{HOMEPAGE_VAR_QBITTORRENT_API_URL}}"
+              type: customapi
+              url: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}/api/v2/transfer/info"
               username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
               password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
-              fields: ["leech", "download", "seed", "upload"]
+              refreshInterval: 10000
+              mappings:
+                - field: dl_info_speed
+                  label: Download
+                  format: bytes
+                  suffix: /s
+                - field: up_info_speed
+                  label: Upload
+                  format: bytes
+                  suffix: /s
+                - field: connection_status
+                  label: Status
+                  remap:
+                    - value: connected
+                      to: Online
+                    - value: firewalled
+                      to: Firewalled
+                    - value: disconnected
+                      to: Offline
 
     - Calendar:
         - Calendar:
