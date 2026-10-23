@@ -446,7 +446,7 @@
    all-clear readout instead of the widget's grey "No items found" box */
 .cp-all-clear {
   background: none;
-  padding: 0 .5rem 0 2.75rem;
+  padding: 0 .5rem 0 0;   /* the list already sits on the stat-label column */
   margin: 0;
 }
 .cp-all-clear > div {
@@ -510,6 +510,34 @@
   font-variant-numeric: tabular-nums;
   font-size: .8rem;
   color: #fff;
+}
+/* No streams: the widget renders "No Active Streams" and "-" as text rows -
+   one all-clear line in the Grafana card's style, no progress tracks */
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div:has(> span) {
+  height: auto;
+  padding-bottom: 0;
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div:has(> span)::after {
+  content: none;
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div:has(> span) ~ div:has(> span) {
+  display: none;
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div:has(> span) > span {
+  position: static;
+  display: block;
+  margin: 0;
+  font-family: var(--cp-font-ui);
+  font-weight: 600;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--section) 70%, white);
+}
+.service[data-name="Tautulli"] .service-card > .flex.flex-col > div:has(> span) > span::before {
+  content: "◆ ";
+  color: #10b981;
+  text-shadow: 0 0 6px #10b981;
 }
 .service[data-name="Tautulli"] .service-card .text-ellipsis {
   font-family: var(--cp-font-ui);
@@ -867,4 +895,26 @@ html {
   .service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card > :not(.service-title):not(.service-container) {
     grid-column: 1 / -1;
   }
+}
+/* Graph cards' stats - right-aligned at every width, wrapped lines included,
+   so the name stays left and the stats end where the dashed leader does.
+   The separator moves to after each stat (instead of before) and the clip
+   moves to the right edge: a dot that would end a line hangs past the edge
+   and is hidden, the same trick the left-aligned rows use for line starts. */
+.service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card > .service-container:not(:has(iframe)) {
+  --pr: 2.5rem;   /* = .service-title::after's margin */
+  justify-content: flex-end;
+  padding-right: var(--pr);
+  clip-path: inset(-1rem var(--pr) -1rem -1rem);
+}
+.service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card > .service-container:not(:has(iframe)) > .service-block + .service-block::before {
+  content: none;
+}
+.service[data-name]:has(iframe[src*="/d-solo/"]) > .service-card > .service-container:not(:has(iframe)) > .service-block:not(:last-child)::after {
+  content: "·";
+  position: absolute;
+  left: 100%;
+  width: var(--sep);
+  text-align: center;
+  color: var(--cp-text-dim);
 }
