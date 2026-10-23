@@ -399,14 +399,17 @@
 }
 
 
-/* Container status markers (statusStyle: dot) - glowing diamonds.
-   The dot's color is a background class, so the glow is a blurred copy of it. */
-.docker-status .rounded-full {
+/* Status markers (statusStyle: dot) - glowing diamonds, for Docker containers
+   and siteMonitor HTTP checks alike. The dot's color is a background class, so
+   the glow is a blurred copy of it. */
+.docker-status .rounded-full,
+.site-monitor-status .rounded-full {
   position: relative;
   border-radius: 1px;
   transform: rotate(45deg) scale(.75);
 }
-.docker-status .rounded-full::after {
+.docker-status .rounded-full::after,
+.site-monitor-status .rounded-full::after {
   content: "";
   position: absolute;
   inset: -1px;

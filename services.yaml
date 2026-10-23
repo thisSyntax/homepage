@@ -116,6 +116,21 @@
               showSummary: false # optional, default: false. Takes precedence over showStacks
               showStacks: true # optional, default: false
               fields: ["running", "down", "total"] # allowed fields (max 4): total, running, stopped, unhealthy, unknown
+        # Grafana and Prometheus run as LXCs, so siteMonitor (an HTTP check from the
+        # Homepage server) drives their status dot instead of Docker.
+        # No grafana widget: its stats come from /api/admin/stats, which needs a
+        # Grafana server-admin login - too much privilege for a public Grafana.
+        - Grafana:
+            icon: grafana
+            href: "{{HOMEPAGE_VAR_GRAFANA_URL}}"
+            siteMonitor: "{{HOMEPAGE_VAR_GRAFANA_URL}}/api/health"
+        - Prometheus:
+            icon: prometheus
+            href: "{{HOMEPAGE_VAR_PROMETHEUS_URL}}"
+            siteMonitor: "{{HOMEPAGE_VAR_PROMETHEUS_URL}}/-/healthy"
+            widget:
+              type: prometheus
+              url: "{{HOMEPAGE_VAR_PROMETHEUS_URL}}"
 
     - Network:
         - Unifi Controller:
@@ -136,6 +151,17 @@
               url: http://{{HOMEPAGE_VAR_DOCKER-OTHERS_IP}}
               version: 2 # required if running v2 or higher, defaults to 1
               key: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}} # in v2 this is your password or an app password
+        # Needs Gluetun's HTTP control server reachable (port 8000 by default) with
+        # an API key allowed on GET /v1/publicip/ip - see .env.example
+        - Gluetun:
+            icon: gluetun
+            server: docker-media
+            container: gluetun
+            widget:
+              type: gluetun
+              url: "{{HOMEPAGE_VAR_GLUETUN_URL}}"
+              key: "{{HOMEPAGE_VAR_GLUETUN_API_KEY}}"
+              version: 2 # Gluetun 3.40.1+; use 1 for older
 
     - DNS & Proxy:
         - Pi-hole 1:
