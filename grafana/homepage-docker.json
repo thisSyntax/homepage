@@ -460,7 +460,13 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "links": [
+            {
+              "title": "Filter dashboard to ${__field.labels.name}",
+              "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__field.labels.name}"
+            }
+          ]
         },
         "overrides": []
       },
@@ -527,7 +533,13 @@
                 "value": 2147483648
               }
             ]
-          }
+          },
+          "links": [
+            {
+              "title": "Filter dashboard to ${__field.labels.name}",
+              "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__field.labels.name}"
+            }
+          ]
         },
         "overrides": []
       },
@@ -585,16 +597,28 @@
             "showPoints": "never",
             "axisPlacement": "right",
             "axisBorderShow": false
-          }
+          },
+          "links": [
+            {
+              "title": "Filter dashboard to ${__field.labels.name}",
+              "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__field.labels.name}"
+            }
+          ]
         },
         "overrides": []
       },
       "options": {
         "legend": {
-          "showLegend": false,
-          "displayMode": "list",
-          "placement": "bottom",
-          "calcs": []
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "sortBy": "Last *",
+          "sortDesc": true,
+          "width": 280
         },
         "tooltip": {
           "mode": "multi",
@@ -641,16 +665,28 @@
             "showPoints": "never",
             "axisPlacement": "right",
             "axisBorderShow": false
-          }
+          },
+          "links": [
+            {
+              "title": "Filter dashboard to ${__field.labels.name}",
+              "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__field.labels.name}"
+            }
+          ]
         },
         "overrides": []
       },
       "options": {
         "legend": {
-          "showLegend": false,
-          "displayMode": "list",
-          "placement": "bottom",
-          "calcs": []
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "sortBy": "Last *",
+          "sortDesc": true,
+          "width": 280
         },
         "tooltip": {
           "mode": "multi",
@@ -698,16 +734,28 @@
             "showPoints": "never",
             "axisPlacement": "right",
             "axisBorderShow": false
-          }
+          },
+          "links": [
+            {
+              "title": "Filter dashboard to ${__field.labels.name}",
+              "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__field.labels.name}"
+            }
+          ]
         },
         "overrides": []
       },
       "options": {
         "legend": {
-          "showLegend": false,
-          "displayMode": "list",
-          "placement": "bottom",
-          "calcs": []
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "sortBy": "Last *",
+          "sortDesc": true,
+          "width": 200
         },
         "tooltip": {
           "mode": "multi",
@@ -754,16 +802,28 @@
             "showPoints": "never",
             "axisPlacement": "right",
             "axisBorderShow": false
-          }
+          },
+          "links": [
+            {
+              "title": "Filter dashboard to ${__field.labels.name}",
+              "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__field.labels.name}"
+            }
+          ]
         },
         "overrides": []
       },
       "options": {
         "legend": {
-          "showLegend": false,
-          "displayMode": "list",
-          "placement": "bottom",
-          "calcs": []
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "sortBy": "Last *",
+          "sortDesc": true,
+          "width": 200
         },
         "tooltip": {
           "mode": "multi",
@@ -878,6 +938,23 @@
                     }
                   ]
                 }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Container"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Filter dashboard to ${__value.raw}",
+                    "url": "/d/homepage-docker/homepage-docker?${__url.params:exclude:var-container}&var-container=${__value.raw}"
+                  }
+                ]
               }
             ]
           }
