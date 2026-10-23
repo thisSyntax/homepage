@@ -9,7 +9,8 @@
     # One card per node of the F-SI-CLU01 cluster. The API on either node answers
     # for the whole cluster; `node` filters VMs, LXCs, CPU and memory to that node.
     # The graphs are panels of grafana/homepage-infrastructure.json (panelId 1 = CPU,
-    # 2 = network). Iframes load in the browser, so you must be logged into Grafana.
+    # 2 = network). They load from the embed host (HOMEPAGE_VAR_GRAFANA_EMBED_URL),
+    # which Internal Traefik signs in as a Viewer, so no Grafana login is needed.
     - F-SI-HV01:
         icon: proxmox.png
         href: {{HOMEPAGE_VAR_PROXMOX_IP_URL}}
@@ -21,12 +22,12 @@
             node: F-SI-HV01
           - type: iframe
             name: hv01-cpu
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV01&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_EMBED_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV01&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: hv01-net
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV01&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_EMBED_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV01&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
     - F-SI-HV02:
@@ -40,12 +41,12 @@
             node: F-SI-HV02
           - type: iframe
             name: hv02-cpu
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV02&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_EMBED_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV02&panelId=1&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: hv02-net
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_EMBED_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&var-node=F-SI-HV02&panelId=2&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
     # Graphs: panels 3 (network) and 4 (volume I/O), from SNMP via snmp_exporter
@@ -59,12 +60,12 @@
             password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
           - type: iframe
             name: nas-net
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&panelId=3&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_EMBED_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&panelId=3&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
           - type: iframe
             name: nas-io
-            src: "{{HOMEPAGE_VAR_GRAFANA_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&panelId=4&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
+            src: "{{HOMEPAGE_VAR_GRAFANA_EMBED_URL}}/d-solo/homepage-nodes/homepage-infrastructure?orgId=1&panelId=4&from=now-6h&to=now&refresh=1m&theme=dark&__feature.dashboardSceneSolo"
             classes: h-32
             allowScrolling: no
 
@@ -199,10 +200,20 @@
             widget:
               type: traefik
               url: https://internal-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}
-              username: {{HOMEPAGE_VAR_ITRAEFIK_USER}} # optional
-              password: {{HOMEPAGE_VAR_ITRAEFIK_PASSWD}} # optional
+              username: {{HOMEPAGE_VAR_TRAEFIK_USER}} # optional
+              password: {{HOMEPAGE_VAR_TRAEFIK_PASSWD}} # optional
         - Traefik External:
             icon: traefik
+            # Its dashboard/API only answers the LAN (ipAllowList), and Homepage
+            # reaches the DMZ through a Servers -> DMZ firewall rule for 443
+            href: https://external-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}/dashboard/
+            widget:
+              type: traefik
+              url: https://external-traefik.{{HOMEPAGE_VAR_WEB_DOMAIN}}
+              # Both dashboards are deployed by home-ops with the same htpasswd
+              # file, so they share one login
+              username: {{HOMEPAGE_VAR_TRAEFIK_USER}}
+              password: {{HOMEPAGE_VAR_TRAEFIK_PASSWD}}
 
 - Media:
     - Arr Stack:
