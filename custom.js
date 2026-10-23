@@ -106,15 +106,19 @@ function openSysmon(url) {
     }
 
     overlay.querySelector(".cp-sysmon-tab").href = url;
-    const frame = overlay.querySelector("iframe");
-    if (frame.getAttribute("src") !== url) frame.src = url; // keep it loaded between opens
+    // Reload on every open: Escape inside the dashboard makes Grafana leave kiosk
+    // mode, and the cross-origin iframe can't be inspected to notice that
+    overlay.querySelector("iframe").src = url;
     overlay.hidden = false;
     document.documentElement.classList.add("cp-sysmon-open");
 }
 
 function closeSysmon() {
     const overlay = document.getElementById("cp-sysmon-overlay");
-    if (overlay) overlay.hidden = true;
+    if (overlay) {
+        overlay.hidden = true;
+        overlay.querySelector("iframe").src = "about:blank"; // stop its 1m refreshes while hidden
+    }
     document.documentElement.classList.remove("cp-sysmon-open");
 }
 
