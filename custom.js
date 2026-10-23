@@ -57,8 +57,13 @@ function addSysmonButton() {
 
     const link = document.createElement("a");
     link.id = "cp-sysmon";
-    link.className = "widget-container cp-sysmon";
-    link.href = `${grafana}/d/homepage-docker/homepage-docker?orgId=1&kiosk&theme=dark`;
+    // Borrow a neighbouring box's classes so the button gets the same padding,
+    // margins and height as the weather and clock boxes
+    const sibling = bar.querySelector(".widget-container");
+    link.className = `${sibling ? sibling.className : "widget-container"} cp-sysmon`;
+    // kiosk=1, not a bare kiosk: Grafana only accepts "1" or true, and the bare
+    // form didn't hide its menus inside the overlay iframe
+    link.href = `${grafana}/d/homepage-docker/homepage-docker?orgId=1&kiosk=1&theme=dark`;
     link.target = "_blank";
     link.rel = "noreferrer";
     link.innerHTML = '<span class="cp-sysmon-label">SYS.MON</span><span class="cp-sysmon-sub">Docker</span>';

@@ -367,21 +367,34 @@
 /* Top bar - angled boxes with a yellow frame, search as a terminal prompt */
 #information-widgets .widget-container {
   --cut: 8px;
+  --frame: color-mix(in oklab, var(--cp-yellow) 30%, transparent);
+  position: relative;
   background: color-mix(in oklab, var(--cp-bg) 82%, transparent);
-  border: 1px solid color-mix(in oklab, var(--cp-yellow) 30%, transparent);
+  border: 1px solid var(--frame);
   border-radius: 0;
   clip-path: var(--chamfer);
 }
+/* The clip-path cuts the border off at the two angled corners - draw the
+   diagonals back in, so the frame is unbroken */
+#information-widgets .widget-container::after {
+  content: "";
+  position: absolute;
+  inset: -1px;   /* the border box, which the chamfer is measured against */
+  pointer-events: none;
+  --diag: linear-gradient(to bottom left,
+    transparent calc(50% - .75px), var(--frame) calc(50% - .75px),
+    var(--frame) calc(50% + .75px), transparent calc(50% + .75px));
+  background:
+    var(--diag) top right / var(--cut) var(--cut) no-repeat,
+    var(--diag) bottom left / var(--cut) var(--cut) no-repeat;
+}
 
-/* SYS.MON button (custom.js) - opens the Grafana Docker dashboard. It carries
-   .widget-container, so it gets the frame and angled corners above. */
+/* SYS.MON button (custom.js) - opens the Grafana Docker dashboard. It copies a
+   neighbouring box's classes, so its size, spacing and frame match theirs. */
 #information-widgets .cp-sysmon {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-self: stretch;
-  margin-left: .5rem;
-  padding: .3rem 1.2rem .3rem .85rem;
   font-family: var(--cp-font-ui);
   text-transform: uppercase;
   line-height: 1.1;
